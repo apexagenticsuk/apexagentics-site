@@ -1,0 +1,11 @@
+{
+  "name": "apexagentics-site",
+  "private": true,
+  "description": "Apex Agentics one-page marketing site. Static; tests run against a local static server.",
+  "scripts": {
+    "serve": "python3 -m http.server 8834",
+    "build": "tools/rebuild.sh",
+    "test": "for t in build editor; do node tests/$t.js ${BASE:-http://localhost:8834} || exit 1; done"
+  },
+  "devDependencies": { "playwright": "^1.48.0" }
+}

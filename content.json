@@ -1,0 +1,113 @@
+{
+  "version": "2026-10-17T00:30:00Z",
+  "_help": "Single source of truth for shared content. Edited by the visual editor at /admin/. 'site' and 'pages' hold per-element edits keyed by element id; empty means the page is shown exactly as built.",
+  "siteUrl": "https://apexagenticsuk.github.io/apexagentics-site/",
+  "brand": {
+    "name": "Apex Agentics",
+    "logo": "A",
+    "logoNote": "Logo direction: A, B or C (files in assets/logos). Change this one setting to swap the logo."
+  },
+  "theme": {
+    "accent": "teal"
+  },
+  "contact": {
+    "email": "",
+    "phone": "",
+    "location": "",
+    "replyTime": ""
+  },
+  "prices": {
+    "refresh": {
+      "name": "Website Refresh",
+      "unit": "one-off",
+      "amount": "",
+      "small": ""
+    },
+    "support": {
+      "name": "Ongoing Support",
+      "unit": "monthly",
+      "amount": "",
+      "small": ""
+    },
+    "vat": "",
+    "cancellation": "",
+    "_internalNote": "NOT RENDERED. Lewis's ceiling, awaiting owner's approval: refresh of an existing site GBP 395-650; new 5-page site 595; 10 pages 895; support 19 per month, or 39 per month with 30 minutes of edits. Do not publish until owner approves."
+  },
+  "testimonials": [
+    {
+      "id": "dave-young",
+      "name": "Dave Young",
+      "role": "comedian",
+      "quote": "[QUOTE FROM DAVE]",
+      "result": "[FIGURE TBC]",
+      "link": "[Link: before and after]",
+      "permission": "pending"
+    }
+  ],
+  "nav": [
+    {
+      "key": "what",
+      "label": "What we do",
+      "href": "#what",
+      "show": "menu"
+    },
+    {
+      "key": "how",
+      "label": "How it works",
+      "href": "#how",
+      "show": "menu"
+    },
+    {
+      "key": "pricing",
+      "label": "Pricing",
+      "href": "#pricing",
+      "show": "menu"
+    },
+    {
+      "key": "results",
+      "label": "Results",
+      "href": "#results",
+      "show": "menu"
+    },
+    {
+      "key": "contact",
+      "label": "Contact",
+      "href": "#contact",
+      "show": "menu"
+    }
+  ],
+  "site": {},
+  "pages": {},
+  "seo": {
+    "index": {
+      "title": "Apex Agentics | A better website, built fast",
+      "description": "Apex Agentics is a small team using agentic technology to give your website a state-of-the-art refresh, at speed."
+    }
+  },
+  "dims": {
+    "assets/hero.webp": [
+      1920,
+      800
+    ],
+    "assets/hero_m.webp": [
+      640,
+      502
+    ],
+    "assets/og.jpg": [
+      1200,
+      630
+    ],
+    "assets/support_speed.webp": [
+      1200,
+      675
+    ],
+    "assets/support_trust_600.webp": [
+      600,
+      338
+    ],
+    "assets/support_upgrade_600.webp": [
+      600,
+      338
+    ]
+  }
+}
