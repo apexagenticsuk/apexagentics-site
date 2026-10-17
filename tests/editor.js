@@ -10,6 +10,8 @@ const F=()=>p.frame({url:/edit=1/});
 const ready=async()=>{await p.waitForFunction(()=>{try{return !!document.querySelector('#frame').contentWindow.DYI&&document.querySelector('#frame').contentDocument.readyState==='complete';}catch(e){return false;}});await p.waitForTimeout(600);};
 await p.goto(BASE+'/admin/');await p.waitForFunction(()=>window.DYE&&window.DYE.state().content);await ready();
 ok('demo mode opens without a key',await p.evaluate(()=>!document.querySelector('#demobadge').hidden));
+ok('multi-page tools (Pages, Page settings, page picker) are hidden',await p.evaluate(()=>['#pagesb','#psettings','#page'].every(s=>{const e=document.querySelector(s);return e.hidden&&getComputedStyle(e).display==='none';})));
+ok('Shared content (results and pricing) button is still there',await p.evaluate(()=>{const e=document.querySelector('#sharedb');return !!e&&getComputedStyle(e).display!=='none';}));
 // 1 text
 const h=F().locator('.hero h1');await h.click();await p.keyboard.press('Control+A');await p.keyboard.type('A better website, built fast. EDIT');await F().locator('#pricing h2').click();await p.waitForTimeout(400);
 ok('edit text: heading changed in the page and recorded as a draft',/EDIT/.test(await F().evaluate(()=>document.querySelector('.hero h1').textContent))&&await p.evaluate(()=>JSON.stringify(DYE.state().content.pages||{}).includes('EDIT')));

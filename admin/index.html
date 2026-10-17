@@ -16,10 +16,10 @@
 <div id="app" hidden>
 <header class="tb">
   <div class="g"><span class="logo"><b>Apex</b> <i>Agentics</i></span><span id="demobadge" class="demob" hidden title="Demo mode: changes stay on this device and can't be published">DEMO</span>
-  <select id="page" aria-label="Page"></select></div>
+  <select id="page" aria-label="Page" hidden></select></div>
   <div class="g"><div class="seg" role="group" aria-label="View"><button id="vdesk" class="on" title="Desktop view">🖥<span class="sl"> Desktop</span></button><button id="vphone" title="Phone view">📱<span class="sl"> Phone</span></button></div>
   <button id="undo" class="ib" title="Undo the last change"><span aria-hidden="true">↶</span> Undo</button><button id="redo" class="ib" title="Redo the change you undid">Redo <span aria-hidden="true">↷</span></button></div>
-  <div class="g tools"><button id="pagesb" class="tbb">Pages</button><button id="psettings" class="tbb">Page settings</button><button id="sharedb" class="tbb" title="Shared content">Shared<span class="wide"> content</span></button><button id="style" class="tbb">Style</button><button id="helpb" class="tbb">Help</button><button id="preview" class="tbb gold">Preview</button><button id="out" class="tbb ghost"></button></div>
+  <div class="g tools"><button id="pagesb" class="tbb" hidden>Pages</button><button id="psettings" class="tbb" hidden>Page settings</button><button id="sharedb" class="tbb" title="Shared content">Shared<span class="wide"> content</span></button><button id="style" class="tbb">Style</button><button id="helpb" class="tbb">Help</button><button id="preview" class="tbb gold">Preview</button><button id="out" class="tbb ghost"></button></div>
   <div class="g pubg"><span id="pill" class="pill"></span><button id="publish" class="pub">Publish</button></div>
 </header>
 <div id="selbar" class="selbar" hidden></div>
@@ -38,7 +38,6 @@
 <div><h3>Move or hide a section</h3><p><b>Drag:</b> point at a section and grab the blue <b>⠿ Drag</b> tab (top right), or a block’s yellow <b>⠿</b>, and drop it where the yellow line shows; the page scrolls when you get near the edge. Pictures, cards, testimonials and other repeated items have a small <b>⠿</b> too (on a phone, tap the section first). Drag menu links sideways, or the <b>⠿</b> in <b>Pages</b>. In <b>Add a block</b> you can drag a tile straight onto the page (on a phone: hold it, then drag). Every drag can be undone with <b>↶</b>.</p><p>Or click inside a section: the bar under the toolbar shows what is selected, with <b>Move up</b>, <b>Move down</b>, <b>Reorder…</b> (drag in a list), <b>Hide</b>, <b>Copy</b> and <b>Delete</b>. Hidden sections stay faded in the editor so you can bring them back.</p></div>
 <div><h3>Check, then publish</h3><p><b>📱 Phone</b> shows how it looks on a mobile. <b>Preview</b> opens the site with your changes. When you're happy, tap the big red <b>Publish</b>. The real website updates in about a minute.</p></div>
 <div><h3>Add something new</h3><p>Click any heading or paragraph and tap the yellow <b>+</b> under it (or <b>+ Add below</b>) to add a heading, text, picture, button, video, gallery, quote, cards and more. Use the blue <b>+ Add section</b> lines between sections for ready-made layouts.</p></div>
-<div><h3>Add or change pages</h3><p>Tap <b>Pages</b> at the top. <b>+ New page</b> makes a new page from a ready-made layout and adds it to the menu. From there you can also rename, copy, delete, hide from the menu, change the menu order and the Google title and description.</p></div>
 <div><h3>Made a mistake?</h3><p>Use <b>↶ Undo</b>. Unpublished changes are kept even if you close the page. Every published version is saved, so your web person can always roll back.</p>
 <button class="btn ghost sm" id="discard">Throw away all unpublished changes</button></div>
 </div></div></div>
