@@ -86,7 +86,7 @@ function tcardHTML(t){var perm=t.permission==='approved'?'approved':'pending',q=
   return '<article class="case" data-tid="'+esc(t.id||'')+'">'+h+'</article>';}
 function priceHTML(c,key,view){var P=c.prices||{},p=P[key]||{};
   if(view==='small')return clean1(p.small)?esc(clean1(p.small)):'';
-  var a=clean1(p.amount);return a?esc(a):'<span class="tbc">'+(key==='support'?'Price to be confirmed per month':'Price to be confirmed')+'</span>';}
+  var a=clean1(p.amount);return a?esc(a):'<span class="tbc">'+'Shared at your free consultation'+'</span>';}
 function telHTML(ct,cls){var d=telOf(ct.phone);return d?'<a class="tel'+(cls?' '+cls:'')+'" href="tel:'+esc(d)+'">'+esc(ct.phone)+'</a>':'';}
 function mailHTML(ct){var e=clean1(ct.email);return e?'<a class="ul" href="mailto:'+esc(e)+'">'+esc(e)+'</a>':'';}
 function contactHTML(ct,view){var m=mailHTML(ct),t=telHTML(ct),l=clean1(ct.location),r=clean1(ct.replyTime);

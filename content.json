@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-17T02:40:00Z",
+  "version": "2026-10-17T03:10:00Z",
   "_help": "Single source of truth for shared content. Edited by the visual editor at /admin/. 'site' and 'pages' hold per-element edits keyed by element id; empty means the page is shown exactly as built.",
   "siteUrl": "https://apexagenticsuk.github.io/apexagentics-site/",
   "brand": {
@@ -54,7 +54,7 @@
       "images": [
         {
           "src": "assets/dave_desktop.webp",
-          "alt": "Screenshot of the Dave Young website preview on a computer, showing the Corporate Events card in the Book Dave section"
+          "alt": "Screenshot of the Dave Young website preview on a computer: the Book Dave heading and the Corporate Events card"
         },
         {
           "src": "assets/dave_phone.webp",
@@ -107,8 +107,8 @@
   },
   "dims": {
     "assets/dave_desktop.webp": [
-      440,
-      740
+      650,
+      668
     ],
     "assets/dave_phone.webp": [
       468,

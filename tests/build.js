@@ -24,9 +24,9 @@ ok('no word "AI" or "revolutionary"',!all.some(([f,s])=>/\bAI\b|revolutionary/i.
 // 4 rendered page, desktop + tablet + phone, with and without script
 const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
 const reqs=[],posts=[];
-for(const [M,vp] of [['desktop',{width:1280,height:800}],['tablet 768',{width:768,height:1024}],['wide 1920',{width:1920,height:1080}],['phone',{width:390,height:844}]]){
+for(const [M,vp] of [['desktop',{width:1280,height:800}],['tablet 768',{width:768,height:1024}],['nav 820',{width:820,height:1024}],['laptop 1024',{width:1024,height:768}],['wide 1920',{width:1920,height:1080}],['phone',{width:390,height:844}]]){
  for(const js of [true,false]){
-  if(!js&&(M==='tablet 768'||M==='wide 1920'))continue;
+  if(!js&&(M==='tablet 768'||M==='wide 1920'||M==='nav 820'||M==='laptop 1024'))continue;
   const ctx=await b.newContext({viewport:vp,javaScriptEnabled:js});const p=await ctx.newPage();p.on('request',r=>{if(!r.url().startsWith(BASE)&&!r.url().startsWith('data:'))reqs.push(r.url());if(r.method()!=='GET')posts.push(r.url());});
   await p.goto(BASE+'/index.html',{waitUntil:'networkidle'});const tag=M+(js?'':' no-JS');
   const r=await p.evaluate(()=>{
@@ -45,7 +45,7 @@ for(const [M,vp] of [['desktop',{width:1280,height:800}],['tablet 768',{width:76
     prices,h1:document.querySelectorAll('h1').length,ctaHero:document.querySelectorAll('.hero .btn').length,robots:document.querySelector('meta[name=robots]').content,
     secs:[...document.querySelectorAll('main>section')].map(s=>s.id),turn:/turnaround|\b\d+\s*(hours|days)\b/i.test(txt),
     imgBad:[...document.querySelectorAll('img')].filter(i=>!i.hasAttribute('alt')||!i.getAttribute('width')||!i.getAttribute('height')).length,
-    pcards:pc,deluxe:!!document.querySelector('.pcard.deluxe'),daveImgs:[...document.querySelectorAll('.case[data-tid=dave-young] img')].map(i=>[i.getAttribute('src'),i.alt.length>20&&!/christmas|xmas|unwrapped|poster/i.test(i.alt),i.getAttribute('width')+'x'+i.getAttribute('height')]),notice:(document.querySelector('.notice')||{}).innerText||'',noticeBeforeForm:!!document.querySelector('.notice+.enq'),supportNb:/not included/i.test([...document.querySelectorAll('.pcard')].find(e=>/Ongoing Support/.test(e.textContent)).textContent),refreshNb:/not included/i.test([...document.querySelectorAll('.pcard')].find(e=>/Website Refresh/.test(e.querySelector('h3').textContent)).textContent),rows:(()=>{const cs=[...document.querySelectorAll('.pcard')].map(e=>{const r=e.getBoundingClientRect(),a=e.querySelector('.amt').getBoundingClientRect(),h=e.querySelector('h3').getBoundingClientRect(),p=e.querySelector('.per').getBoundingClientRect();return {top:Math.round(r.top+scrollY),h:Math.round(r.height),amt:Math.round(a.top-r.top),h3:Math.round(h.top-r.top),per:Math.round(p.top-r.top),ah:Math.round(a.height)};});return cs;})(),navR:Math.round(document.querySelector('nav.main').getBoundingClientRect().right),navH:Math.round(document.querySelector('nav.main').getBoundingClientRect().height),
+    pcards:pc,deluxe:!!document.querySelector('.pcard.deluxe'),daveImgs:[...document.querySelectorAll('.case[data-tid=dave-young] img')].map(i=>[i.getAttribute('src'),i.alt.length>20&&!/christmas|xmas|unwrapped|poster/i.test(i.alt),i.getAttribute('width')+'x'+i.getAttribute('height')]),notice:(document.querySelector('.notice')||{}).innerText||'',noticeBeforeForm:!!document.querySelector('.notice+.enq'),supportNb:/not included/i.test([...document.querySelectorAll('.pcard')].find(e=>/Ongoing Support/.test(e.textContent)).textContent),refreshNb:/not included/i.test([...document.querySelectorAll('.pcard')].find(e=>/Website Refresh/.test(e.querySelector('h3').textContent)).textContent),cardFit:[...document.querySelectorAll('.pcard')].map(e=>{const kids=[...e.children],last=kids[kids.length-1].getBoundingClientRect(),r=e.getBoundingClientRect(),cta=e.querySelector('.cardcta a');return {h:Math.round(r.height),content:Math.round(last.bottom-r.top),maxGap:70,ctaGap:cta?Math.round(r.bottom-cta.getBoundingClientRect().bottom-30):999,hasCta:!!cta};}),rows:(()=>{const cs=[...document.querySelectorAll('.pcard')].map(e=>{const r=e.getBoundingClientRect(),a=e.querySelector('.amt').getBoundingClientRect(),h=e.querySelector('h3').getBoundingClientRect(),p=e.querySelector('.per').getBoundingClientRect();return {top:Math.round(r.top+scrollY),h:Math.round(r.height),amt:Math.round(a.top-r.top),h3:Math.round(h.top-r.top),per:Math.round(p.top-r.top),ah:Math.round(a.height)};});return cs;})(),navGap:Math.round(document.querySelector('nav.main a').getBoundingClientRect().left-document.querySelector('.brand').getBoundingClientRect().right),navR:Math.round(document.querySelector('nav.main').getBoundingClientRect().right),navH:Math.round(document.querySelector('nav.main').getBoundingClientRect().height),
     posterAny:[...document.querySelectorAll('img')].some(i=>/unwrapped|poster/i.test(i.alt+i.src)),
     overflow:document.documentElement.scrollWidth>innerWidth,
     smallTap:small('header a, header button, .sticky a, .sticky button, .mnav a'),
@@ -56,11 +56,12 @@ for(const [M,vp] of [['desktop',{width:1280,height:800}],['tablet 768',{width:76
   ok(tag+': no placeholder markers or dead links left on the page',r.ph===0&&r.hashLinks===0,r.ph+' ph, '+r.hashLinks+' # links');
   ok(tag+': no pound-sign (or other currency) figures',!r.pound&&!r.other);
   ok(tag+': unfinished items are hidden (no TBC, draft, pending, VAT, cancellation, catch, privacy, response time, quote, figure wording)',!r.unfinished);
-  ok(tag+': prices read "Price to be confirmed" (no amounts)',r.prices.length===5&&r.prices.every(x=>/^Price to be confirmed( per month)?$/.test(x)),r.prices.join('|'));
+  ok(tag+': prices read "Shared at your free consultation" (no amounts, no quote wording)',r.prices.length===5&&r.prices.every(x=>x==='Shared at your free consultation'),r.prices.join('|'));
   ok(tag+': no phone/tap-to-call anywhere while there is no real number',r.tels===0&&r.stickyTel===0);
-  ok(tag+': Dave Young entry has only the two cropped screenshots (alt + size), no poster or Xmas tile, permission flag not in the markup',r.cases===1&&r.daveImgs.length===2&&r.daveImgs.every(x=>x[1])&&r.daveImgs[0][0]==='assets/dave_desktop.webp'&&r.daveImgs[0][2]==='440x740'&&r.daveImgs[1][0]==='assets/dave_phone.webp'&&!r.posterAny&&r.names===0&&r.permAttrs===0,JSON.stringify(r.daveImgs)+' permAttrs '+r.permAttrs);
+  ok(tag+': Dave Young entry has only the two cropped screenshots (alt + size), no poster or Xmas tile, permission flag not in the markup',r.cases===1&&r.daveImgs.length===2&&r.daveImgs.every(x=>x[1])&&r.daveImgs[0][0]==='assets/dave_desktop.webp'&&r.daveImgs[0][2]==='650x668'&&r.daveImgs[1][0]==='assets/dave_phone.webp'&&!r.posterAny&&r.names===0&&r.permAttrs===0,JSON.stringify(r.daveImgs)+' permAttrs '+r.permAttrs);
   ok(tag+': not-connected note sits above the form before any submit',/isn't connected yet/.test(r.notice)&&r.noticeBeforeForm,r.notice);
   ok(tag+': brand review not-included line on Refresh only, not on Support',r.refreshNb&&!r.supportNb);
+  ok(tag+': pricing cards are sized to their content (no big empty gap, CTA at the bottom of each card)',r.cardFit.every(c=>c.h-c.content<=c.maxGap&&c.ctaGap<=40&&c.hasCta),JSON.stringify(r.cardFit));
   {const g={};r.rows.forEach(c=>{(g[c.top]=g[c.top]||[]).push(c);});const rows=Object.values(g);ok(tag+': pricing cards in a row have equal height, and heading, one-off line and price line sit at the same offsets',rows.every(R=>R.every(c=>c.h===R[0].h&&c.amt===R[0].amt&&c.h3===R[0].h3&&c.per===R[0].per&&c.ah===R[0].ah)),JSON.stringify(r.rows));}
   ok(tag+': three pricing cards incl. Deluxe',r.pcards.length===3&&r.deluxe,r.pcards.join());
   ok(tag+': six sections in order',r.secs.join()==='top,what,how,pricing,results,contact',r.secs.join());
@@ -71,8 +72,8 @@ for(const [M,vp] of [['desktop',{width:1280,height:800}],['tablet 768',{width:76
   ok(tag+': logo is the final lockup',/logos\/logo-final-light\.svg$/.test(r.logo));
   ok(tag+': no sideways scroll',!r.overflow);
   if(js){ok(tag+': header links, menu button and sticky bar tap targets are at least 44px tall',r.smallTap.length===0,JSON.stringify(r.smallTap));
-   ok(tag+': full desktop nav visible from 768px up on one row; menu button only below 768px',vp.width<768?(r.ham&&!r.navShown&&r.hh<=80):(r.navShown&&!r.ham&&r.hh<=80&&r.navH<=60&&r.navR<=vp.width-12),JSON.stringify({ham:r.ham,nav:r.navShown,hh:r.hh,navH:r.navH,navR:r.navR}));
-   ok(tag+': sticky bar only on phones (under 768px)',r.sticky===(vp.width<768));}
+   ok(tag+': full desktop nav visible from 820px up on one row with clear space after the logo; menu button only below 820px',vp.width<820?(r.ham&&!r.navShown&&r.hh<=80):(r.navShown&&!r.ham&&r.hh<=80&&r.navH<=60&&r.navR<=vp.width-12&&r.navGap>=16),JSON.stringify({ham:r.ham,nav:r.navShown,hh:r.hh,navH:r.navH,navR:r.navR}));
+   ok(tag+': sticky bar only below 820px',r.sticky===(vp.width<820));}
   if(!js){const hv=await p.evaluate(()=>[...document.querySelectorAll('main h2,main .case,.pcard')].every(e=>getComputedStyle(e).opacity==='1'));ok('first paint without script shows content',hv);}
   if(js&&M==='phone'){
    // contact form: required fields, messages, honest not-connected state, nothing sent

@@ -21,7 +21,7 @@ const pi=p.locator('#sharedm .shbody input[type=text]').first();await pi.fill('T
 const priceTxt=await F().evaluate(()=>[...document.querySelectorAll('[data-cms=price][data-key=refresh]')].map(e=>e.textContent).join('|'));
 ok('edit a price: shows on the page everywhere it is used (card + pricing)',(priceTxt.match(/TESTPRICE/g)||[]).length>=2,priceTxt);
 await pi.fill('');await pi.dispatchEvent('change');await ready();
-ok('empty price goes back to "Price to be confirmed"',await F().evaluate(()=>/^Price to be confirmed$/.test(document.querySelector('#pricing [data-cms=price][data-key=refresh]').textContent.trim())));
+ok('empty price goes back to "Shared at your free consultation"',await F().evaluate(()=>/^Shared at your free consultation$/.test(document.querySelector('#pricing [data-cms=price][data-key=refresh]').textContent.trim())));
 await p.evaluate(()=>document.querySelector('#sharedm').hidden=true);
 // 2b clicking a price opens the clicked card's own tab
 for(const [k,exp] of [['deluxe','Price: Deluxe Refresh'],['support','Price: Ongoing Support'],['refresh','Price: Website Refresh']]){
