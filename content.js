@@ -73,7 +73,7 @@ function ATTR(el,n,d){var v=el.getAttribute('data-'+n);return v==null||v===''?d:
 function ph(s){return esc(s).replace(/\[[^\]]+\]/g,function(m){return '<span class="ph" title="Placeholder: to be confirmed">'+m+'</span>';});}
 function phOr(v,fallback){v=String(v==null?'':v).trim();return v?(/\[[^\]]+\]/.test(v)?ph(v):esc(v)):'<span class="ph" title="Placeholder: to be confirmed">'+esc(fallback)+'</span>';}
 function showHTML(){return '';}
-function logoSrc(c,tone){var k=String((c.brand||{}).logo||'A').toUpperCase();if(!/^[ABC]$/.test(k))k='A';return 'assets/logos/logo-'+k+'-'+(tone||'light')+'.svg';}
+function logoSrc(c,tone){var k=String((c.brand||{}).logo||'final').toLowerCase();if(!/^[a-z0-9-]+$/.test(k))k='final';return 'assets/logos/logo-'+k+'-'+(tone||'light')+'.svg';}
 function logoHTML(c,tone){var nm=(c.brand||{}).name||'Apex Agentics';return '<img src="'+esc(RES(logoSrc(c,tone)))+'" alt="'+esc(nm)+'" width="170" height="25">';}
 function imgsHTML(t){var L=(t.images||[]).filter(function(i){return i&&i.src;});if(!L.length)return '';return '<figure class="shots">'+L.map(function(i){return '<img src="'+esc(RES(i.src))+'" alt="'+esc(i.alt||'')+'" loading="lazy">';}).join('')+(t.imageCaption?'<figcaption>'+esc(t.imageCaption)+'</figcaption>':'')+'</figure>';}
 function tcardHTML(t){var perm=t.permission==='approved'?'approved':'pending';

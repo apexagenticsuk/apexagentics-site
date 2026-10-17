@@ -9,7 +9,7 @@ var DEFS={
  support:{title:'Price: Ongoing Support',note:'Leave the price empty and the card shows [PRICE TBC per month]. Only type a price after owner has approved it.',path:'prices.support',kind:'object',fields:[['amount','Price per month (empty until approved)','text'],['small','Small print under the price','text']]},
  terms:{title:'VAT and cancellation',note:'Empty slots. They show as marked placeholders until wording has been approved.',path:'prices',kind:'object',fields:[['vat','VAT line','text'],['cancellation','Cancellation line','text']]},
  contact:{title:'Contact details',note:'Empty values show as marked placeholders. A phone number turns the call link on.',path:'contact',kind:'object',fields:[['email','Email','text'],['phone','Phone','text'],['location','Location','text'],['replyTime','Reply time (for example: within 2 working days)','text']]},
- brand:{title:'Logo',note:'Pick the logo direction. The files are in assets/logos.',path:'brand',kind:'object',fields:[['logo','Logo direction','select',[['A','A: Slash (blue)'],['B','B: Window (orange)'],['C','C: Lower-case (blue)']]]]}
+ brand:{title:'Logo',note:'Pick the logo direction. The files are in assets/logos.',path:'brand',kind:'object',fields:[['logo','Logo name (files assets/logos/logo-NAME-light.svg and -dark.svg)','text']]}
 };
 var OPEN={},GEN=0;
 var ORDER=['testimonials','refresh','deluxe','support','terms','contact','brand'],cur='testimonials',modal=null;

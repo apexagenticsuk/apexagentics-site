@@ -64,5 +64,8 @@ ok('every testimonial has permission',cj.testimonials.every(t=>['pending','appro
 ok('Dave entry flag in content.json',cj.testimonials[0].flag==="Pending Dave's OK"&&cj.testimonials[0].images.length===2);
 ok('only Dave Young in testimonials',cj.testimonials.length===1&&cj.testimonials[0].name==='Dave Young'&&cj.testimonials[0].permission==='pending');
 ok('internal pricing note is in content.json only (not in any html)',/395/.test(cj.prices._internalNote)&&!html.some(f=>/395|595|895/.test(fs.readFileSync(f,'utf8').replace(/data:[^"')]+/g,''))));
+const hh=fs.readFileSync(root+'/index.html','utf8');
+ok('logo is one setting: header image follows brand.logo, alt is Apex Agentics',new RegExp('assets/logos/logo-'+cj.brand.logo+'-light\\.svg"[^>]*alt="Apex Agentics"').test(hh)&&fs.existsSync(root+'/assets/logos/logo-'+cj.brand.logo+'-light.svg')&&fs.existsSync(root+'/assets/logos/logo-'+cj.brand.logo+'-dark.svg'));
+ok('favicon, apple-touch icon and JSON-LD logo use the final icon set',/favicon\.ico/.test(hh)&&/apple-touch-icon" href="assets\/icon\.png/.test(hh)&&/assets\/icon\.png/.test((hh.match(/id="dy-ld">([^<]*)/)||[])[1]||''));
 ok('siteUrl set for JSON-LD/og:image',/apexagenticsuk\.github\.io\/apexagentics-site\//.test(cj.siteUrl)&&/og:image" content="https:\/\/apexagenticsuk\.github\.io\/apexagentics-site\/assets\/og\.jpg/.test(fs.readFileSync(root+'/index.html','utf8')));
 await b.close();console.log(fail?fail+' FAILED':'ALL PASSED');process.exit(fail?1:0);})();

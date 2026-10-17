@@ -1,11 +1,11 @@
 {
-  "version": "2026-10-17T01:35:00Z",
+  "version": "2026-10-17T01:45:00Z",
   "_help": "Single source of truth for shared content. Edited by the visual editor at /admin/. 'site' and 'pages' hold per-element edits keyed by element id; empty means the page is shown exactly as built.",
   "siteUrl": "https://apexagenticsuk.github.io/apexagentics-site/",
   "brand": {
     "name": "Apex Agentics",
-    "logo": "A",
-    "logoNote": "One setting for the logo: A is Slash (blue), B is Window (orange), C is Lower-case (blue). Files in assets/logos (from brand v2)."
+    "logo": "final",
+    "logoNote": "One setting for the logo. 'final' is the v2-C lockup (assets/logos/logo-final-light.svg for light backgrounds, logo-final-dark.svg for dark). To swap, add logo-NAME-light.svg and logo-NAME-dark.svg and set this value to NAME."
   },
   "theme": {
     "accent": "blue"
