@@ -12,3 +12,7 @@ trap 'kill $SRV 2>/dev/null' EXIT
 sleep 1
 node tools/prerender.js . "$PORT" $PAGES
 node tools/assign-ids.js . "$PORT" $PAGES
+# cache-busting stamp on local scripts and styles (GitHub Pages caches for minutes)
+V=$(date +%Y%m%d%H%M%S)
+sed -i -E "s#(href=\"style\.css|src=\"content\.js|src=\"ui\.js)(\?v=[0-9]+)?\"#\1?v=$V\"#g" index.html
+sed -i -E "s#(\.\./content\.js|href=\"base\.css|href=\"shell\.css|src=\"drag\.js|src=\"shell\.js|src=\"shared\.js)(\?v=[0-9]+)?\"#\1?v=$V\"#g" admin/index.html

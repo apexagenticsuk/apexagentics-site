@@ -145,7 +145,7 @@ function slugify(s){return String(s||'').toLowerCase().normalize('NFKD').replace
 function pagesModal(){var box=$('#plist');box.innerHTML='';var nav=navOf();
   nav.forEach(function(n,i){var cu=(c.custom||{})[n.key],ext=!!n.href,d=document.createElement('div');d.className='prow';
     d.innerHTML='<div class="mv"><span class="ph" title="Drag to change the menu order">⠿</span><button data-a="up" title="Move up in the menu">▲</button><button data-a="down" title="Move down in the menu">▼</button></div>'+
-      '<div><input data-f="label" value="'+esc(n.label)+'" aria-label="Menu name"><small>'+(ext?'Link to '+esc(n.href):(cu?'Your page · '+esc(n.key)+'.html':'Built-in page · '+esc(n.key)+'.html'))+'</small></div>'+
+      '<div><input data-f="label" value="'+esc(n.label)+'" aria-label="Menu name"><small>'+(ext?'Goes to '+esc(({'#what':'What we do','#how':'How it works','#pricing':'Pricing','#results':'Results','#contact':'Contact','#top':'Top of the page'})[n.href]||n.href):(cu?'Your page · '+esc(n.key)+'.html':'Built-in page · '+esc(n.key)+'.html'))+'</small></div>'+
       '<select data-f="show"><option value="menu">Menu</option><option value="footer">Footer only</option><option value="none">Hidden</option></select>'+
       '<div class="acts">'+(ext?'':'<button data-a="open">Open</button><button data-a="seo">Settings</button><button data-a="dup">Copy</button>')+(cu?'<button data-a="title">Rename</button><button data-a="del" class="del">Delete</button>':'')+'</div>';
     d.querySelector('select').value=n.show||'menu';
@@ -284,7 +284,7 @@ $('#vphone').onclick=function(){$('#stage').classList.add('phone');this.classLis
 $('#undo').onclick=undo;$('#redo').onclick=redo;$('#pundo').onclick=undo;$('#predo').onclick=redo;$('#preview').onclick=preview;$('#publish').onclick=publish;
 $('#helpb').onclick=function(){$('#helpm').hidden=false;};$('#style').onclick=styleModal;
 $('#discard').onclick=function(){if(!dirty()){toast('There is nothing unpublished to throw away.');return;}dialog({title:'Throw away changes?',text:'All changes that are not published yet will be removed.',ok:'Throw away',danger:true}).then(function(r){if(!r.ok)return;c=clone(base);uploads={};record();localStorage.removeItem(DK());$('#helpm').hidden=true;if(!exists(page))page='index';reload();});};
-$('#out').onclick=function(){function go(){persist();localStorage.removeItem(TK);localStorage.removeItem(MK);location.reload();}if(mode==='live'&&dirty())dialog({title:'Sign out?',text:'You have unpublished changes. They stay saved on this device.',ok:'Sign out'}).then(function(r){if(r.ok)go();});else go();};
+$('#out').onclick=function(){function go(){persist();localStorage.removeItem(TK);localStorage.removeItem(MK);location.reload();}if(mode==='live'&&dirty())dialog({title:'Sign out?',text:'You have unpublished changes. They stay saved on this device.',ok:'Sign out'}).then(function(r){if(r.ok)go();});else if(mode!=='live'&&dirty())dialog({title:'Exit demo?',text:'You have changes that are not saved anywhere except this practice copy. If you exit, they are kept on this device only and cannot be published.',ok:'Exit demo',cancel:'Stay'}).then(function(r){if(r.ok)go();});else go();};
 $('#psettings').onclick=function(){pageSettings(page);};
 $('#signin').onclick=signin;$('#tok').onkeydown=function(e){if(e.key==='Enter')signin();};
 $('#demo').onclick=function(){mode='demo';localStorage.setItem(MK,'demo');start();};

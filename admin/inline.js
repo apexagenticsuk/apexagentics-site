@@ -205,10 +205,8 @@ function linkPanel(a){finishEdit(true);if(sel!==a)select(a);var blk=a.hasAttribu
   p.querySelector('[data-save]').onclick=function(){saveLabel();if(saveHref(hrefNow())){DYE.toast('Saved.');}};
   p.querySelector('[data-done]').onclick=function(){saveLabel();var v=hrefNow();if(v!=null)saveHref(v);DYE.closePanel();};}
 R.origStyle=function(a){if(a.dataset.dyOs)return a.dataset.dyOs;var s0=BSTYLES.filter(function(s){return a.classList.contains(s[0]);})[0];return s0?s0[0]:'red';};
-function navPanel(a){finishEdit(true);clearSel();var k=navKey(a.getAttribute('href')),lab=a.textContent.trim();var p=openPanel('Menu link');
-  p.innerHTML='<p>“'+esc(lab)+'” is a link in the menu. Menu names, order and which pages appear are set in <b>Pages</b>.</p><div class="prow2 col">'+(k?'<button type="button" class="pbtn red" data-open>Open this page in the editor</button>':'')+'<button type="button" class="pbtn" data-pages>Rename or reorder in Pages</button>'+(k?'<button type="button" class="pbtn" data-set>Page settings</button>':'')+'</div>';
-  var o=p.querySelector('[data-open]');if(o)o.onclick=function(){DYE.closePanel();DYE.goPage(k);};p.querySelector('[data-pages]').onclick=function(){DYE.closePanel();DYE.openPages();};
-  var s=p.querySelector('[data-set]');if(s)s.onclick=function(){DYE.closePanel();if(k===PAGE)DYE.pageSettings();else DYE.goPage(k);};}
+function navPanel(a){finishEdit(true);clearSel();var lab=a.textContent.trim();var p=openPanel('Menu link');
+  p.innerHTML='<p>“'+esc(lab)+'” is a link in the menu. It takes visitors to the “'+esc(lab)+'” part of this page. The menu on this one-page site is fixed, so there is nothing to change here.</p><div class="prow2"><button type="button" class="pbtn" data-done>Close</button></div>';p.querySelector('[data-done]').onclick=function(){DYE.closePanel();};}
 function fixedPanel(a){clearSel();select(a);var p=openPanel('Button');p.innerHTML='<p>This button rings your phone number. To change the number everywhere, open <b>Style</b> and edit <b>Phone number</b>.</p><div class="prow2"><button type="button" class="pbtn red" data-st>Open Style</button></div>';p.querySelector('[data-st]').onclick=function(){DYE.closePanel();DYE.openSocials();};}
 
 /* ---------- images ---------- */
