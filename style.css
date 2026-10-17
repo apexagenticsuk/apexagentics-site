@@ -71,3 +71,6 @@ footer{padding:36px 0 110px}.frow .mail{display:flex;flex-wrap:wrap;gap:10px 28p
 @media (max-width:959px){.sticky{display:flex}}
 @media (max-width:420px){.hero{min-height:520px}.hero .wrap{padding-top:48px}}
 @media print{.sticky,header.top{display:none}}
+
+.shots{display:grid;gap:14px;margin:0 0 20px;align-items:end}.shots img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line)}.shots figcaption{font-size:14px;color:var(--mut)}
+@media (min-width:760px){.shots{grid-template-columns:2fr 1fr}.shots figcaption{grid-column:1/-1}}

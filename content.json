@@ -48,7 +48,19 @@
       "quote": "[QUOTE FROM DAVE]",
       "result": "[FIGURE TBC]",
       "link": "[Link: before and after]",
-      "permission": "pending"
+      "permission": "pending",
+      "flag": "Pending Dave's OK",
+      "images": [
+        {
+          "src": "assets/dave_desktop.webp",
+          "alt": "Screenshot of the refreshed Dave Young website on a computer, showing the Dave Young Unwrapped Christmas show poster"
+        },
+        {
+          "src": "assets/dave_phone.webp",
+          "alt": "Screenshot of the refreshed Dave Young website on a phone, showing the same poster"
+        }
+      ],
+      "imageCaption": "Preview of the refreshed site."
     }
   ],
   "nav": [
@@ -92,6 +104,14 @@
     }
   },
   "dims": {
+    "assets/dave_desktop.webp": [
+      1200,
+      726
+    ],
+    "assets/dave_phone.webp": [
+      585,
+      498
+    ],
     "assets/hero.webp": [
       1920,
       800
