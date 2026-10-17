@@ -14,7 +14,7 @@ function gh(path,opt){opt=opt||{};opt.headers=Object.assign({'Authorization':'Be
   return fetch(path.indexOf('http')==0?path:API+path,opt).then(function(r){return r.text().then(function(t){var j;try{j=t?JSON.parse(t):{};}catch(e){j={};}if(!r.ok){var e=new Error((j&&j.message)||('HTTP '+r.status));e.status=r.status;throw e;}return j;});});}
 function b64utf8(s){return btoa(unescape(encodeURIComponent(s)));}
 function fromb64utf8(s){return decodeURIComponent(escape(atob(s.replace(/\n/g,''))));}
-function norm(x){x=x||{};x.site=x.site||{};x.pages=x.pages||{};x.theme=x.theme||{accent:'teal'};x.contact=x.contact||{};x.shows=x.shows||[];x.socials=x.socials||[];x.contactSocials=x.contactSocials||[];return x;}
+function norm(x){x=x||{};x.site=x.site||{};x.pages=x.pages||{};x.theme=x.theme||{accent:'blue'};x.contact=x.contact||{};x.shows=x.shows||[];x.socials=x.socials||[];x.contactSocials=x.contactSocials||[];return x;}
 
 /* ---- pages ---- */
 function navOf(x){return (x||c).nav||LIB.DEFAULT_NAV;}
@@ -238,9 +238,9 @@ function signin(){var t=$('#tok').value.trim(),m=$('#loginmsg');if(!t){m.classNa
   .catch(function(e){token='';m.className='msg err';m.textContent='That key didn\u2019t work: '+explain(e).replace('Please get a new key.','Check you copied all of it.');});}
 
 /* ---- style modal ---- */
-var NAMES={teal:'Teal',blue:'Electric blue'};
+var NAMES={blue:'Blue'};
 function styleModal(){var A=window.DY_ACCENTS||{},box=$('#accents');box.innerHTML='';
-  Object.keys(A).forEach(function(k){var b=document.createElement('button');b.innerHTML='<i style="background:'+A[k][0]+'"></i>'+NAMES[k];if((c.theme.accent||'teal')===k)b.className='on';
+  Object.keys(A).forEach(function(k){var b=document.createElement('button');b.innerHTML='<i style="background:'+A[k][0]+'"></i>'+NAMES[k];if((c.theme.accent||'blue')===k)b.className='on';
     b.onclick=function(){DYE.change(function(x){x.theme.accent=k;},{reload:true});styleModal();};box.appendChild(b);});
   $('#mphone').value=c.contact.phone||'';renderSocs();$('#stylem').hidden=false;}
 $('#mphone').onchange=function(){var v=$('#mphone').value.trim();DYE.change(function(x){x.contact.phone=v;},{reload:true});};

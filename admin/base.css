@@ -1,10 +1,10 @@
 @font-face{font-family:'Inter';font-style:normal;font-weight:400 800;font-display:swap;src:url(../assets/font_inter.woff2) format('woff2')}
-:root{--red:#19C3B1;--red2:#0e8f82;--gold:#f6c343;--bg:#0b1020;--panel:#141b30;--line:#2a3350;--txt:#f3f5fa;--mut:#aab2c8}
+:root{--red:#2F5BFF;--red2:#2444D4;--gold:#f6c343;--bg:#0b1020;--panel:#141b30;--line:#2a3350;--txt:#f3f5fa;--mut:#aab2c8}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--txt);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.5}
 a{color:inherit;text-decoration:none}
 .btn{display:inline-flex;align-items:center;justify-content:center;text-align:center;gap:.5em;line-height:1.2;box-sizing:border-box;font-weight:800;border-radius:999px;padding:12px 22px;font-size:15px;white-space:nowrap}
-.btn.red{background:var(--red);color:#0B1B3A}
+.btn.red{background:var(--red);color:#fff}
 .btn.gold{background:var(--gold);color:#111}
 .btn.ghost{border:2px solid #fff;color:#fff;padding:10px 20px}
 .btn.sm{padding:9px 16px;font-size:14px}
