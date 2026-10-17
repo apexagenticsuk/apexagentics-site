@@ -69,37 +69,38 @@ window.DY_clean=clean;
 
 /* ---------- shared collections (single source: content.json) ---------- */
 function ATTR(el,n,d){var v=el.getAttribute('data-'+n);return v==null||v===''?d:v;}
-/* [BRACKETS] never appear as final text: every one is wrapped in a visible placeholder marker. */
-function ph(s){return esc(s).replace(/\[[^\]]+\]/g,function(m){return '<span class="ph" title="Placeholder: to be confirmed">'+m+'</span>';});}
-function phOr(v,fallback){v=String(v==null?'':v).trim();return v?(/\[[^\]]+\]/.test(v)?ph(v):esc(v)):'<span class="ph" title="Placeholder: to be confirmed">'+esc(fallback)+'</span>';}
+/* Unfinished items are hidden or shown as plain "to be confirmed" wording. Raw [BRACKET] text never reaches the page. */
+function ph(s){return esc(String(s==null?'':s).replace(/\[[^\]]*\]/g,'').replace(/\s+/g,' ').trim());}
+function clean1(v){v=String(v==null?'':v).trim();return /\[[^\]]*\]/.test(v)?'':v;}
 function showHTML(){return '';}
 function logoSrc(c,tone){var k=String((c.brand||{}).logo||'final').toLowerCase();if(!/^[a-z0-9-]+$/.test(k))k='final';return 'assets/logos/logo-'+k+'-'+(tone||'light')+'.svg';}
 function logoHTML(c,tone){var nm=(c.brand||{}).name||'Apex Agentics';return '<img src="'+esc(RES(logoSrc(c,tone)))+'" alt="'+esc(nm)+'" width="170" height="25">';}
 function imgsHTML(t){var L=(t.images||[]).filter(function(i){return i&&i.src;});if(!L.length)return '';return '<figure class="shots">'+L.map(function(i){return '<img src="'+esc(RES(i.src))+'" alt="'+esc(i.alt||'')+'" loading="lazy">';}).join('')+(t.imageCaption?'<figcaption>'+esc(t.imageCaption)+'</figcaption>':'')+'</figure>';}
-function tcardHTML(t){var perm=t.permission==='approved'?'approved':'pending';
-  return '<article class="case" data-permission="'+perm+'" data-tid="'+esc(t.id||'')+'"><p class="flag">'+esc(t.flag||(perm==='approved'?'Permission given':'Permission pending'))+'</p>'+imgsHTML(t)+
-   '<blockquote><p>'+phOr(t.quote,'[QUOTE TBC]')+'</p></blockquote>'+
-   '<p class="who"><b>'+esc(t.name||'')+'</b>'+(t.role?', '+esc(t.role):'')+'.</p>'+
-   '<p class="res">'+phOr(t.result,'[FIGURE TBC]')+'</p>'+
-   '<p class="lnk">'+(t.link&&!/^\[/.test(t.link)?'<a class="ul" href="'+esc(safeUrl(t.link))+'" target="_blank" rel="noopener">Before and after</a>':phOr(t.link,'[Link: before and after]'))+'</p></article>';}
-function priceHTML(c,key,view){var P=c.prices||{},p=P[key]||{},v=view||'amount';
-  if(v==='vat')return phOr(P.vat,'[VAT TBC]');
-  if(v==='cancel')return phOr(P.cancellation,'[CANCELLATION TBC]');
-  if(v==='small')return phOr(p.small,'[PRICE DETAILS TBC]');
-  return phOr(p.amount,key==='support'?'[PRICE TBC per month]':'[PRICE TBC]');}
-function telHTML(ct,cls){var d=telOf(ct.phone);if(d)return '<a class="tel'+(cls?' '+cls:'')+'" href="tel:'+esc(d)+'">'+esc(ct.phone)+'</a>';
-  return '<a class="tel ph'+(cls?' '+cls:'')+'" href="#" data-ph-link="1" title="Placeholder: this will be a tap-to-call link once there is a phone number">[phone TBC]</a>';}
-function mailHTML(ct){var e=String(ct.email||'').trim();return e?'<a class="ul" href="mailto:'+esc(e)+'">'+esc(e)+'</a>':'<span class="ph" title="Placeholder: to be confirmed">[email TBC]</span>';}
-function contactHTML(ct,view){
+function tcardHTML(t){var perm=t.permission==='approved'?'approved':'pending',q=clean1(t.quote),res=clean1(t.result),lk=clean1(t.link),h='';
+  h+=imgsHTML(t);
+  if(q)h+='<blockquote><p>'+esc(q)+'</p></blockquote>';
+  if(q||!(t.images||[]).length)h+='<p class="who"><b>'+esc(t.name||'')+'</b>'+(t.role?', '+esc(t.role):'')+'.</p>';
+  if(res)h+='<p class="res">'+esc(res)+'</p>';
+  if(lk)h+='<p class="lnk"><a class="ul" href="'+esc(safeUrl(lk))+'" target="_blank" rel="noopener">Before and after</a></p>';
+  return '<article class="case" data-permission="'+perm+'" data-tid="'+esc(t.id||'')+'">'+h+'</article>';}
+function priceHTML(c,key,view){var P=c.prices||{},p=P[key]||{};
+  if(view==='small')return clean1(p.small)?esc(clean1(p.small)):'';
+  var a=clean1(p.amount);return a?esc(a):'<span class="tbc">'+(key==='support'?'Price to be confirmed per month':'Price to be confirmed')+'</span>';}
+function telHTML(ct,cls){var d=telOf(ct.phone);return d?'<a class="tel'+(cls?' '+cls:'')+'" href="tel:'+esc(d)+'">'+esc(ct.phone)+'</a>':'';}
+function mailHTML(ct){var e=clean1(ct.email);return e?'<a class="ul" href="mailto:'+esc(e)+'">'+esc(e)+'</a>':'';}
+function contactHTML(ct,view){var m=mailHTML(ct),t=telHTML(ct),l=clean1(ct.location),r=clean1(ct.replyTime);
   if(view==='phone')return telHTML(ct,'call');
-  if(view==='reply')return phOr(ct.replyTime,'[within X working days: TBC]');
-  if(view==='loc')return phOr(ct.location,'[UK/city TBC]');
-  if(view==='foot')return '<b>Apex Agentics</b><span>'+mailHTML(ct)+'</span><span>'+phOr(ct.location,'[UK/city TBC]')+'</span>';
-  return '<p class="direct">'+mailHTML(ct)+' '+telHTML(ct)+'</p>';}
-function shared(c,root){root=root||document;
+  if(view==='reply')return r?' '+esc(r):'';
+  if(view==='loc')return esc(l);
+  if(view==='foot')return '<b>Apex Agentics</b>'+(m?'<span>'+m+'</span>':'')+(t?'<span>'+t+'</span>':'')+(l?'<span>'+esc(l)+'</span>':'');
+  return (m||t)?'<p class="direct">'+m+(m&&t?' ':'')+t+'</p>':'';}
+function shared(c,root){root=root||document;var P=c.prices||{};
   root.querySelectorAll('[data-cms]').forEach(function(el){var k=el.getAttribute('data-cms'),v=ATTR(el,'view',''),h=null;
     if(k==='testimonials')h=(c.testimonials||[]).map(tcardHTML).join('');
     else if(k==='price')h=priceHTML(c,ATTR(el,'key','refresh'),v);
+    else if(k==='terms'){var a=clean1(P.vat),b=clean1(P.cancellation);h=(a?'<span>'+esc(a)+'</span> ':'')+(b?'<span>'+esc(b)+'</span>':'');}
+    else if(k==='catch'){var ct=clean1(c.catch);h=ct?'<h3>The catch</h3><p>'+esc(ct)+'</p>':'';}
+    else if(k==='privacy')h=clean1((c.contact||{}).privacy)?esc(clean1(c.contact.privacy)):'';
     else if(k==='logo')h=logoHTML(c,ATTR(el,'tone','light'));
     else if(k==='contact')h=contactHTML(c.contact||{},v);
     if(h!==null)el.innerHTML=AD(h);});}

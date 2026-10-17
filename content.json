@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-17T01:45:00Z",
+  "version": "2026-10-17T02:10:00Z",
   "_help": "Single source of truth for shared content. Edited by the visual editor at /admin/. 'site' and 'pages' hold per-element edits keyed by element id; empty means the page is shown exactly as built.",
   "siteUrl": "https://apexagenticsuk.github.io/apexagentics-site/",
   "brand": {
@@ -14,7 +14,8 @@
     "email": "",
     "phone": "",
     "location": "",
-    "replyTime": ""
+    "replyTime": "",
+    "privacy": ""
   },
   "prices": {
     "refresh": {
@@ -45,22 +46,23 @@
       "id": "dave-young",
       "name": "Dave Young",
       "role": "comedian",
-      "quote": "[QUOTE FROM DAVE]",
-      "result": "[FIGURE TBC]",
-      "link": "[Link: before and after]",
+      "quote": "",
+      "result": "",
+      "link": "",
       "permission": "pending",
       "flag": "Pending Dave's OK",
       "images": [
         {
           "src": "assets/dave_desktop.webp",
-          "alt": "Screenshot of the refreshed Dave Young website on a computer, showing the Dave Young Unwrapped Christmas show poster"
+          "alt": "Screenshot of the Dave Young website preview on a computer, showing the Book Dave section with Corporate Events, Christmas Parties and Weddings"
         },
         {
           "src": "assets/dave_phone.webp",
-          "alt": "Screenshot of the refreshed Dave Young website on a phone, showing the same poster"
+          "alt": "Screenshot of the Dave Young website preview on a phone, showing the Book Dave section"
         }
       ],
-      "imageCaption": "Preview of the refreshed site."
+      "imageCaption": "Preview of the refreshed site.",
+      "_internal": "Pending Dave's OK for his name, quote and screenshots. Quote, results line and before/after link stay empty (hidden) until real ones exist."
     }
   ],
   "nav": [
@@ -106,11 +108,11 @@
   "dims": {
     "assets/dave_desktop.webp": [
       1200,
-      726
+      617
     ],
     "assets/dave_phone.webp": [
-      585,
-      498
+      468,
+      828
     ],
     "assets/favicon-32.png": [
       32,
@@ -144,5 +146,6 @@
       600,
       338
     ]
-  }
+  },
+  "catch": ""
 }
