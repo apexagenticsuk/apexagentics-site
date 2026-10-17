@@ -31,7 +31,14 @@
     },
     "vat": "",
     "cancellation": "",
-    "_internalNote": "NOT RENDERED. Lewis's ceiling, awaiting owner's approval: refresh of an existing site GBP 395-650; new 5-page site 595; 10 pages 895; support 19 per month, or 39 per month with 30 minutes of edits. Do not publish until owner approves."
+    "_internalNote": "NOT RENDERED. Lewis's ceiling, awaiting owner's approval: refresh of an existing site GBP 395-650; new 5-page site 595; 10 pages 895; support 19 per month, or 39 per month with 30 minutes of edits. Do not publish until owner approves.",
+    "deluxe": {
+      "name": "Deluxe Refresh",
+      "unit": "one-off",
+      "amount": "",
+      "small": "",
+      "draft": true
+    }
   },
   "testimonials": [
     {
@@ -92,6 +99,10 @@
     "assets/hero_m.webp": [
       640,
       502
+    ],
+    "assets/icon.png": [
+      180,
+      180
     ],
     "assets/og.jpg": [
       1200,
