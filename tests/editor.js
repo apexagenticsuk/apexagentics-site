@@ -21,7 +21,19 @@ const pi=p.locator('#sharedm .shbody input[type=text]').first();await pi.fill('T
 const priceTxt=await F().evaluate(()=>[...document.querySelectorAll('[data-cms=price][data-key=refresh]')].map(e=>e.textContent).join('|'));
 ok('edit a price: shows on the page everywhere it is used (card + pricing)',(priceTxt.match(/TESTPRICE/g)||[]).length>=2,priceTxt);
 await pi.fill('');await pi.dispatchEvent('change');await ready();
-ok('empty price goes back to the [PRICE TBC] placeholder',await F().evaluate(()=>/\[PRICE TBC\]/.test(document.querySelector('#pricing [data-cms=price][data-key=refresh]').textContent)));
+ok('empty price goes back to "Price to be confirmed"',await F().evaluate(()=>/^Price to be confirmed$/.test(document.querySelector('#pricing [data-cms=price][data-key=refresh]').textContent.trim())));
+await p.evaluate(()=>document.querySelector('#sharedm').hidden=true);
+// 2b clicking a price opens the clicked card's own tab
+for(const [k,exp] of [['deluxe','Price: Deluxe Refresh'],['support','Price: Ongoing Support'],['refresh','Price: Website Refresh']]){
+ await F().locator('#pricing [data-cms=price][data-key='+k+']:not([data-view])').first().click();await p.waitForSelector('#sharedm:not([hidden])');
+ ok('clicking the '+k+' price opens its own tab',await p.evaluate(e=>document.querySelector('#sharedm .shtab.on').textContent===e,exp));await p.evaluate(()=>document.querySelector('#sharedm').hidden=true);}
+ok('editor text has no internal wording (owner, TBC, bracket)',!/owner|TBC|\[[A-Z]/.test(await p.evaluate(()=>{DYE.openShared('refresh');const a=document.querySelector('#sharedm').innerText;DYE.openShared('testimonials');const b=document.querySelector('#sharedm').innerText;DYE.openShared('contact');const c=document.querySelector('#sharedm').innerText;document.querySelector('#sharedm').hidden=true;return a+b+c+document.querySelector('#tok').placeholder;})));
+// 2c phone number switches the call link on and off
+await p.evaluate(()=>DYE.openShared('contact'));await p.waitForSelector('#sharedm:not([hidden])');
+const ph=p.locator('#sharedm .shbody label:has(span:text-is("Phone")) input');await ph.fill('020 7946 0000');await ph.dispatchEvent('change');await ready();
+ok('a real phone number switches on tap-to-call (tel: link in footer and sticky bar)',await F().evaluate(()=>document.querySelectorAll('a.tel[href^="tel:"]').length>=2));
+await ph.fill('');await ph.dispatchEvent('change');await ready();
+ok('clearing the phone number removes every call link again',await F().evaluate(()=>document.querySelectorAll('a.tel,a[href^="tel:"]').length===0));
 await p.evaluate(()=>document.querySelector('#sharedm').hidden=true);
 // 3 image
 const png=path.join(__dirname,'_tmp.png');fs.writeFileSync(png,Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGNgYGD4DwABBAEAHb8pBgAAAABJRU5ErkJggg==','base64'));

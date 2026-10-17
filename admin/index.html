@@ -1,11 +1,11 @@
 <!doctype html><html lang="en-IE"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Website editor | Apex Agentics</title>
 <link rel="icon" href="data:,"><link rel="stylesheet" href="base.css"><link rel="stylesheet" href="shell.css"></head><body>
 <div id="login" class="login" hidden><div class="card">
-  <div class="brand"><span class="d">Apex</span> <span class="y">Agentics</span><small>Website editor</small></div>
+  <div class="brand"><span class="d">Apex Agentics</span><small>Website editor</small></div>
   <h1>Edit your website</h1>
   <p class="lead2">Click on anything on your pages to change it, then press Publish. No coding needed.</p>
   <label for="tok">Your editor key</label>
-  <input id="tok" type="password" autocomplete="off" placeholder="Starts with github_pat_…">
+  <input id="tok" type="password" autocomplete="off" placeholder="Paste your editor key here">
   <p class="hint">Paste the key you were given. It stays in this browser on this device only and is never put on the website.</p>
   <div class="row"><button class="btn red" id="signin">Sign in</button><button class="btn ghost" id="demo">Just look around (demo mode)</button></div>
   <p id="loginmsg" class="msg"></p>
@@ -15,7 +15,7 @@
 
 <div id="app" hidden>
 <header class="tb">
-  <div class="g"><span class="logo"><b>Apex</b> <i>Agentics</i></span><span id="demobadge" class="demob" hidden title="Demo mode: changes stay on this device and can't be published">DEMO</span>
+  <div class="g"><span class="logo"><b>Apex Agentics</b></span><span id="demobadge" class="demob" hidden title="Demo mode: changes stay on this device and can't be published">DEMO</span>
   <select id="page" aria-label="Page" hidden></select></div>
   <div class="g"><div class="seg" role="group" aria-label="View"><button id="vdesk" class="on" title="Desktop view">🖥<span class="sl"> Desktop</span></button><button id="vphone" title="Phone view">📱<span class="sl"> Phone</span></button></div>
   <button id="undo" class="ib" title="Undo the last change"><span aria-hidden="true">↶</span> Undo</button><button id="redo" class="ib" title="Redo the change you undid">Redo <span aria-hidden="true">↷</span></button></div>
@@ -44,7 +44,7 @@
 
 <div id="stylem" class="modal" hidden><div class="mc"><button class="x" data-close>✕</button>
 <h2>Site style</h2><p class="hint">Pick the accent colour used on buttons and highlights.</p><div id="accents" class="accents"></div>
-<label>Phone number (leave empty until there is one)</label><input id="mphone" inputmode="tel"><p class="hint">Fills the tap-to-call link. While empty it stays a marked placeholder.</p>
+<label>Phone number (leave empty until there is one)</label><input id="mphone" inputmode="tel"><p class="hint">Fills the tap-to-call link. While empty, no call link is shown on the page.</p>
 <h3 style="margin-top:20px">Social media links</h3><p class="hint">Also editable by clicking the icons on any page.</p><div id="socs"></div><button class="btn gold sm" id="addsoc">+ Add a social link</button>
 <h3 style="margin-top:20px">Contact page icon strip</h3><p class="hint">The four icons in the middle of the Contact page only.</p><div id="csocs"></div><button class="btn gold sm" id="addcsoc">+ Add an icon</button>
 <div class="row"><button class="btn red" data-close>Done</button></div></div></div>
@@ -60,8 +60,8 @@
 <div id="newpm" class="modal" hidden><div class="mc"><button class="x" data-close>✕</button>
 <h2 id="newpt">New page</h2>
 <label for="np-title">Page title</label><input id="np-title" maxlength="60" placeholder="e.g. Extra page">
-<label for="np-label">Name in the menu</label><input id="np-label" maxlength="24" placeholder="e.g. Parties">
-<label for="np-slug">Web address</label><div class="slug"><span id="np-base"></span><input id="np-slug" maxlength="40" placeholder="christmas-parties"><span>.html</span></div><p class="hint">Made from the title automatically. Letters, numbers and dashes only.</p>
+<label for="np-label">Name in the menu</label><input id="np-label" maxlength="24" placeholder="e.g. Extra">
+<label for="np-slug">Web address</label><div class="slug"><span id="np-base"></span><input id="np-slug" maxlength="40" placeholder="new-page"><span>.html</span></div><p class="hint">Made from the title automatically. Letters, numbers and dashes only.</p>
 <label for="np-tpl">Start from</label><select id="np-tpl"></select>
 <p id="np-msg" class="msg err"></p>
 <div class="row"><button class="btn red" id="np-go">Create page</button><button class="btn ghost" data-close>Cancel</button></div></div></div>

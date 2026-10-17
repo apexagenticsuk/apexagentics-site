@@ -27,8 +27,8 @@ D.querySelectorAll(NAVSEL).forEach(function(a){a.setAttribute('data-dy-nav','');
 function secs(){return [].slice.call((D.querySelector('body>main')||D.body).children).filter(function(e){return R.secId.has(e);});}
 secs().forEach(function(s){s.classList.add('dy-sec');if(s.classList.contains('dy-hidden'))s.appendChild(mk('div','dy-hidlab','Hidden section · click it, then “Show”'));});
 D.querySelectorAll('[data-cms="socials"]').forEach(function(s){s.setAttribute('data-dy-soc','');});
-var CMSLAB={testimonials:'Testimonials and results',price:'Prices',contact:'Contact details',logo:'Logo'},CMSKEY={price:'refresh',logo:'brand'};
-D.querySelectorAll('[data-cms]').forEach(function(s){var k=s.getAttribute('data-cms');if(CMSLAB[k]){s.setAttribute('data-dy-cms',CMSKEY[k]||k);s.setAttribute('data-dy-label','Shared: '+CMSLAB[k]+'. Click to edit everywhere');}});
+var CMSLAB={testimonials:'Results and testimonials',price:'Prices',contact:'Contact details',logo:'Logo',terms:'Prices',catch:'Notes under prices',privacy:'Contact details'},CMSKEY={price:'refresh',logo:'brand'};
+D.querySelectorAll('[data-cms]').forEach(function(s){var k=s.getAttribute('data-cms');if(CMSLAB[k]){s.setAttribute('data-dy-cms',(k==='price'&&s.getAttribute('data-key'))||CMSKEY[k]||k);s.setAttribute('data-dy-label','Shared: '+CMSLAB[k]+'. Click to edit everywhere');}});
 D.querySelectorAll('.blk-video').forEach(function(v){v.appendChild(mk('div','dy-vidcover','<span>▶ Video · click to select, then “Change video”</span>'));});
 function isNew(s){return !!(s&&s.hasAttribute('data-nsec'));}
 /* + Add section insert points: inside the top of the next section (never over the header/menu) */
@@ -171,24 +171,25 @@ D.addEventListener('drop',function(e){if(editing)e.preventDefault();},true);
 
 /* ---------- buttons & links ---------- */
 function pagesList(){return DYE.pages();}
-function kindOf(h){if(/^tel:/i.test(h))return 'phone';if(/^mailto:/i.test(h))return 'email';var m=/^([\w-]+)\.html(#.*)?$/.exec(h||'');if(m&&pagesList().some(function(p){return p.key===m[1];}))return 'page';if(!h||h==='#')return 'page';return 'web';}
+var SECTIONS_NAV=[['top','Top of the page'],['what','What we do'],['how','How it works'],['pricing','Pricing'],['results','Results'],['contact','Contact']];
+function kindOf(h){if(/^tel:/i.test(h))return 'phone';if(/^mailto:/i.test(h))return 'email';var m=/^([\w-]+)\.html(#.*)?$/.exec(h||'');if(m&&pagesList().some(function(p){return p.key===m[1];}))return 'page';if(/^#[\w-]+$/.test(h||''))return 'page';if(!h||h==='#')return 'page';return 'web';}
 function labelEl(a){if(a.hasAttribute('data-bf'))return a;var o=R.ids.get(a);if(o&&o.t)return a;var k=a.querySelector('[data-dy-t]');return k&&k.closest('a')===a?k:null;}
 function linkPanel(a){finishEdit(true);if(sel!==a)select(a);var blk=a.hasAttribute('data-bl'),o=R.ids.get(a)||{},isBtn=a.classList.contains('btn'),bid=blk&&blockOf(a).dataset.bid;
   var le=labelEl(a),href=a.getAttribute('href')||'',k=kindOf(href),pm=/^([\w-]+)\.html/.exec(href),cs=BSTYLES.filter(function(s){return a.classList.contains(s[0]);})[0];
   var canStyle=isBtn&&(blk?!!a.dataset.bs:!!o.a);
   var h=(le?field(isBtn?'Words on the button':'Words','<input class="pin" data-label value="'+esc(le.textContent.replace(/\s+/g,' ').trim())+'">'):'')+
-    field('When someone clicks it, go to',seg('kind',[['page','One of my pages'],['web','A web address'],['phone','Call a phone'],['email','Send an email']],k))+
-    '<div data-for="page">'+field('Page','<select class="pin" data-page>'+pagesList().map(function(p){return '<option value="'+esc(p.key)+'">'+esc(p.label)+'</option>';}).join('')+'</select>')+'</div>'+
+    field('When someone clicks it, go to',seg('kind',[['page','A part of this page'],['web','A web address'],['phone','Call a phone'],['email','Send an email']],k))+
+    '<div data-for="page">'+field('Go to','<select class="pin" data-page>'+SECTIONS_NAV.map(function(p){return '<option value="'+esc(p[0])+'">'+esc(p[1])+'</option>';}).join('')+'</select>')+'</div>'+
     '<div data-for="web">'+field('Web address','<input class="pin" data-web placeholder="https://www.example.com" value="'+(k==='web'?esc(href):'')+'">')+'<p class="hint">Opens in a new tab.</p></div>'+
-    '<div data-for="phone">'+field('Phone number','<input class="pin" data-phone type="tel" placeholder="087 123 4567" value="'+(k==='phone'?esc(href.replace(/^tel:/i,'')):'')+'">')+'</div>'+
+    '<div data-for="phone">'+field('Phone number','<input class="pin" data-phone type="tel" placeholder="020 7946 0000" value="'+(k==='phone'?esc(href.replace(/^tel:/i,'')):'')+'">')+'</div>'+
     '<div data-for="email">'+field('Email address','<input class="pin" data-email type="email" placeholder="name@example.com" value="'+(k==='email'?esc(href.replace(/^mailto:/i,'').split('?')[0]):'')+'">')+'</div><p class="perr" data-err></p>'+
     (canStyle?field('Colour',seg('style',BSTYLES,cs?cs[0]:'red')):'')+
     '<div class="prow2"><button type="button" class="pbtn red" data-save>Save</button><button type="button" class="pbtn" data-done>Close</button></div>';
   var p=openPanel(isBtn?'Button':'Link');p.innerHTML=h;var kind=k;
   function show(){p.querySelectorAll('[data-for]').forEach(function(d){d.hidden=d.dataset.for!==kind;});}show();
-  var ps=p.querySelector('[data-page]');ps.value=pm&&kind==='page'?pm[1]:(pagesList()[0]||{}).key;
+  var ps=p.querySelector('[data-page]');ps.value=(/^#([\w-]+)$/.exec(href)||[])[1]||'contact';
   function hrefNow(){var err=p.querySelector('[data-err]');err.textContent='';
-    if(kind==='page')return ps.value+'.html';
+    if(kind==='page')return '#'+ps.value;
     if(kind==='web'){var v=p.querySelector('[data-web]').value.trim();if(/^\s*(javascript|data):/i.test(v)){err.textContent='That address is not allowed.';return null;}if(!v){err.textContent='Please type a web address.';return null;}if(!/^https?:\/\//i.test(v))v='https://'+v.replace(/^\/+/,'');return v;}
     if(kind==='phone'){var t=p.querySelector('[data-phone]').value.trim();if(!/\d{6,}/.test(t.replace(/\D/g,''))){err.textContent='Please type a phone number.';return null;}return 'tel:'+window.DY.telOf(t);}
     var m=p.querySelector('[data-email]').value.trim();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)){err.textContent='Please type an email address like name@example.com.';return null;}return 'mailto:'+m;}
