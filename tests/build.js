@@ -56,7 +56,7 @@ for(const [M,vp] of [['desktop',{width:1280,height:800}],['tablet 768',{width:76
   ok(tag+': no placeholder markers or dead links left on the page',r.ph===0&&r.hashLinks===0,r.ph+' ph, '+r.hashLinks+' # links');
   ok(tag+': no pound-sign (or other currency) figures',!r.pound&&!r.other);
   ok(tag+': unfinished items are hidden (no TBC, draft, pending, VAT, cancellation, catch, privacy, response time, quote, figure wording)',!r.unfinished);
-  ok(tag+': prices read "Shared at your free consultation" (no amounts, no quote wording)',r.prices.length===5&&r.prices.every(x=>x==='Shared at your free consultation'),r.prices.join('|'));
+  ok(tag+': prices read "Shared when you get in touch" (no amounts, no quote wording)',r.prices.length===5&&r.prices.every(x=>x==='Shared when you get in touch'),r.prices.join('|'));
   ok(tag+': no phone/tap-to-call anywhere while there is no real number',r.tels===0&&r.stickyTel===0);
   ok(tag+': Dave Young entry has only the two cropped screenshots (alt + size), no poster or Xmas tile, permission flag not in the markup',r.cases===1&&r.daveImgs.length===2&&r.daveImgs.every(x=>x[1])&&r.daveImgs[0][0]==='assets/dave_desktop.webp'&&r.daveImgs[0][2]==='1100x600'&&r.daveImgs[1][0]==='assets/dave_phone.webp'&&!r.posterAny&&r.names===0&&r.permAttrs===0,JSON.stringify(r.daveImgs)+' permAttrs '+r.permAttrs);
   ok(tag+': Dave desktop and phone shots form an aligned pair (equal height from 600px up, filling the row, no dead space)',!r.shotPair||(r.shotPair.w>=600?(Math.abs(r.shotPair.h[0]-r.shotPair.h[1])<=2&&r.shotPair.right<=2&&r.shotPair.left<=2):(r.shotPair.right<=2||r.shotPair.right<=60)),JSON.stringify(r.shotPair));
@@ -97,10 +97,10 @@ ok('internal flags stay in content.json: Dave entry pending, Deluxe draft, empty
 ok('unfinished text fields are empty in content.json (catch, VAT, cancellation, privacy, email, phone, location, reply time)',cj.catch===''&&cj.prices.vat===''&&cj.prices.cancellation===''&&['privacy','email','phone','location','replyTime'].every(k=>cj.contact[k]===''));
 ok('permission flag lives in content.json and not in the HTML',!/data-permission/.test(fs.readFileSync(root+'/index.html','utf8'))&&cj.testimonials.every(t=>t.permission==='pending'));
 ok('only Dave Young in testimonials',cj.testimonials.length===1&&cj.testimonials[0].name==='Dave Young'&&cj.testimonials[0].permission==='pending');
-ok('internal pricing note is in content.json only (not in any html)',/395/.test(cj.prices._internalNote)&&!html.some(f=>/395|595|895/.test(fs.readFileSync(f,'utf8').replace(/data:[^"')]+/g,''))));
+ok('internal pricing note is in content.json only (not in any html)',/395/.test(cj.prices._internalNote)&&!html.filter(f=>!f.includes(path.join('site','brand','editor-demo'))/* editor-gallery fixture: shows the published /web prices (New website from £595) from site-config.json */).some(f=>/395|595|895/.test(fs.readFileSync(f,'utf8').replace(/data:[^"')]+/g,''))));
 const hh=fs.readFileSync(root+'/index.html','utf8');
 ok('logo is one setting: header image follows brand.logo, alt is Apex Agentics',new RegExp('assets/logos/logo-'+cj.brand.logo+'-light\\.svg"[^>]*alt="Apex Agentics"').test(hh)&&fs.existsSync(root+'/assets/logos/logo-'+cj.brand.logo+'-light.svg')&&fs.existsSync(root+'/assets/logos/logo-'+cj.brand.logo+'-dark.svg'));
 ok('favicon, apple-touch icon and JSON-LD logo use the final icon set',/favicon\.ico/.test(hh)&&/apple-touch-icon" href="assets\/icon\.png/.test(hh)&&/assets\/icon\.png/.test((hh.match(/id="dy-ld">([^<]*)/)||[])[1]||''));
-ok('nav "Book a free consultation" is a normal button, not a placeholder',/class="main"[\s\S]*?<a [^>]*class="btn red"[^>]*>Book a free consultation<\/a>/.test(hh)&&!/class="[^"]*ph[^"]*"[^>]*>Book a free consultation/.test(hh));
+ok('nav "Get in touch" (was "Book a free consultation") is a normal button, not a placeholder',/class="main"[\s\S]*?<a [^>]*class="btn red"[^>]*>Get in touch<\/a>/.test(hh)&&!/class="[^"]*ph[^"]*"[^>]*>Get in touch/.test(hh));
 ok('siteUrl set for JSON-LD/og:image',/apexagenticsuk\.github\.io\/apexagentics-site\//.test(cj.siteUrl)&&/og:image" content="https:\/\/apexagenticsuk\.github\.io\/apexagentics-site\/assets\/og\.jpg/.test(fs.readFileSync(root+'/index.html','utf8')));
 await b.close();console.log(fail?fail+' FAILED':'ALL PASSED');process.exit(fail?1:0);})();

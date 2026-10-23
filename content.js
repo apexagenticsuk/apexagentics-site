@@ -19,10 +19,10 @@ var BLOCKS={
  image:{label:'Image',icon:'🖼',make:function(){return {type:'image',img:{src:'assets/support_upgrade_600.webp',alt:'Apex Agentics'},caption:''};}},
  imageLeft:{label:'Image + text (image left)',icon:'◧',make:function(){return {type:'imageText',side:'left',img:{src:'assets/support_upgrade_600.webp',alt:'Apex Agentics'},title:'A heading <span class="r">here</span>',text:'Some text to go with the picture. Click to change it.',btnLabel:'Find out more',btnUrl:'#contact'};}},
  imageRight:{label:'Image + text (image right)',icon:'◨',make:function(){var b=BLOCKS.imageLeft.make();b.side='right';return b;}},
- button:{label:'Button',icon:'⬭',make:function(){return {type:'button',label:'Book a free consultation',url:'#contact',style:'red'};}},
+ button:{label:'Button',icon:'⬭',make:function(){return {type:'button',label:'Get in touch',url:'#contact',style:'red'};}},
  spacer:{label:'Spacer',icon:'↕',make:function(){return {type:'divider',kind:'space'};}},
  divider:{label:'Divider line',icon:'—',make:function(){return {type:'divider',kind:'line'};}},
- cta:{label:'Contact / booking',icon:'☎',make:function(){return {type:'cta',title:'Let’s talk about your <span class="r">website</span>.',text:'Tell us what is not working.',btnLabel:'Book a free consultation',btnUrl:'#contact'};}},
+ cta:{label:'Contact / booking',icon:'☎',make:function(){return {type:'cta',title:'Let’s talk about your <span class="r">website</span>.',text:'Tell us what is not working.',btnLabel:'Get in touch',btnUrl:'#contact'};}},
  socials:{label:'Social links',icon:'＠',make:function(){return {type:'socials'};}},
  cards2:{label:'2 cards',icon:'▥',make:function(){return {type:'cards',cols:2,items:[CARD(0),CARD(1)]};}},
  cards3:{label:'3 cards',icon:'▥▥',make:function(){return {type:'cards',cols:3,items:[CARD(0),CARD(1),CARD(2)]};}},
@@ -86,7 +86,7 @@ function tcardHTML(t){var perm=t.permission==='approved'?'approved':'pending',q=
   return '<article class="case" data-tid="'+esc(t.id||'')+'">'+h+'</article>';}
 function priceHTML(c,key,view){var P=c.prices||{},p=P[key]||{};
   if(view==='small')return clean1(p.small)?esc(clean1(p.small)):'';
-  var a=clean1(p.amount);return a?esc(a):'<span class="tbc">'+'Shared at your free consultation'+'</span>';}
+  var a=clean1(p.amount);return a?esc(a):'<span class="tbc">'+'Shared when you get in touch'+'</span>';}
 function telHTML(ct,cls){var d=telOf(ct.phone);return d?'<a class="tel'+(cls?' '+cls:'')+'" href="tel:'+esc(d)+'">'+esc(ct.phone)+'</a>':'';}
 function mailHTML(ct){var e=clean1(ct.email);return e?'<a class="ul" href="mailto:'+esc(e)+'">'+esc(e)+'</a>':'';}
 function contactHTML(ct,view){var m=mailHTML(ct),t=telHTML(ct),l=clean1(ct.location),r=clean1(ct.replyTime);

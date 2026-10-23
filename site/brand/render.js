@@ -1,5 +1,5 @@
 // Render the share image and icons from the HTML templates in this folder with Playwright (real self-hosted fonts).
-// node site/brand/render.js  -> site/static/og.png, favicon.ico (16+32), apple-touch-icon.png (180). build.js copies site/static/* to dist/.
+// node site/brand/render.js  -> site/static/og.png (root, UK lockup), og-web.png (/web/, Shift lockup), favicon.ico (16+32), apple-touch-icon.png (180). build.js copies site/static/* to dist/.
 const {chromium}=require('playwright'),fs=require('fs'),path=require('path');
 const here=__dirname,out=path.join(here,'..','static');fs.mkdirSync(out,{recursive:true});
 const url=f=>'file://'+path.join(here,f);
@@ -9,10 +9,11 @@ const ico=imgs=>{const h=Buffer.alloc(6+16*imgs.length);h.writeUInt16LE(0,0);h.w
  return Buffer.concat([h,...imgs.map(x=>x[1])]);};
 (async()=>{const b=await chromium.launch({executablePath:process.env.CHROME||'/usr/bin/google-chrome',args:['--no-sandbox','--allow-file-access-from-files']});
  const p=await (await b.newContext({viewport:{width:1200,height:630},deviceScaleFactor:1})).newPage();
- await p.goto(url('og.html'));await p.evaluate(()=>document.fonts.ready);
+ for(const [b,f] of [['uk','og.png'],['web','og-web.png']]){await p.goto(url('og.html')+'?b='+b);await p.evaluate(()=>document.fonts.ready);
+ await p.waitForFunction(()=>{const i=document.getElementById('lock');return i.complete&&i.naturalWidth>0});
  const fonts=await p.evaluate(()=>['700 10px "Space Grotesk"','italic 400 10px "Instrument Serif"','500 10px "Inter Tight"'].map(f=>document.fonts.check(f)));
  if(!fonts.every(Boolean))throw new Error('share image fonts not loaded '+fonts);
- await p.screenshot({path:path.join(out,'og.png'),clip:{x:0,y:0,width:1200,height:630}});
+ await p.screenshot({path:path.join(out,f),clip:{x:0,y:0,width:1200,height:630}});}
  const icon=async(s,r)=>{await p.setViewportSize({width:s,height:s});await p.goto(url('icon.html')+`?s=${s}${r?'&r=1':''}`);return p.screenshot({clip:{x:0,y:0,width:s,height:s},omitBackground:true});};
  fs.writeFileSync(path.join(out,'favicon.ico'),ico([[16,await icon(16,true)],[32,await icon(32,true)]]));
  fs.writeFileSync(path.join(out,'apple-touch-icon.png'),await icon(180,false));

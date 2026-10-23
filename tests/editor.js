@@ -22,7 +22,7 @@ const pi=p.locator('#sharedm .shbody input[type=text]').first();await pi.fill('T
 const priceTxt=await F().evaluate(()=>[...document.querySelectorAll('[data-cms=price][data-key=refresh]')].map(e=>e.textContent).join('|'));
 ok('edit a price: shows on the page everywhere it is used (card + pricing)',(priceTxt.match(/TESTPRICE/g)||[]).length>=2,priceTxt);
 await pi.fill('');await pi.dispatchEvent('change');await ready();
-ok('empty price goes back to "Shared at your free consultation"',await F().evaluate(()=>/^Shared at your free consultation$/.test(document.querySelector('#pricing [data-cms=price][data-key=refresh]').textContent.trim())));
+ok('empty price goes back to "Shared when you get in touch"',await F().evaluate(()=>/^Shared when you get in touch$/.test(document.querySelector('#pricing [data-cms=price][data-key=refresh]').textContent.trim())));
 await p.evaluate(()=>document.querySelector('#sharedm').hidden=true);
 // 2b clicking a price opens the clicked card's own tab
 for(const [k,exp] of [['deluxe','Price: Deluxe Refresh'],['support','Price: Ongoing Support'],['refresh','Price: Website Refresh']]){
@@ -76,5 +76,7 @@ ok('choosing Stay keeps the editor open',await p.evaluate(()=>document.querySele
 await p.goto(BASE+'/robots.txt');await p.evaluate(()=>{localStorage.setItem('dy2-draft-demo',JSON.stringify({content:{version:'1999',pages:{index:{text:{e0:'STALE'}}},site:{}},uploads:{},base:'1999-01-01T00:00:00Z'}));});
 await p.goto(BASE+'/admin/');await p.waitForFunction(()=>window.DYE&&window.DYE.state().content);await ready();
 ok('stale draft (older version stamp) is dropped',await p.evaluate(()=>!JSON.stringify(DYE.state().content).includes('STALE')));
+{const L=await F().evaluate(()=>{const B=window.DY_LIB.BLOCKS;return {b:B.button.make().label,c:B.cta.make().btnLabel,all:JSON.stringify(Object.keys(B).map(k=>B[k].make()).concat((window.DY_LIB.SECTIONS?Object.keys(window.DY_LIB.SECTIONS):[]).map(k=>{try{return window.DY_LIB.makeSection(k)}catch(e){return null}})))};});
+ ok('rebrand v3: add-block defaults: a new Button and a new Contact / booking block both say "Get in touch", and no built-in block or section default says "free consultation"',L.b==='Get in touch'&&L.c==='Get in touch'&&!/free consultation/i.test(L.all),JSON.stringify([L.b,L.c]));}
 ok('no script errors',errs.length===0,errs.join(' | '));
 await b.close();console.log(fail?fail+' FAILED':'ALL PASSED');process.exit(fail?1:0);})();

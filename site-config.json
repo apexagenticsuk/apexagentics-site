@@ -37,14 +37,13 @@
     }
   },
   "prices": {
-    "_note": "Every £ figure on the site comes from here. In text, {key} is replaced by that price’s figure (e.g. {check} -> £50) and {key+} by the full price with its prefix and unit (e.g. {domain+} -> about £10 a year). {creditDays}, {changesMinutes} and {email} are filled in too.",
+    "_note": "Every £ figure on the site comes from here. In text, {key} is replaced by that price’s figure (e.g. {check} -> £50) and {key+} by the full price with its prefix and unit (e.g. {domain+} -> about £10 a year). {email} is filled in too.",
     "check": {
       "label": "Website & brand check",
       "value": "£50",
       "tag": "introductory",
       "provisional": false
     },
-    "creditDays": 30,
     "newSite": {
       "label": "New website",
       "value": "£595",
@@ -61,12 +60,10 @@
     },
     "monthly": {
       "label": "Build and care",
-      "value": "£39",
-      "prefix": "from",
+      "value": "£20",
       "unit": "a month",
       "provisional": false
     },
-    "changesMinutes": 30,
     "domain": {
       "label": "Domain",
       "value": "£10",
@@ -77,25 +74,18 @@
   },
   "formAddons": [
     {
-      "label": "Simple form",
-      "value": "£49",
+      "label": "Form",
+      "value": "£50",
+      "unit": "per form",
       "provisional": false,
-      "id": "simple",
-      "prefix": "from"
-    },
-    {
-      "label": "Detailed form",
-      "value": "£99",
-      "provisional": false,
-      "id": "detailed",
-      "prefix": "from"
+      "id": "form"
     },
     {
       "label": "Three forms",
       "value": "£120",
+      "prefix": "for",
       "provisional": false,
-      "id": "bundle",
-      "prefix": "from"
+      "id": "bundle"
     }
   ],
   "faq": {
@@ -109,7 +99,7 @@
       },
       {
         "q": "Any hidden costs?",
-        "a": "No. The only extras are paid straight to other providers: your domain name ({domain+}), hosting and email if you want it, all in your own name. With a New website or Website refresh, there’s no monthly bill from us."
+        "a": "No. Apart from Build and care, if you choose it, the only cost after handover is your domain name, paid yearly. Hosting on your own account is free."
       },
       {
         "q": "How do I get a quote?",
@@ -122,7 +112,7 @@
     ]
   },
   "about": {
-    "bio": "Apex Agentics is a small UK web studio designing clear, modern websites for small businesses.",
+    "bio": "Apex Agentics Web builds fast, modern websites for small businesses across the UK. The latest technology keeps our sites quick and our prices competitive.",
     "statement": "Your website should be as good as the work you do."
   },
   "contact": {
@@ -160,7 +150,7 @@
     ]
   },
   "formSection": {
-    "intro": "Branded forms that work on phones and laptops, and can be saved or printed."
+    "intro": "Need a form for your business? We’ll build it for {form}."
   },
   "daveYoung": {
     "name": "Dave Young",
@@ -189,38 +179,29 @@
       {
         "key": "cafe",
         "name": "Corner Café",
-        "type": "Café website concept"
+        "type": "Café website concept",
+        "alt": "Concept phone designs for Corner Café, a made-up business: the home page and the menu page"
       },
       {
         "key": "plumber",
         "name": "Local Plumbing Co.",
-        "type": "Trades website concept"
+        "type": "Trades website concept",
+        "alt": "Concept phone designs for Local Plumbing Co., a made-up business: the home page and the services page"
       },
       {
         "key": "studio",
         "name": "Clay & Form Studio",
-        "type": "Studio website concept"
+        "type": "Studio website concept",
+        "alt": "Concept phone designs for Clay & Form Studio, a made-up business: the home page and the classes and gallery page"
       }
     ],
-    "inner": [
-      {
-        "key": "cafe",
-        "alt": "Concept menu page for Corner Café, a made-up business"
-      },
-      {
-        "key": "plumber",
-        "alt": "Concept services page for Local Plumbing Co., a made-up business"
-      },
-      {
-        "key": "studio",
-        "alt": "Concept classes and gallery page for Clay & Form Studio, a made-up business"
-      }
-    ]
+    "phoneAlt": "Concept café home page on a phone, a made-up business",
+    "openFull": "Open full size"
   },
   "included": [
     {
       "t": "Made for phones first",
-      "d": "Designed for small screens first, then scaled up for laptops."
+      "d": "Designed for phone screens first, then scaled up for laptops."
     },
     {
       "t": "Easy to read",
@@ -239,6 +220,39 @@
       "d": "Set up so search engines can list your site once it’s live."
     }
   ],
+  "editorGallery": {
+    "_note": "Editor gallery on /web (after Included). Images are real screenshots of the editor in admin/ (demo mode, demo site), framed by site/brand/editor.html and rendered by site/brand/render-editor.js. Adding a whole new page is built into the editor but switched off (the Pages tools are hidden in every mode), so the second picture shows adding a section instead.",
+    "eyebrow": "Editor",
+    "heading": "A simple <em>editor</em>",
+    "intro": "Real screens from the editor that comes with a new website, shown with a demo site.",
+    "label": "Editor preview",
+    "items": [
+      {
+        "key": "reorder",
+        "title": "Drag sections into a new order",
+        "text": "Grab a section by its handle and drop it where you want it. The page updates when you let go.",
+        "alt": "Editor preview: the Reorder sections panel, with the How it works section being dragged above What we do"
+      },
+      {
+        "key": "add",
+        "title": "Add a section",
+        "text": "Pick a ready-made layout, then change the words and pictures.",
+        "alt": "Editor preview: the Add a section window, with ready-made layouts such as Text + image, Cards and FAQ"
+      },
+      {
+        "key": "image",
+        "title": "Change a picture",
+        "text": "Click a picture, choose a new one and describe it for visitors who can’t see it.",
+        "alt": "Editor preview: a picture on the page has just been replaced, with the Picture panel open showing Replace picture and a description box"
+      }
+    ],
+    "swipeHint": "Swipe to see more",
+    "openFull": "Open full size"
+  },
+  "viewer": {
+    "_note": "On-page picture viewer for the six gallery pictures on /web (site/viewer.js, a native <dialog>). Phones (max-width:759px) see a tall 9:16 crop (<base>-view-*); larger screens see the 2400px picture fitted to the screen. Without JavaScript the picture link still opens the full-size WebP.",
+    "close": "Close"
+  },
   "closing": {
     "heading": "Let’s build a website worthy of your business.",
     "button": "Get in touch",
@@ -249,14 +263,11 @@
     "check": {
       "title": "Website & brand check",
       "text": [
-        "We look at your home page, two other pages and your social accounts from the outside, then send you a written list of fixes.",
-        "The {check} credit comes off any build, whether a refresh or a new site."
+        "We check your website and your brand online with the latest tools, then send you the fixes that matter. You could be missing out on business.",
+        "Rebuild with us and the {check} comes off."
       ],
-      "finePrint": [
-        "Checks use only publicly visible information. We won’t log in, scan for weaknesses or try to break in. This isn’t a full security audit or penetration test.",
-        "The {check} credit lasts {creditDays} days from when we send your report. It can be used once, against any build, and has no cash value."
-      ],
-      "bestFor": "Keeping your current site, but want a clear list of fixes."
+      "bestFor": "Keeping your current site, but want a clear list of fixes.",
+      "enquirySubject": "Enquiry: Website & brand check"
     },
     "buildHandOver": {
       "title": "Build and hand over",
@@ -264,28 +275,32 @@
       "options": [
         {
           "price": "newSite",
-          "includes": "Up to five pages, built around your business, with a simple editor so you can make changes yourself."
+          "includes": "A multi-page site built around your business, with a simple editor you control."
         },
         {
           "price": "refresh",
           "includes": "We refresh your site, move it to hosting in your own name and hand it over. Moving off Wix or WordPress is quoted per job."
         }
       ],
-      "bestFor": "Owners who want a new site they can run themselves."
+      "bestFor": "Owners who want a new site they can run themselves.",
+      "enquirySubject": "Enquiry: Build and hand over"
     },
     "buildCare": {
       "title": "Build and care",
-      "headline": "From {refresh} one-off + {monthly} a month",
-      "intro": "Everything in Build and hand over, plus:",
-      "costLine": "Same build price as Build and hand over (refresh from {refresh}, new site from {newSite}), then from {monthly} a month.",
+      "headline": "Any build above, then {monthly} a month",
       "includes": [
-        "{changesMinutes} minutes of changes each month. Unused minutes don’t roll over. Hosting stays in your own account.",
-        "Rolling monthly, no minimum term.",
-        "Cancel any time by emailing {email}."
+        "Hassle-free.",
+        "You ask. We change it.",
+        "Hosting stays in your own account."
       ],
-      "bestFor": "Owners who’d rather we handle changes each month."
+      "bestFor": "Owners who’d rather hand changes to us.",
+      "enquirySubject": "Enquiry: Build and care"
     },
-    "vatLine": "Prices are final. No VAT is added."
+    "vatLine": "Prices are final. No VAT is added.",
+    "enquiry": {
+      "_note": "Each price card ends with one mailto link (styled as a button) to the contact email, with the card’s own subject line. label is the button text.",
+      "label": "Ask about this"
+    }
   },
   "otherServices": {
     "eyebrow": "Other services",
@@ -298,10 +313,9 @@
       {
         "id": "risk",
         "title": "Risk assessment form",
-        "price": "detailed",
+        "price": "form",
         "kind": "paper",
-        "alt": "Example risk assessment form for the made-up Corner Café, filled in with sample entries: who assessed it and when, a hazards table with control measures, a review date and a signed sign-off section. Template only. This is not professional health and safety advice.",
-        "note": "Template only. This is not professional health and safety advice.",
+        "alt": "Example risk assessment form for the made-up Corner Café, filled in with sample entries: who assessed it and when, a hazards table with control measures, a review date and a signed sign-off section.",
         "sections": [
           {
             "title": "About this assessment",
@@ -387,7 +401,7 @@
       {
         "id": "booking",
         "title": "Booking form",
-        "price": "detailed",
+        "price": "form",
         "kind": "tablet",
         "alt": "Example booking form for the made-up Corner Café on a tablet, filled in with sample entries: a group booking for six people with date and time, contact details and a note asking for a table by the window.",
         "sections": [
@@ -441,7 +455,7 @@
       {
         "id": "enquiry",
         "title": "Enquiry form",
-        "price": "simple",
+        "price": "form",
         "kind": "phone",
         "alt": "Example enquiry form for the made-up Corner Café on a phone, filled in with sample entries: name and email, a ticked choice asking for a quote, a short message about catering, and email chosen as the way to reply.",
         "sections": [
@@ -499,5 +513,34 @@
       "quote": null,
       "name": null
     }
+  },
+  "home": {
+    "_note": "Holding page (/). The UK logo is the page heading (its alt is the name, the page title and the share site name), so the name is shown once. tagline is the one line under it; card is the line on the /web card. logo: put the file in site/img and set src to /img/your-file.svg. width and height are the drawn size (keep the file’s proportions).",
+    "tagline": "Modern technology for UK businesses.",
+    "card": "Fast, modern websites for small businesses, at competitive prices.",
+    "logo": {
+      "src": "/img/logo/apex-agentics-uk-on-dark.svg",
+      "alt": "Apex Agentics UK",
+      "width": 368,
+      "height": 40
+    }
+  },
+  "webLogo": {
+    "_note": "Logo for the /web/ header and footer. Put the file in site/img and set src to /img/your-file.svg; leave src empty to keep the text wordmark. width and height are the drawn size (keep the file’s proportions).",
+    "src": "/img/logo/apex-agentics-web-on-dark.svg",
+    "alt": "Apex Agentics Web",
+    "width": 236,
+    "height": 24
+  },
+  "webPage": {
+    "_note": "/web/ page title, also used for the share (og and twitter) titles. The header and footer show webLogo (alt 'Apex Agentics Web'); / shows home.logo (alt 'Apex Agentics UK'), which is also the share site name there and the footer link text back to /.",
+    "title": "Apex Agentics Web | Fast, modern websites for small businesses"
+  },
+  "hero": {
+    "_note": "/web/ hero. heading is the question; punch is shown on its own line after it (<em> marks the one word in the serif accent style). lead is also the line on the holding-page card (/), so the two stay in sync.",
+    "heading": "Still paying to host a simple website in 2026?",
+    "punch": "Stop. Save <em>money</em>.",
+    "lead": "Built with the latest technology. Fast on every phone. Prices up front.",
+    "button": "See prices"
   }
 }

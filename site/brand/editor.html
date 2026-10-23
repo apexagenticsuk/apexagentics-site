@@ -1,0 +1,22 @@
+<!doctype html>
+<!-- Editor gallery frames. Rendered by site/brand/render-editor.js with Playwright at 2x (1200x800 scene).
+     ?img= a real editor screenshot (1280x800 viewport); ?label= the label text from site-config.json (editorGallery.label).
+     Draws a plain browser window around the screenshot. No other words. -->
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><style>
+@font-face{font-family:IT;font-weight:500;src:url(../fonts/inter-tight-latin-500-normal.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow:hidden;-webkit-font-smoothing:antialiased}
+.scene{position:relative;width:1200px;height:800px;overflow:hidden;
+ background:radial-gradient(120% 90% at 85% 0%,rgba(124,255,178,.16),transparent 55%),radial-gradient(90% 80% at 0% 100%,rgba(124,255,178,.08),transparent 60%),#11151a}
+.win{position:absolute;left:50%;top:40px;width:1080px;margin-left:-540px;border-radius:14px;overflow:hidden;background:#1b2027;
+ box-shadow:0 0 0 1px rgba(255,255,255,.10),0 50px 90px -30px rgba(0,0,0,.75),0 20px 40px -20px rgba(0,0,0,.6)}
+.bar{height:44px;display:flex;align-items:center;gap:8px;padding:0 16px;background:linear-gradient(#232931,#1d2229);border-bottom:1px solid #0b0d10}
+.bar i{width:12px;height:12px;border-radius:50%;background:#3a414b}
+.bar i:nth-child(1){background:#ff5f57}.bar i:nth-child(2){background:#febc2e}.bar i:nth-child(3){background:#28c840}
+.url{position:absolute;left:50%;transform:translateX(-50%);height:28px;min-width:300px;padding:0 18px;border-radius:8px;background:#0f1216;color:#7CFFB2;
+ display:flex;align-items:center;justify-content:center;gap:8px;font:500 14px/1 IT;letter-spacing:.02em}
+.url::before{content:"";width:8px;height:8px;border-radius:50%;background:#7CFFB2}
+.shot{display:block;width:1080px;height:675px}
+</style></head><body><div class="scene"><div class="win"><div class="bar"><i></i><i></i><i></i><span class="url" id="u"></span></div><img class="shot" id="s" alt=""></div></div>
+<script>const q=new URLSearchParams(location.search);document.getElementById('u').textContent=q.get('label')||'';document.getElementById('s').src=q.get('img');</script>
+</body></html>

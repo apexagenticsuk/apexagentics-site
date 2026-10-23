@@ -15,26 +15,40 @@ for(const f of ['index.html','web/index.html','web/privacy.html','404.html','rob
 ok('old top-level privacy.html is gone (privacy lives at /web/privacy)',!fs.existsSync(path.join(dist,'privacy.html')));
 // --- root holding page
 const home=read('index.html'),web=read('web/index.html'),priv=read('web/privacy.html');
-{const h1=[...home.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/g)].map(m=>text(m[1]));ok('root: one h1 reading exactly "Apex Agentics"',h1.length===1&&h1[0]==='Apex Agentics',h1.join('|'));}
+{const h1=[...home.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/g)].map(m=>m[1]);ok('rebrand v3 root: one h1, and it is only the UK logo (alt "Apex Agentics UK"), so the name is shown once (no big text heading repeating it)',h1.length===1&&/^<img class="slot-logo home-logo" src="\/img\/logo\/apex-agentics-uk-on-dark\.svg" alt="Apex Agentics UK" width="\d+" height="\d+">$/.test(h1[0]),h1.join('|'));
+ ok('rebrand v3 root: the one line "Modern technology for UK businesses." sits straight under the logo heading (from config home.tagline)',C.home.tagline==='Modern technology for UK businesses.'&&/<\/h1><p class="home-h1 home-tag">Modern technology for UK businesses\.<\/p><a class="dcard"/.test(home)&&(home.match(/Modern technology for UK businesses\./g)||[]).length>=1);}
+{// logo slots (Shift logo): config fields; / shows the UK lockup, /web shows the Web lockup; an empty src renders nothing
+ const LG=[['UK',C.home.logo,'apex-agentics-uk-on-dark.svg'],['Web',C.webLogo,'apex-agentics-web-on-dark.svg']];
+ ok('logo slots in config point at the Shift lockups with alt text and width/height',LG.every(([n,L,f])=>L.src==='/img/logo/'+f&&L.alt==='Apex Agentics '+n&&L.width>0&&L.height>0));
+ ok('logo files exist in dist and are SVGs with no metadata (only <svg> and <path>)',LG.every(([,L])=>{const s=read(L.src.slice(1));return /^<svg\b/.test(s)&&![...s.matchAll(/<([a-zA-Z][\w:-]*)/g)].some(m=>!['svg','path'].includes(m[1]));}));
+ const lg=(L,cls)=>`<img class="${cls}" src="${L.src}" alt="${L.alt}" width="${L.width}" height="${L.height}">`;
+ ok('logo renders on /: UK lockup <img> with alt "Apex Agentics UK", width and height',home.includes(lg(C.home.logo,'slot-logo home-logo')));
+ ok('logo renders on /web/: Web lockup in the header (linking to /web/) and footer, alt "Apex Agentics Web"',new RegExp('<header[\\s\\S]*?<a class="logo" href="/web/">'+lg(C.webLogo,'slot-logo').replace(/[.*+?^${}()|[\]\\/]/g,'\\$&')+'</a>').test(web)&&/<footer[\s\S]*<img class="slot-logo" src="\/img\/logo\/apex-agentics-web-on-dark.svg" alt="Apex Agentics Web"/.test(web));
+ ok('/ shows only the UK logo, /web only the Web logo',!home.includes('apex-agentics-web-on-dark')&&!web.includes('apex-agentics-uk-on-dark'));
+ const d=fs.mkdtempSync(path.join(os.tmpdir(),'apex-logo-'));build({...C,home:{...C.home,logo:{...C.home.logo,src:''}},webLogo:{...C.webLogo,src:''}},d);
+ const h2=fs.readFileSync(path.join(d,'index.html'),'utf8'),w2=fs.readFileSync(path.join(d,'web/index.html'),'utf8');
+ ok('logo slots emptied: no <img> on /, /web falls back to the text wordmark',!/<img\b/.test(h2)&&!/slot-logo/.test(h2+w2)&&/<a class="logo" href="\/web\/">[\s\S]*?Apex Agentics <span class="ldiv">Web<\/span><\/a>/.test(w2)&&/<h1 class="home-brand">Apex Agentics UK<\/h1>/.test(h2));
+ fs.rmSync(d,{recursive:true,force:true});}
 ok('root: a card/button links to /web/',/<a class="dcard" href="\/web\/">/.test(home));
 ok('root: footer Contact mailto to the config email',new RegExp('<footer[\\s\\S]*<p>Contact: <a href="'+mt+'">'+em+'</a></p>').test(home));
 ok('root: no mailto to any other address',[...home.matchAll(/href="mailto:([^"]*)"/g)].every(m=>m[1]===em));
 ok('root: footer links to the privacy page /web/privacy',/<footer[\s\S]*<a href="\/web\/privacy">Privacy notice<\/a>/.test(home));
 {const hrefs=[...home.matchAll(/<a [^>]*href="([^"]*)"/g)].map(m=>m[1]).filter(h=>!/^mailto:|^#/.test(h));ok('root: only internal links are /web/ and /web/privacy',hrefs.length>0&&hrefs.every(h=>h==='/web/'||h==='/web/privacy'),hrefs.join());}
-{// no invented wording: every visible text chunk on the root page already appears on the Web site (index or privacy)
- const webText=text(web)+' '+text(priv);const chunks=home.replace(/<head>[\s\S]*?<\/head>/,'').replace(/<script[\s\S]*?<\/script>/g,'').split(/<(?!span class="ldiv")[^>]+>/).map(s=>s.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim()).filter(Boolean);
- const extra=chunks.filter(c=>!webText.includes(c));ok('root: every visible text chunk already exists on the Web site',extra.length===0,extra.join(' | '));
+{// no invented wording: every visible text chunk on the root page already appears on the Web site (index or privacy),
+ // apart from the two lines the owners gave for / in rebrand v3 (home.tagline, home.card)
+ const webText=text(web)+' '+text(priv)+' '+[...web.matchAll(/<img class="slot-logo"[^>]*alt="([^"]+)"/g)].map(m=>m[1]).join(' ');/* the /web logo shows its alt text as lettering */const chunks=home.replace(/<head>[\s\S]*?<\/head>/,'').replace(/<script[\s\S]*?<\/script>/g,'').split(/<(?!span class="ldiv")[^>]+>/).map(s=>s.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim()).filter(Boolean);
+ const extra=chunks.filter(c=>!webText.includes(c)&&c!==C.home.tagline&&c!==C.home.card);ok('root: every visible text chunk already exists on the Web site, or is the given tagline or card line',extra.length===0,extra.join(' | '));
  const t=text(home);ok('root: no other divisions, figures or timeframes',!/division|consult|agency|software|marketing|automation|\bAI\b|labs?\b|studios\b|coming soon|launching|soon|\d/i.test(t.replace(em,'')),t);
- ok('root: description meta is Web site wording',(home.match(/<meta name="description" content="([^"]*)"/)||[])[1]===C.about.bio);}
+ ok('rebrand v3 root: description meta is the tagline "Modern technology for UK businesses."',(home.match(/<meta name="description" content="([^"]*)"/)||[])[1]===C.home.tagline&&C.home.tagline==='Modern technology for UK businesses.');}
 {// motion JS: no external script tag; one inline loader that only adds /js/home.js on desktop (fine pointer, >=1024px, motion allowed)
  const sc=[...home.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)];
  ok('root: phones get no JS - only one inline loader, no external script tags',sc.length===1&&sc[0][1]===''&&!/<script[^>]+src=/.test(home),sc.length);
  const L=sc[0]?sc[0][2]:'';ok('root: loader is gated on reduced motion, fine pointer and width >= 1024 and loads /js/home.js',/prefers-reduced-motion: reduce/.test(L)&&/\(hover: hover\) and \(pointer: fine\)/.test(L)&&/innerWidth>=1024/.test(L)&&/\/js\/home\.js/.test(L));
  ok('dist has js/home.js (holding-page motion entry)',fs.existsSync(path.join(dist,'js/home.js')));}
-{// brand name: heading + card label only; card copy is Web hero wording without the name
- const t=text(home);ok('root: "Apex Agentics" appears exactly twice in visible text (heading + card label)',(t.match(/Apex Agentics/g)||[]).length===2,(t.match(/Apex Agentics/g)||[]).length);
+{// brand name: logo heading (image alt) + card label only
+ const t=text(home),body=home.slice(home.indexOf('<body'));ok('rebrand v3 root: "Apex Agentics" appears once in visible text (the card label) and "Apex Agentics UK" once in the body (the logo alt)',(t.match(/Apex Agentics/g)||[]).length===1&&(body.match(/Apex Agentics UK/g)||[]).length===1,(t.match(/Apex Agentics/g)||[]).length+'/'+(body.match(/Apex Agentics UK/g)||[]).length);
  ok('root: exactly one h1 and one h2 (card label)',(home.match(/<h1[\s>]/g)||[]).length===1&&(home.match(/<h2[\s>]/g)||[]).length===1);
- const cp=(home.match(/<p class="dcard-p">([^<]*)<\/p>/)||[])[1];ok('root: card copy is the Web hero lead and does not repeat the name',cp==='Built for phones first, with prices shown up front.'&&web.includes('<p class="lead">'+cp+'</p>'),cp);
+ const cp=(home.match(/<p class="dcard-p">([^<]*)<\/p>/)||[])[1];ok('rebrand v3 root: Web card text reads "Fast, modern websites for small businesses, at competitive prices." (config home.card) and does not repeat the name',cp==='Fast, modern websites for small businesses, at competitive prices.'&&C.home.card===cp,cp);
  ok('root: card label is the "Apex Agentics Web" wordmark',/<h2 class="dcard-h">Apex Agentics <span class="ldiv">Web<\/span><\/h2>/.test(home));}
 // --- Open Graph / Twitter card
 for(const [f,s,u] of [['index.html',home,'/'],['web/index.html',web,'/web/']]){
@@ -42,21 +56,41 @@ for(const [f,s,u] of [['index.html',home,'/'],['web/index.html',web,'/web/']]){
  ok(f+': og:title, og:description, og:type present',!!m('og:title')&&!!m('og:description')&&m('og:type')==='website');
  ok(f+': og:url is canonical '+SITE+u,m('og:url')===SITE+u,m('og:url'));
  ok(f+': og:image and twitter:image are absolute https URLs to a file in dist',['og:image','twitter:image'].every(k=>/^https:\/\/apexagentics\.co\.uk\/[^"]+\.(png|jpg)$/.test(m(k)||'')&&fs.existsSync(path.join(dist,new URL(m(k)).pathname))),m('og:image'));
- ok(f+': twitter:card summary_large_image',m('twitter:card')==='summary_large_image');}
+ ok(f+': twitter:card summary_large_image',m('twitter:card')==='summary_large_image');
+ {const want=u==='/'?['Apex Agentics UK','Apex Agentics UK']:['Apex Agentics Web | Fast, modern websites for small businesses','Apex Agentics Web'],tt=(s.match(/<title>([^<]*)<\/title>/)||[])[1];
+  ok(f+': rebrand v3: <title>, og:title and twitter:title are "'+want[0]+'"; og:site_name and og:image:alt are "'+want[1]+'"',tt===want[0]&&m('og:title')===want[0]&&m('twitter:title')===want[0]&&m('og:site_name')===want[1]&&m('og:image:alt')===want[1],[tt,m('og:title'),m('twitter:title'),m('og:site_name'),m('og:image:alt')].join(' / '));}}
+{const hd=(web.match(/<header class="top">[\s\S]*?<\/header>/)||[''])[0],ft=(web.match(/<footer class="foot">[\s\S]*?<\/footer>/)||[''])[0];
+ ok('rebrand v3: /web/ header and footer logos say "Apex Agentics Web"; the footer link back to / says "Apex Agentics UK"; / heading says "Apex Agentics UK"',/<a class="logo" href="\/web\/"><img class="slot-logo" src="[^"]+" alt="Apex Agentics Web"/.test(hd)&&/<a href="\/web\/" class="logo flogo"><img class="slot-logo" src="[^"]+" alt="Apex Agentics Web"/.test(ft)&&/<a href="\/">Apex Agentics UK<\/a>/.test(ft)&&/<h1 class="home-brand"><img [^>]*alt="Apex Agentics UK"[^>]*><\/h1>/.test(home));}
 {const b=fs.readFileSync(path.join(dist,'og.png'));const w=b.readUInt32BE(16),h=b.readUInt32BE(20);
  ok('og.png: PNG 1200x630 under 300KB',b.slice(1,4).toString()==='PNG'&&w===1200&&h===630&&b.length<300*1024,`${w}x${h} ${b.length}B`);
  ok('share image template and renderer saved in the repo',['site/brand/og.html','site/brand/render.js'].every(f=>fs.existsSync(path.join(root,f))));}
+// --- rebrand v4: two share images. / keeps og.png (UK option-1 lockup); /web/ gets og-web.png (Shift option-1 lockup). Privacy title and 404 logo say Apex Agentics Web.
+{const img=(s,k)=>(s.match(new RegExp('<meta (?:property|name)="'+k+'" content="([^"]*)">'))||[])[1];
+ ok('rebrand v4: / og:image and twitter:image are '+SITE+'/og.png',img(home,'og:image')===SITE+'/og.png'&&img(home,'twitter:image')===SITE+'/og.png',img(home,'og:image'));
+ ok('rebrand v4: /web/ og:image and twitter:image are '+SITE+'/og-web.png',img(web,'og:image')===SITE+'/og-web.png'&&img(web,'twitter:image')===SITE+'/og-web.png',img(web,'og:image'));
+ const b=fs.readFileSync(path.join(dist,'og-web.png')),w=b.readUInt32BE(16),h=b.readUInt32BE(20);
+ ok('og-web.png: PNG 1200x630 (same size as og.png) under 300KB, and not the same picture as og.png',b.slice(1,4).toString()==='PNG'&&w===1200&&h===630&&b.length<300*1024&&!b.equals(fs.readFileSync(path.join(dist,'og.png'))),`${w}x${h} ${b.length}B`);
+ const t=fs.readFileSync(path.join(root,'site/brand/og.html'),'utf8'),r=fs.readFileSync(path.join(root,'site/brand/render.js'),'utf8');
+ ok('share template: ?b=web uses the Web lockup, otherwise the UK lockup; renderer writes og.png from uk and og-web.png from web',/\/img\/logo\/apex-agentics-'\+b\+'-on-dark\.svg'/.test(t)&&/get\('b'\)==='web'\?'web':'uk'/.test(t)&&r.includes("[['uk','og.png'],['web','og-web.png']]"));
+ const L='/workspace/apex-logos/',pairs=[['uk','uk'],['web','web']].map(([a,o])=>[path.join(root,'site/img/logo/apex-agentics-'+a+'-on-dark.svg'),L+o+'/option-1/svg/lockup-on-dark.svg']);
+ if(fs.existsSync(L))ok('share-image lockups are the option-1 files (UK for /, Shift for /web/)',pairs.every(([x,y])=>fs.readFileSync(x).equals(fs.readFileSync(y))));
+ ok('rebrand v4: privacy <title> is "Privacy notice | Apex Agentics Web"',/<title>Privacy notice \| Apex Agentics Web<\/title>/.test(priv));
+ ok('rebrand v5: 404 <title> is "Page not found | Apex Agentics Web" (from webLogo.alt)',/<title>Page not found \| Apex Agentics Web<\/title>/.test(read('404.html')));
+ const nh=(read('404.html').match(/<header class="top">[\s\S]*?<\/header>/)||[''])[0];
+ ok('rebrand v4: 404 header logo is the Apex Agentics Web lockup linking to /web/',/<a class="logo" href="\/web\/"><img class="slot-logo" src="\/img\/logo\/apex-agentics-web-on-dark\.svg" alt="Apex Agentics Web"/.test(nh)&&!/class="mark"/.test(nh),nh.slice(0,160));}
 // --- icons
 {const b=fs.readFileSync(path.join(dist,'favicon.ico'));const n=b.readUInt16LE(4),sz=[...Array(n)].map((_,k)=>b[6+16*k]).sort((x,y)=>x-y);
  ok('favicon.ico: real ICO with 16px and 32px images',b.readUInt16LE(0)===0&&b.readUInt16LE(2)===1&&sz.join()==='16,32',sz.join());
- const a=fs.readFileSync(path.join(dist,'apple-touch-icon.png'));ok('apple-touch-icon.png: PNG 180x180',a.slice(1,4).toString()==='PNG'&&a.readUInt32BE(16)===180&&a.readUInt32BE(20)===180);
+ const a=fs.readFileSync(path.join(dist,'apple-touch-icon.png'));
+ {const v=fs.existsSync(path.join(dist,'favicon.svg'))?read('favicon.svg'):'';ok('favicon.svg exists: the Shift mark (bone + signal) on Ink, no metadata',/^<svg\b/.test(v)&&v.includes('#F2EFE9')&&v.includes('#7CFFB2')&&v.includes('#0B0D10')&&![...v.matchAll(/<([a-zA-Z][\w:-]*)/g)].some(m=>!['svg','path','rect'].includes(m[1])));}
+ for(const f of ['index.html','web/index.html','web/privacy.html','404.html'])ok(f+': links /favicon.svg as an SVG icon',read(f).includes('<link rel="icon" href="/favicon.svg" type="image/svg+xml">'));ok('apple-touch-icon.png: PNG 180x180',a.slice(1,4).toString()==='PNG'&&a.readUInt32BE(16)===180&&a.readUInt32BE(20)===180);
  for(const f of ['index.html','web/index.html','web/privacy.html','404.html'])ok(f+': links /favicon.ico and /apple-touch-icon.png',read(f).includes('<link rel="icon" href="/favicon.ico"')&&read(f).includes('<link rel="apple-touch-icon" href="/apple-touch-icon.png">'));}
 ok('root: no bare "Apex"',!/\bApex\b(?!\s+Agentics)/.test(text(home)));
 {const css=read('site.css');ok('CSS: reduced-motion turns off root card motion and hero glow',/prefers-reduced-motion:reduce\)\{\.dcard,\.dcard::after\{transition:none\}/.test(css)&&/prefers-reduced-motion:reduce\)\{\.hero::before\{animation:none\}/.test(css));
  ok('CSS: palette Ink/Bone/Signal/Muted/Line',['#0B0D10','#F2EFE9','#7CFFB2','#8A9099','#1E232A'].every(c=>css.includes(c)));
  ok('CSS: self-hosted Space Grotesk, Inter Tight, Instrument Serif',['Space Grotesk','Inter Tight','Instrument Serif'].every(f=>new RegExp("@font-face\\{font-family:'"+f+"'[^}]*url\\(fonts/").test(css)));}
 // --- /web wordmark + links
-ok('/web header wordmark reads "Apex Agentics Web" and links to /web/',/<header[\s\S]*?<a class="logo" href="\/web\/">[\s\S]*?Apex Agentics <span class="ldiv">Web<\/span><\/a>/.test(web));
+ok('/web header logo reads "Apex Agentics Web" (img alt) and links to /web/',/<header[\s\S]*?<a class="logo" href="\/web\/"><img class="slot-logo" src="[^"]+" alt="Apex Agentics Web"/.test(web));
 for(const [f,s] of [['web/index.html',web],['web/privacy.html',priv],['404.html',read('404.html')]]){
  ok(f+': skip link to #main and main#main exists',/<a class="skip" href="#main">/.test(s)&&/<main id="main"/.test(s));
  ok(f+': footer links to / and /web/ and /web/privacy',/<footer[\s\S]*href="\/"[\s\S]*href="\/web\/#work"[\s\S]*href="\/web\/privacy"/.test(s));

@@ -1,0 +1,141 @@
+<!doctype html>
+<!-- Concept phone mock-ups for the made-up businesses (Corner Café, Local Plumbing Co., Clay & Form Studio).
+     Rendered by site/brand/render-concepts.js with Playwright at 2x. ?k=cafe|plumber|studio draws a 1200x800 scene
+     with two phones (home page + inner page); ?k=included draws one phone on a transparent background.
+     Wording is the same as the original concept generators in site/concepts/; names come from site-config.json. -->
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><style>
+@font-face{font-family:SG;font-weight:700;src:url(../fonts/space-grotesk-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:SG;font-weight:500;src:url(../fonts/space-grotesk-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:IT;font-weight:400;src:url(../fonts/inter-tight-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:IT;font-weight:500;src:url(../fonts/inter-tight-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:IS;font-style:italic;font-weight:400;src:url(../fonts/instrument-serif-latin-400-italic.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:transparent;overflow:hidden;-webkit-font-smoothing:antialiased}
+.scene{position:relative;width:1200px;height:800px;overflow:hidden}
+.label{position:absolute;left:44px;top:40px;display:flex;align-items:center;gap:10px;font:500 15px/1 IT;letter-spacing:.02em;z-index:5}
+.label i{font-style:normal;font:500 12px/1 IT;letter-spacing:.14em;text-transform:uppercase;padding:8px 11px;border-radius:99px}
+/* phone */
+.ph{position:absolute;width:414px;height:868px;border-radius:66px;padding:12px;transform-origin:0 0;
+ background:linear-gradient(150deg,#4a4d53 0%,#1d1f23 18%,#2a2d32 50%,#16181b 82%,#3e4146 100%);
+ box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.18),inset 0 0 0 3px #0b0c0e,0 60px 90px -30px rgba(0,0,0,.55),0 24px 40px -18px rgba(0,0,0,.45)}
+.ph::before,.ph::after{content:"";position:absolute;width:4px;border-radius:2px;background:linear-gradient(90deg,#2b2e33,#4b4f55)}
+.ph::before{left:-3px;top:190px;height:64px;box-shadow:0 84px 0 #33363b}
+.ph::after{right:-3px;top:230px;height:100px}
+.scr{position:relative;width:390px;height:844px;border-radius:54px;overflow:hidden;background:#fff}
+.scr::after{content:"";position:absolute;inset:0;border-radius:54px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25);pointer-events:none}
+.isl{position:absolute;left:50%;top:11px;width:124px;height:36px;margin-left:-62px;border-radius:20px;background:#000;z-index:4}
+.sb{position:absolute;left:0;right:0;top:0;height:54px;display:flex;justify-content:space-between;align-items:center;padding:6px 34px 0 46px;font:600 16px/1 IT;letter-spacing:-.01em;z-index:3}
+.sb svg{display:block}.sb .ic{display:flex;gap:6px;align-items:center}
+.pg{position:absolute;inset:0;padding-top:54px;overflow:hidden}
+.home-ind{position:absolute;left:50%;bottom:9px;width:136px;height:5px;margin-left:-68px;border-radius:3px;z-index:3}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:14px 24px 0}
+.nav b{font:700 19px/1 SG;letter-spacing:-.02em}
+.burger{width:40px;height:40px;border-radius:50%;display:grid;place-items:center}
+.burger span{display:block;width:16px;height:10px;border-top:2px solid currentColor;border-bottom:2px solid currentColor}
+.eb{font:500 11.5px/1 IT;letter-spacing:.2em;text-transform:uppercase}
+h1{font:700 50px/.95 SG;letter-spacing:-.045em}
+h1 em{font:italic 400 56px/.9 IS;letter-spacing:-.01em}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 22px;border-radius:99px;font:500 15px/1 IT}
+/* ---------- café ---------- */
+.cafe{background:#F4ECE1;color:#2B1D14}
+.cafe .burger{background:#EADFCF}
+.cafe .hero{padding:30px 24px 0}
+.cafe .eb{color:#9A5B2E}
+.cafe h1{margin-top:14px}.cafe h1 em{color:#9A5B2E}
+.cafe .lead{margin-top:16px;font:400 16.5px/1.45 IT;color:#5B4636;max-width:310px}
+.cafe .ctas{display:flex;gap:10px;margin-top:22px}
+.cafe .b1{background:#2B1D14;color:#F4ECE1}.cafe .b2{border:1.5px solid #2B1D14}
+.cafe .pic{position:relative;margin:26px 24px 0;height:250px;border-radius:26px;overflow:hidden;background:radial-gradient(120% 90% at 30% 20%,#F1D49A 0%,#E2A564 45%,#B86A35 100%)}
+.cafe .pic svg{position:absolute;right:-30px;bottom:-40px}
+.cafe .chip{position:absolute;left:16px;bottom:16px;background:rgba(255,250,242,.94);border-radius:16px;padding:11px 14px;box-shadow:0 10px 24px -10px rgba(43,29,20,.5)}
+.cafe .chip small{display:block;font:500 10.5px/1 IT;letter-spacing:.16em;text-transform:uppercase;color:#9A5B2E}
+.cafe .chip b{display:block;margin-top:6px;font:700 17px/1 SG;letter-spacing:-.02em}
+.cafe .menu{padding:26px 24px 0}
+.cafe .tabs{display:flex;gap:8px;margin-top:20px}
+.cafe .tabs span{height:36px;padding:0 16px;border-radius:99px;display:inline-flex;align-items:center;font:500 14px/1 IT;background:#EADFCF}
+.cafe .tabs .on{background:#2B1D14;color:#F4ECE1}
+.cafe .grp{margin-top:22px}
+.cafe .grp h2{font:italic 400 28px/1 IS;color:#9A5B2E;margin-bottom:6px}
+.cafe .row{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #E3D5C2}
+.cafe .row .dot{width:42px;height:42px;border-radius:14px;flex:none}
+.cafe .row span{font:500 16px/1.2 IT}
+.cafe .row i{flex:1;border-bottom:1.5px dotted #CDB89C;margin-top:8px}
+.cafe .row u{width:28px;height:28px;border-radius:50%;border:1.5px solid #2B1D14;display:grid;place-items:center;text-decoration:none;font:500 17px/1 IT}
+.dock{position:absolute;left:16px;right:16px;bottom:26px;height:58px;border-radius:20px;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 20px;z-index:2}
+/* ---------- plumber ---------- */
+.plumber{background:#0E2A47;color:#fff}
+.plumber .burger{background:rgba(255,255,255,.1)}
+.plumber .hero{position:relative;padding:34px 24px 0}
+.plumber .eb{color:#FFB27A}
+.plumber h1{margin-top:14px;font-size:52px}.plumber h1 em{color:#FF7A1A;font-size:58px}
+.plumber .b1{margin-top:24px;background:#FF7A1A;color:#1A0D02;width:100%;height:54px;font-size:16px;gap:10px}
+.plumber .lines{position:absolute;right:-118px;top:-60px;opacity:.12}
+.plumber .cards{padding:22px 24px 0;display:grid;gap:10px}
+.plumber .card{display:flex;align-items:center;gap:14px;background:#fff;color:#0E2A47;border-radius:20px;padding:16px}
+.plumber .card .n{width:44px;height:44px;border-radius:14px;background:#FFF1E6;color:#E2600A;display:grid;place-items:center;font:700 15px/1 SG}
+.plumber .card b{flex:1;font:700 18px/1.1 SG;letter-spacing:-.02em}
+.plumber .card i{width:30px;height:30px;border-radius:50%;background:#0E2A47;display:grid;place-items:center}
+.plumber2{background:#F2F5F9;color:#0E2A47}
+.plumber2 .burger{background:#E2E8F0}
+.plumber2 .top{padding:30px 24px 0}
+.plumber2 .eb{color:#E2600A}
+.plumber2 h1{margin-top:12px;font-size:42px;line-height:1}
+.plumber2 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:24px 24px 0}
+.plumber2 .t{background:#fff;border-radius:22px;padding:16px;height:128px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 0 #E2E8F0,0 10px 24px -18px rgba(14,42,71,.35)}
+.plumber2 .t .ic{width:42px;height:42px;border-radius:14px;background:#0E2A47;display:grid;place-items:center}
+.plumber2 .t b{font:700 16px/1.15 SG;letter-spacing:-.015em}
+/* ---------- studio ---------- */
+.studio{background:#EDEBE6;color:#111}
+.studio .burger{background:#E0DDD5}
+.studio .hero{padding:26px 24px 0}
+.studio h1{font-size:92px;line-height:.86;letter-spacing:-.06em}.studio h1 em{font-size:96px;color:#3a4a36;letter-spacing:0}
+.studio .tiles{display:grid;gap:10px;padding:26px 24px 0}
+.studio .tile{position:relative;height:118px;border-radius:24px;overflow:hidden;display:flex;align-items:flex-end;padding:16px 18px}
+.studio .tile b{position:relative;font:700 20px/1 SG;letter-spacing:-.02em;z-index:1}
+.studio .tile .arr{position:absolute;right:16px;top:16px;width:34px;height:34px;border-radius:50%;background:rgba(17,17,17,.88);display:grid;place-items:center;z-index:1}
+.studio .tile svg.v{position:absolute;right:60px;bottom:-6px}
+.studio2{background:#2F3B2C;color:#EDEBE6}
+.studio2 .burger{background:rgba(237,235,230,.1)}
+.studio2 .top{padding:30px 24px 0}
+.studio2 h1{font-size:56px;line-height:.92}.studio2 h1 em{color:#C9D7C0;font-size:62px}
+.studio2 .lead{margin-top:16px;font:400 16px/1.45 IT;color:#C8CCC0;max-width:300px}
+.studio2 .b1{margin-top:20px;background:#C9D7C0;color:#1d261b}
+.studio2 .gal{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:26px 24px 0}
+.studio2 .g{position:relative;height:150px;border-radius:22px;overflow:hidden}
+.studio2 .g svg{position:absolute;left:50%;bottom:-4px;transform:translateX(-50%)}
+</style></head><body><div id="root"></div><script>
+const q=new URLSearchParams(location.search),K=q.get('k')||'cafe',N=JSON.parse(q.get('names')||'{}');
+const name=k=>N[k]||({cafe:'Corner Café',plumber:'Local Plumbing Co.',studio:'Clay & Form Studio'})[k];
+const sb=(dark)=>{const c=dark?'#fff':'#111';return `<div class="sb" style="color:${c}"><span>9:41</span><span class="ic">
+<svg width="19" height="12" viewBox="0 0 19 12"><rect x="0" y="8" width="3.2" height="4" rx=".8" fill="${c}"/><rect x="5" y="5.5" width="3.2" height="6.5" rx=".8" fill="${c}"/><rect x="10" y="3" width="3.2" height="9" rx=".8" fill="${c}"/><rect x="15" y="0" width="3.2" height="12" rx=".8" fill="${c}"/></svg>
+<svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 2.3c2.4 0 4.6.9 6.2 2.5l1.3-1.3A10.6 10.6 0 0 0 8.5.5 10.6 10.6 0 0 0 1 3.5l1.3 1.3A8.8 8.8 0 0 1 8.5 2.3Zm0 3.5c1.4 0 2.8.6 3.8 1.5l1.3-1.3a7.2 7.2 0 0 0-10.2 0l1.3 1.3c1-.9 2.4-1.5 3.8-1.5Zm0 3.4c.5 0 1 .2 1.4.6L8.5 11.2 7.1 9.8c.4-.4.9-.6 1.4-.6Z" fill="${c}"/></svg>
+<svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.6" fill="none" stroke="${c}" opacity=".4"/><rect x="2" y="2" width="20" height="9" rx="2.3" fill="${c}"/><path d="M25 4.5v4c.8-.3 1.4-1.1 1.4-2s-.6-1.7-1.4-2Z" fill="${c}" opacity=".45"/></svg></span></div>`};
+const arrow=(c)=>`<svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6" stroke="${c}" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const phone=(cls,dark,inner,x,y,s,ind)=>`<div class="ph" style="left:${x}px;top:${y}px;transform:scale(${s})"><div class="scr ${cls}"><div class="isl"></div>${sb(dark)}<div class="pg">${inner}</div><div class="home-ind" style="background:${ind}"></div></div></div>`;
+const nav=k=>`<div class="nav"><b>${name(k)}</b><span class="burger"><span></span></span></div>`;
+// café pictures: a latte in a cup, seen from above (pure SVG, no photos)
+const cup=`<svg width="300" height="300" viewBox="0 0 300 300"><circle cx="150" cy="150" r="128" fill="#F8F1E7"/><circle cx="150" cy="150" r="128" fill="none" stroke="#E7D8C3" stroke-width="3"/><circle cx="150" cy="150" r="96" fill="#7A4524"/><circle cx="150" cy="150" r="96" fill="url(#cr)"/><path d="M150 112c-26 0-40 18-40 34 0 22 22 34 40 50 18-16 40-28 40-50 0-16-14-34-40-34Z" fill="#F5E6D0"/><path d="M150 124c-16 0-25 11-25 21 0 14 14 22 25 32 11-10 25-18 25-32 0-10-9-21-25-21Z" fill="#B97A4B"/><path d="M150 134c-9 0-14 6-14 12 0 8 8 13 14 19 6-6 14-11 14-19 0-6-5-12-14-12Z" fill="#F5E6D0"/><path d="M262 150c26 0 34 14 34 26s-8 26-34 26" fill="none" stroke="#F8F1E7" stroke-width="18" stroke-linecap="round"/><defs><radialGradient id="cr" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#C98B55" stop-opacity=".9"/><stop offset="1" stop-color="#6B3A1E" stop-opacity="0"/></radialGradient></defs></svg>`;
+const sw=['#C98B55','#E9C46A','#B86A35','#8C5A3A','#D9A877','#F0DDB8','#A86B3F','#6B4430'];
+const cafeHome=`${nav('cafe')}<div class="hero"><p class="eb">Neighbourhood coffee</p><h1>Good coffee, <em>slow</em> mornings.</h1><p class="lead">Fresh bakes daily, seasonal brunch and a seat by the window.</p><div class="ctas"><span class="btn b1">See the menu</span><span class="btn b2">Find us</span></div></div><div class="pic">${cup}<div class="chip"><small>Today’s pick</small><b>Flat white</b></div></div><div class="menu" style="padding-top:30px"><h2 style="font:700 30px/1 SG;letter-spacing:-.03em">Our <em style="font:italic 400 34px/1 IS;color:#9A5B2E">menu</em></h2>${['Espresso','Flat white'].map((x,i)=>`<div class="row"><span class="dot" style="background:radial-gradient(circle at 35% 30%,${sw[i]},${sw[i+3]})"></span><span>${x}</span><i></i><u>+</u></div>`).join('')}</div>`;
+const cafeMenu=`${nav('cafe')}<div class="menu"><h1>Our <em style="color:#9A5B2E">menu</em></h1><div class="tabs"><span class="on">Coffee</span><span>Brunch</span></div>${[['Coffee',['Espresso','Flat white','Oat latte','Filter of the day']],['Brunch',['Sourdough toast','Seasonal bowl','Banana bread','Cinnamon bun']]].map(([h,it],g)=>`<div class="grp"><h2>${h}</h2>${it.map((x,i)=>`<div class="row"><span class="dot" style="background:radial-gradient(circle at 35% 30%,${sw[(g*4+i)%8]},${sw[(g*4+i+3)%8]})"></span><span>${x}</span><i></i><u>+</u></div>`).join('')}</div>`).join('')}</div><div class="dock" style="background:#2B1D14;color:#F4ECE1"><span style="font:500 15px/1 IT">Find us</span><span class="btn" style="height:42px;background:#E9C46A;color:#2B1D14;padding:0 18px">See the menu</span></div>`;
+const pipes=`<svg class="lines" width="260" height="260" viewBox="0 0 260 260" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round"><path d="M20 60h120a40 40 0 0 1 40 40v140"/><path d="M60 20v60a30 30 0 0 0 30 30h150"/><circle cx="180" cy="200" r="16" fill="#fff" stroke="none"/></svg>`;
+const plumbHome=`${nav('plumber')}<div class="hero">${pipes}<p class="eb">Boilers · Leaks · Bathrooms</p><h1>Plumbing, sorted <em>properly.</em></h1><span class="btn b1">Request a quote ${arrow('#1A0D02')}</span></div><div class="cards">${['Boiler servicing','Leak repairs','Bathroom fitting'].map((t,i)=>`<div class="card"><span class="n">0${i+1}</span><b>${t}</b><i>${arrow('#fff')}</i></div>`).join('')}</div>`;
+const ico={flame:'<path d="M11 2c1 4 6 6 6 11a6 6 0 0 1-12 0c0-3 2-4 2-7 2 1 3 3 3 5 1-2 1-5 1-9Z"/>',drop:'<path d="M11 2s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11Z"/>',bath:'<path d="M3 11h16v3a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5v-3Zm2-1V5a2 2 0 0 1 4 0"/>',rad:'<path d="M4 5v13M8.5 5v13M13 5v13M17.5 5v13M2 8h18M2 15h18"/>',tap:'<path d="M5 9h8a3 3 0 0 1 3 3v2M9 9V5M6 5h6M16 17v2"/>',pipe:'<path d="M3 7h9a4 4 0 0 1 4 4v8M3 4v6M13 19h6"/>'};
+const svgI=(p,c)=>`<svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="${c}" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const plumbServ=`${nav('plumber')}<div class="top"><p class="eb">Services</p><h1>What we can help with</h1></div><div class="grid">${[['Boiler servicing','flame'],['Leak repairs','drop'],['Bathroom fitting','bath'],['Radiators','rad'],['Taps and toilets','tap'],['Outside pipes','pipe']].map(([t,k],i)=>`<div class="t"><span class="ic" ${i==0?'style="background:#FF7A1A"':''}>${svgI(ico[k],i==0?'#1A0D02':'#fff')}</span><b>${t}</b></div>`).join('')}</div><div class="dock" style="background:#0E2A47;color:#fff"><span style="font:500 15px/1 IT">${name('plumber')}</span><span class="btn" style="height:42px;background:#FF7A1A;color:#1A0D02;padding:0 18px">Request a quote</span></div>`;
+const vessel=(c,w,h,k)=>[`<svg class="v" width="${w}" height="${h}" viewBox="0 0 100 120"><path d="M30 6h40v10c0 6 18 14 18 44 0 34-16 54-38 54S12 94 12 60c0-30 18-38 18-44Z" fill="${c}"/><path d="M30 6h40" stroke="rgba(0,0,0,.18)" stroke-width="4"/><path d="M14 64c20 8 52 8 72 0" stroke="rgba(255,255,255,.35)" stroke-width="3" fill="none"/></svg>`,`<svg class="v" width="${w}" height="${h}" viewBox="0 0 100 120"><path d="M8 40h84c0 40-18 70-42 70S8 80 8 40Z" fill="${c}"/><ellipse cx="50" cy="40" rx="42" ry="8" fill="rgba(0,0,0,.16)"/><path d="M16 66c22 7 46 7 68 0" stroke="rgba(255,255,255,.35)" stroke-width="3" fill="none"/></svg>`,`<svg class="v" width="${w}" height="${h}" viewBox="0 0 100 120"><path d="M40 4h20v18c0 8 24 18 24 50 0 28-14 44-34 44S16 100 16 72c0-32 24-42 24-50Z" fill="${c}"/><rect x="38" y="2" width="24" height="6" rx="3" fill="rgba(0,0,0,.18)"/></svg>`][k];
+const studioHome=`${nav('studio')}<div class="hero"><h1>Clay<br><em>&amp;</em> Form</h1></div><div class="tiles">${[['Beginner classes','#C9D7C0','#7F927A'],['Open studio','#D9B8A0','#A8775A'],['Gift vouchers','#B9B4AA','#6F6A60']].map(([t,bg,v],i)=>`<div class="tile" style="background:${bg}">${vessel(v,96,118,i)}<b>${t}</b><span class="arr">${arrow('#EDEBE6')}</span></div>`).join('')}</div>`;
+const studioGal=`${nav('studio')}<div class="top"><h1>Classes<br><em>&amp;</em> gallery</h1><p class="lead">Wheel, hand-building and glazing sessions for every level.</p><span class="btn b1">See classes</span></div><div class="gal">${[['#C9D7C0','#6F8269'],['#D9B8A0','#9C6B4E'],['#B9B4AA','#5E5A52'],['#8E9C86','#E6E2D8']].map(([bg,v],i)=>`<div class="g" style="background:${bg}">${vessel(v,104,128,i%3)}</div>`).join('')}</div>`;
+const S={
+ cafe:{bg:'radial-gradient(90% 120% at 85% 10%,#E9C46A 0%,#C98B55 38%,#5A3520 80%,#2B1D14 100%)',lab:'#F4ECE1',chip:['#2B1D14','#E9C46A'],a:['cafe',false,cafeHome,'#2B1D14'],b:['cafe',false,cafeMenu,'#2B1D14']},
+ plumber:{bg:'radial-gradient(100% 120% at 90% 0%,#FF9A4D 0%,#FF7A1A 22%,#1B4470 62%,#0A1F36 100%)',lab:'#fff',chip:['#FF7A1A','#1A0D02'],a:['plumber',true,plumbHome,'#fff'],b:['plumber2',false,plumbServ,'#0E2A47']},
+ studio:{bg:'radial-gradient(100% 120% at 15% 0%,#E6EDE1 0%,#C9D7C0 35%,#B5A391 75%,#9C8A78 100%)',lab:'#111',chip:['#111','#EDEBE6'],a:['studio',false,studioHome,'#111'],b:['studio2',true,studioGal,'#EDEBE6']}};
+const root=document.getElementById('root');
+if(K==='included'){document.body.style.cssText='width:470px;height:960px';root.innerHTML=`<div style="position:relative;width:470px;height:960px">${phone('cafe',false,cafeHome,28,18,1,'#2B1D14')}</div>`;}
+else{const s=S[K];
+ // No baked-in label: the page shows the 'Concept' tag and the name under each image (once per card).
+ // The café is the wide card, so both phones show whole. The plumber and studio images sit on the smaller cards,
+ // so they use a bigger, tighter crop (phones at 1.32x, cut off at the bottom) to keep the mock-up text readable.
+ const L=K==='cafe'?{sc:.79,a:[266,50],b:[640,98]}:{sc:1.32,a:[34,36],b:[620,92]};
+ root.innerHTML=`<div class="scene" style="background:${s.bg}">${phone(s.b[0],s.b[1],s.b[2],L.b[0],L.b[1],L.sc,s.b[3])}${phone(s.a[0],s.a[1],s.a[2],L.a[0],L.a[1],L.sc,s.a[3])}</div>`;}
+</script></body></html>

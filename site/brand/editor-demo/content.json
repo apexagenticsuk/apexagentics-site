@@ -1,0 +1,118 @@
+{
+  "version": "2026-10-17T03:40:00Z",
+  "_help": "Demo content for the editor-gallery screenshots only (built by site/brand/editor-demo.js from site-config.json).",
+  "siteUrl": "https://apexagenticsuk.github.io/apexagentics-site/",
+  "brand": {
+    "name": "Apex Agentics",
+    "logo": "final",
+    "logoNote": "One setting for the logo. 'final' is the v2-C lockup (assets/logos/logo-final-light.svg for light backgrounds, logo-final-dark.svg for dark). To swap, add logo-NAME-light.svg and logo-NAME-dark.svg and set this value to NAME."
+  },
+  "theme": {
+    "accent": "blue"
+  },
+  "contact": {
+    "email": "hello@apexagentics.co.uk",
+    "phone": "",
+    "location": "",
+    "replyTime": "",
+    "privacy": ""
+  },
+  "prices": {
+    "check": {
+      "name": "Website & brand check",
+      "unit": "introductory",
+      "amount": "£50",
+      "small": ""
+    },
+    "refresh": {
+      "name": "Build and hand over",
+      "unit": "one-off",
+      "amount": "from £495 one-off",
+      "small": ""
+    },
+    "monthly": {
+      "name": "Build and care",
+      "unit": "a month",
+      "amount": "Any build above, then £20 a month",
+      "small": "Hassle-free. You ask. We change it. Hosting stays in your own account."
+    },
+    "vat": "Prices are final. No VAT is added.",
+    "cancellation": ""
+  },
+  "testimonials": [],
+  "nav": [
+    {
+      "key": "what",
+      "label": "Included",
+      "href": "#what",
+      "show": "menu"
+    },
+    {
+      "key": "how",
+      "label": "How it works",
+      "href": "#how",
+      "show": "menu"
+    },
+    {
+      "key": "pricing",
+      "label": "Prices",
+      "href": "#pricing",
+      "show": "menu"
+    },
+    {
+      "key": "results",
+      "label": "About",
+      "href": "#results",
+      "show": "menu"
+    },
+    {
+      "key": "contact",
+      "label": "Contact",
+      "href": "#contact",
+      "show": "menu"
+    }
+  ],
+  "site": {},
+  "pages": {},
+  "seo": {
+    "index": {
+      "title": "Apex Agentics Web | Fast, modern websites for small businesses",
+      "description": "Built with the latest technology. Fast on every phone. Prices up front."
+    }
+  },
+  "dims": {
+    "assets/favicon-32.png": [
+      32,
+      32
+    ],
+    "assets/hero.webp": [
+      1920,
+      800
+    ],
+    "assets/hero_m.webp": [
+      640,
+      502
+    ],
+    "assets/icon.png": [
+      180,
+      180
+    ],
+    "assets/og.jpg": [
+      1200,
+      630
+    ],
+    "assets/support_speed.webp": [
+      1200,
+      675
+    ],
+    "assets/support_trust_600.webp": [
+      600,
+      338
+    ],
+    "assets/support_upgrade_600.webp": [
+      600,
+      338
+    ]
+  },
+  "catch": ""
+}

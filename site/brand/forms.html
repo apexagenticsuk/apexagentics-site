@@ -39,6 +39,9 @@ body{font-family:'IT',system-ui,sans-serif;color:var(--ink);-webkit-font-smoothi
 .sheet .top{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid var(--ink);padding-bottom:12px;margin-bottom:16px}
 .sheet .val{background:transparent;border:0;border-bottom:1px solid #CDBBA6;border-radius:0;padding:4px 0 5px;min-height:24px;font-size:12.5px}
 .sheet .blk{margin-bottom:15px}
+/* the risk sheet's blocks spread down the whole visible sheet (no empty paper at the bottom), with slightly larger text */
+.sheet{display:flex;flex-direction:column;justify-content:space-between;padding-bottom:46px}.sheet .top,.sheet .blk{margin-bottom:0}
+.sheet .val{font-size:13.5px}.sheet table{font-size:11.5px}.sheet th{font-size:10.5px;padding:8px 7px}.sheet td{padding:9px 7px}.sheet .f label{font-size:11.5px}.sheet .sect{font-size:11.5px}
 table{width:100%;border-collapse:collapse;font-size:10.5px;line-height:1.35}
 th{text-align:left;font-weight:500;color:var(--soft);font-size:9.5px;padding:6px 6px;background:#F3E8DA;border:1px solid var(--rule)}
 td{padding:7px 6px;border:1px solid var(--rule);vertical-align:top;font-weight:500;background:#fff}
@@ -81,7 +84,7 @@ const blk=s=>`<div class="blk"><p class="sect">${esc(s.title)}</p>${s.table?`<ta
 window.render=(x,brand)=>{
   const head=`<div class="brand"><span class="mark"></span><span class="bname">${esc(brand)}</span></div>`;
   let h='';
-  if(x.kind==='paper')h=`<div class="bg paper"></div><div class="sheet"><div class="top"><div>${head}<p class="ftitle" style="margin-top:12px">${title(x.title)}</p></div></div>${x.sections.map(blk).join('')}<p class="note">${esc(x.note)}</p></div>`;
+  if(x.kind==='paper')h=`<div class="bg paper"></div><div class="sheet"><div class="top"><div>${head}<p class="ftitle" style="margin-top:12px">${title(x.title)}</p></div></div>${x.sections.map(blk).join('')}${x.imageNote?`<p class="note">${esc(x.imageNote)}</p>`:''}</div>`;
   else{const nav=x.kind==='tablet'?`<span class="nav"><span>Menu</span><span>Visit</span><span class="pill">Book</span></span>`:'';
     h=`<div class="bg ${x.kind}"></div><div class="dev ${x.kind}">${x.kind==='phone'?'<span class="notch"></span>':''}<div class="screen"><div class="appbar">${head}${nav}</div><div class="banner"><i class="a"></i><i class="b"></i></div><div class="body"><p class="ftitle">${title(x.title)}</p>${x.sections.map(blk).join('')}<div class="blk"><span class="btn">${esc(x.button)}</span></div></div></div></div>`}
   document.getElementById('root').innerHTML=h;

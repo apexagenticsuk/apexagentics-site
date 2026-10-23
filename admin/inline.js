@@ -62,15 +62,15 @@ function buildBar(t){curBar=t;SB.innerHTML='';plus.hidden=true;var g,addBelow=nu
   if(t.tagName==='IMG'){g=grp('Picture');btn(g,'📷 Change picture',function(){imgPanel(t);});}
   if(bl){var bid=bl.dataset.bid,f=findBlock(C(),bid);g=grp('Block');
     btn(g,'↑ Move up',function(){moveBlock(bid,-1);});btn(g,'↓ Move down',function(){moveBlock(bid,1);});btn(g,'⇅ Reorder…',function(){reorderBlocks(bid);},'Drag blocks into a new order');
-    btn(g,'⧉ Copy',function(){dupBlock(bid);},'Make a copy below');if(f&&OPTS[f.b.type])btn(g,f.b.type==='video'?'▶ Change video':'⚙ Options',function(){optsPanel(bid);});btn(g,'🗑 Delete',function(){delBlock(bid);},'Delete this block','del');
+    btn(g,'Copy',function(){dupBlock(bid);},'Make a copy below');if(f&&OPTS[f.b.type])btn(g,f.b.type==='video'?'▶ Change video':'⚙ Options',function(){optsPanel(bid);});btn(g,'🗑 Delete',function(){delBlock(bid);},'Delete this block','del');
     addBelow=function(){pickInto(function(c){var r=findBlock(c,bid);return {list:r.list,at:r.i+1};});};}
-  if(it){g=grp('Item');btn(g,'← Earlier',function(){moveItem(it,-1);});btn(g,'→ Later',function(){moveItem(it,1);});btn(g,'⧉ Copy',function(){dupItem(it);});btn(g,'🗑 Delete',function(){delItem(it);},'','del');}
+  if(it){g=grp('Item');btn(g,'← Earlier',function(){moveItem(it,-1);});btn(g,'→ Later',function(){moveItem(it,1);});btn(g,'Copy',function(){dupItem(it);});btn(g,'🗑 Delete',function(){delItem(it);},'','del');}
   if(!bl&&s&&t!==s){var an=anchorFor(t);if(an){var aid=eid(an);addBelow=function(){pickInto(function(c){var P=E(c,'page');P.ins=P.ins||{};P.ins[aid]=P.ins[aid]||[];return {list:P.ins[aid],at:0};});};}}
   if(s){var hid=s.classList.contains('dy-hidden'),nw=isNew(s);g=grp('Section');
     btn(g,'↑ Move up',function(){moveSec(s,-1);},'Move this section up');btn(g,'↓ Move down',function(){moveSec(s,1);},'Move this section down');btn(g,'⇅ Reorder…',function(){reorderSecs(s);},'Drag sections into a new order');
     btn(g,hid?'👁 Show':'🙈 Hide',function(){hideSec(s,!hid);},hid?'Show this section on the website again':'Hide this section from the website (you can bring it back)');
     btn(g,'+ Add block',function(){addToSection(s);},'Add a block at the end of this section');
-    if(nw){btn(g,'🎨 Background',function(){secBgPanel(s);});btn(g,'⧉ Copy',function(){dupSec(s);},'Copy this section');btn(g,'🗑 Delete',function(){delSec(s);},'Delete this section','del');}}
+    if(nw){btn(g,'🎨 Background',function(){secBgPanel(s);});btn(g,'Copy',function(){dupSec(s);},'Copy this section');btn(g,'🗑 Delete',function(){delSec(s);},'Delete this section','del');}}
   if(addBelow){var g0=pk('div','sg');btn(g0,'+ Add below',addBelow,'Add a new block below this','add');SB.prepend(g0);
     plus.onclick=function(e){e.stopPropagation();finishEdit(true);addBelow();};plus.hidden=false;var tgt=bl||anchorFor(t)||t,r=tgt.getBoundingClientRect();plusFor=tgt;plus.style.left=(r.left+window.scrollX+r.width/2-17)+'px';plus.style.top=(r.bottom+window.scrollY-17)+'px';}
   var x=pk('div','sg end');btn(x,'✕ Done',function(){clearSel();DYE.closePanel();},'Deselect');SB.appendChild(x);
