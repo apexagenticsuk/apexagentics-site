@@ -7,7 +7,8 @@
   "flags": {
     "daveYoungApproved": false,
     "ownershipConfirmed": false,
-    "showLegalLine": false
+    "showLegalLine": false,
+    "showDaveYoungStory": false
   },
   "trader": {
     "name": {
@@ -36,41 +37,65 @@
     }
   },
   "prices": {
-    "build": {
-      "label": "Website build",
+    "_note": "Every £ figure on the site comes from here. In text, {key} is replaced by that price’s figure (e.g. {check} -> £50) and {key+} by the full price with its prefix and unit (e.g. {domain+} -> about £10 a year). {creditDays}, {changesMinutes} and {email} are filled in too.",
+    "check": {
+      "label": "Website & brand check",
+      "value": "£50",
+      "tag": "introductory",
+      "provisional": false
+    },
+    "creditDays": 30,
+    "newSite": {
+      "label": "New website",
       "value": "£595",
       "prefix": "from",
-      "unit": "one-off",
-      "provisional": true,
-      "includes": [
-        "Design and build of your site",
-        "Works on phones and laptops",
-        "Contact details easy to find"
-      ],
-      "leadTag": "Start here"
+      "provisional": false,
+      "unit": "one-off"
     },
-    "deluxe": {
-      "label": "Deluxe brand review",
-      "value": null,
-      "unit": "add-on",
-      "provisional": true
+    "refresh": {
+      "label": "Website refresh",
+      "value": "£495",
+      "prefix": "from",
+      "provisional": false,
+      "unit": "one-off"
+    },
+    "monthly": {
+      "label": "Build and care",
+      "value": "£39",
+      "prefix": "from",
+      "unit": "a month",
+      "provisional": false
+    },
+    "changesMinutes": 30,
+    "domain": {
+      "label": "Domain",
+      "value": "£10",
+      "prefix": "about",
+      "unit": "a year",
+      "provisional": false
     }
   },
   "formAddons": [
     {
       "label": "Simple form",
       "value": "£49",
-      "provisional": true
+      "provisional": false,
+      "id": "simple",
+      "prefix": "from"
     },
     {
       "label": "Detailed form",
       "value": "£99",
-      "provisional": true
+      "provisional": false,
+      "id": "detailed",
+      "prefix": "from"
     },
     {
-      "label": "3 forms",
+      "label": "Three forms",
       "value": "£120",
-      "provisional": true
+      "provisional": false,
+      "id": "bundle",
+      "prefix": "from"
     }
   ],
   "faq": {
@@ -79,20 +104,12 @@
     "ownershipAnswer": "You own your site and domain. No lock-in.",
     "items": [
       {
-        "q": "Are your prices estimates?",
-        "a": "Yes. Prices start from the figure shown. We confirm your quote before any work begins."
-      },
-      {
         "q": "Do you add VAT?",
         "a": "No VAT is added to our prices."
       },
       {
-        "q": "What does Care cover?",
-        "a": "@care:0"
-      },
-      {
-        "q": "What does Care Plus cover?",
-        "a": "@care:1"
+        "q": "Any hidden costs?",
+        "a": "No. The only extras are paid straight to other providers: your domain name ({domain+}), hosting and email if you want it, all in your own name. With a New website or Website refresh, there’s no monthly bill from us."
       },
       {
         "q": "How do I get a quote?",
@@ -102,8 +119,7 @@
         "q": "What is a ‘Concept’?",
         "a": "An example design for a made-up business, made to show our style. It is not a real client."
       }
-    ],
-    "_note": "'@care:N' answers are built from careTiers[N].includes so they always match the price cards."
+    ]
   },
   "about": {
     "bio": "Apex Agentics is a small UK web studio designing clear, modern websites for small businesses.",
@@ -144,8 +160,7 @@
     ]
   },
   "formSection": {
-    "intro": "Branded forms that work on phone or laptop, save or print.",
-    "disclaimer": "Template only. This is not professional health and safety advice. You must check and adapt it for your own activity, venue and people, and keep it up to date. You remain responsible for your own risk assessment."
+    "intro": "Branded forms that work on phones and laptops, and can be saved or printed."
   },
   "daveYoung": {
     "name": "Dave Young",
@@ -202,32 +217,6 @@
       }
     ]
   },
-  "careTiers": [
-    {
-      "label": "Care",
-      "value": "£19",
-      "prefix": "from",
-      "unit": "a month",
-      "provisional": true,
-      "includes": [
-        "Hosting",
-        "Security updates",
-        "Small text changes"
-      ]
-    },
-    {
-      "label": "Care Plus",
-      "value": "£39",
-      "prefix": "from",
-      "unit": "a month",
-      "provisional": true,
-      "includes": [
-        "Everything in Care",
-        "Photo and image swaps",
-        "Small page edits"
-      ]
-    }
-  ],
   "included": [
     {
       "t": "Made for phones first",
@@ -243,7 +232,7 @@
     },
     {
       "t": "Easy to keep up to date",
-      "d": "With Care or Care Plus, send us small changes and we make them."
+      "d": "A new website comes with a simple editor. With Build and care, we make changes for you."
     },
     {
       "t": "Visible to search engines",
@@ -254,5 +243,104 @@
     "heading": "Let’s build a website worthy of your business.",
     "button": "Get in touch",
     "secondary": "See prices"
+  },
+  "pricing": {
+    "heading": "Simple prices, <em>shown</em> up front",
+    "check": {
+      "title": "Website & brand check",
+      "text": [
+        "We look at your home page, two other pages and your social accounts from the outside, then send you a written list of fixes.",
+        "The {check} credit comes off any build, whether a refresh or a new site."
+      ],
+      "finePrint": [
+        "Checks use only publicly visible information. We won’t log in, scan for weaknesses or try to break in. This isn’t a full security audit or penetration test.",
+        "The {check} credit lasts {creditDays} days from when we send your report. It can be used once, against any build, and has no cash value."
+      ],
+      "bestFor": "Keeping your current site, but want a clear list of fixes."
+    },
+    "buildHandOver": {
+      "title": "Build and hand over",
+      "badge": "Start here",
+      "options": [
+        {
+          "price": "newSite",
+          "includes": "Up to five pages, built around your business, with a simple editor so you can make changes yourself."
+        },
+        {
+          "price": "refresh",
+          "includes": "We refresh your site, move it to hosting in your own name and hand it over. Moving off Wix or WordPress is quoted per job."
+        }
+      ],
+      "bestFor": "Owners who want a new site they can run themselves."
+    },
+    "buildCare": {
+      "title": "Build and care",
+      "headline": "From {refresh} one-off + {monthly} a month",
+      "intro": "Everything in Build and hand over, plus:",
+      "costLine": "Same build price as Build and hand over (refresh from {refresh}, new site from {newSite}), then from {monthly} a month.",
+      "includes": [
+        "{changesMinutes} minutes of changes each month. Unused minutes don’t roll over. Hosting stays in your own account.",
+        "Rolling monthly, no minimum term.",
+        "Cancel any time by emailing {email}."
+      ],
+      "bestFor": "Owners who’d rather we handle changes each month."
+    },
+    "vatLine": "Prices are final. No VAT is added."
+  },
+  "otherServices": {
+    "heading": "<em>Forms</em>",
+    "exampleLabel": "Example",
+    "exampleMessage": "This is an example. Nothing has been sent.",
+    "examples": [
+      {
+        "title": "Enquiry form",
+        "fields": [
+          [
+            "Name",
+            "text"
+          ],
+          [
+            "Email",
+            "email"
+          ],
+          [
+            "Message",
+            "textarea"
+          ]
+        ],
+        "button": "Send (example)",
+        "price": "simple"
+      },
+      {
+        "title": "Booking form",
+        "fields": [
+          [
+            "Name",
+            "text"
+          ],
+          [
+            "Email",
+            "email"
+          ],
+          [
+            "Date",
+            "date"
+          ]
+        ],
+        "button": "Send (example)",
+        "price": "detailed"
+      }
+    ],
+    "bundle": "bundle",
+    "eyebrow": "Other services",
+    "exampleNote": "Example only, nothing is sent"
+  },
+  "stories": {
+    "placeholder": "We’re new, so there are no client stories yet. See our concept work above.",
+    "_note": "Hidden slot for Dave Young’s client story. Nothing renders unless flags.showDaveYoungStory is true AND quote is filled in.",
+    "daveYoung": {
+      "quote": null,
+      "name": null
+    }
   }
 }
