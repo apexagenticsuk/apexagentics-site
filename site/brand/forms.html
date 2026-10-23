@@ -1,0 +1,89 @@
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><title>Example form mock-ups</title>
+<!-- Mock-up template for the three example form images. render-forms.js fills it from site-config.json (otherServices.examples) and screenshots at 2x. -->
+<style>
+@font-face{font-family:'SG';font-weight:700;src:url(../fonts/space-grotesk-latin-700-normal.woff2)}
+@font-face{font-family:'SG';font-weight:500;src:url(../fonts/space-grotesk-latin-500-normal.woff2)}
+@font-face{font-family:'IT';font-weight:400;src:url(../fonts/inter-tight-latin-400-normal.woff2)}
+@font-face{font-family:'IT';font-weight:500;src:url(../fonts/inter-tight-latin-500-normal.woff2)}
+@font-face{font-family:'IS';font-style:italic;src:url(../fonts/instrument-serif-latin-400-italic.woff2)}
+:root{--ink:#2B1D14;--cream:#F4ECE1;--paper:#FCF8F2;--car:#C8742F;--brn:#9A5B2E;--sun:#E9C46A;--rule:#E3D5C3;--soft:#7A6656}
+*{margin:0;box-sizing:border-box}
+html,body{width:600px;height:780px;overflow:hidden}
+body{font-family:'IT',system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;position:relative}
+.bg{position:absolute;inset:0}
+.bg.paper{background:radial-gradient(120% 90% at 20% 0%,#E9C46A 0%,#D99A52 45%,#B5662B 100%)}
+.bg.tablet{background:radial-gradient(120% 90% at 80% 0%,#F4ECE1 0%,#E7D4BC 55%,#D2B593 100%)}
+.bg.phone{background:radial-gradient(120% 90% at 30% 10%,#5A2E14 0%,#3A2116 60%,#2B1D14 100%)}
+/* brand header */
+.brand{display:flex;align-items:center;gap:10px}
+.mark{width:26px;height:26px;border-radius:50%;background:var(--cream);box-shadow:inset 0 0 0 6px #5A2E14,0 0 0 2px var(--car)}
+.bname{font-family:'SG';font-weight:700;font-size:19px;letter-spacing:-.02em}
+.ftitle{font-family:'SG';font-weight:700;font-size:26px;letter-spacing:-.03em;line-height:1.05}
+.ftitle em{font-family:'IS';font-weight:400;font-style:italic;font-size:1.12em;letter-spacing:0}
+.sect{font-family:'SG';font-weight:500;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--brn);margin:0 0 8px}
+.f label{display:block;font-size:10.5px;font-weight:500;color:var(--soft);margin-bottom:4px}
+.val{font-size:13px;font-weight:500;line-height:1.35;border:1px solid var(--rule);background:#fff;border-radius:8px;padding:8px 10px;min-height:33px;position:relative}
+.val.sel:after{content:'';position:absolute;right:12px;top:50%;width:7px;height:7px;border-right:1.6px solid var(--ink);border-bottom:1.6px solid var(--ink);transform:translateY(-70%) rotate(45deg)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px}
+.wide{grid-column:1/-1}
+.opts{display:flex;flex-wrap:wrap;gap:6px 14px;padding-top:2px}
+.opt{display:flex;align-items:center;gap:7px;font-size:12.5px}
+.box{width:15px;height:15px;border:1.5px solid #B8A48E;border-radius:4px;background:#fff;display:grid;place-items:center}
+.radio .box{border-radius:50%}
+.opt.on .box{background:var(--ink);border-color:var(--ink)}
+.opt.on .box:after{content:'';width:4px;height:8px;border:solid var(--cream);border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg)}
+.radio .opt.on .box{background:#fff}.radio .opt.on .box:after{width:7px;height:7px;border:0;border-radius:50%;background:var(--ink);transform:none}
+.btn{display:inline-block;background:var(--ink);color:var(--cream);font-weight:500;font-size:13px;padding:11px 26px;border-radius:99px}
+/* paper sheet */
+.sheet{position:absolute;left:40px;right:40px;top:34px;bottom:-18px;background:var(--paper);border-radius:4px;box-shadow:0 30px 60px -20px rgba(43,29,20,.55),0 2px 6px rgba(43,29,20,.18);padding:26px 28px;transform:rotate(-1.2deg)}
+.sheet .top{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid var(--ink);padding-bottom:12px;margin-bottom:16px}
+.sheet .val{background:transparent;border:0;border-bottom:1px solid #CDBBA6;border-radius:0;padding:4px 0 5px;min-height:24px;font-size:12.5px}
+.sheet .blk{margin-bottom:15px}
+table{width:100%;border-collapse:collapse;font-size:10.5px;line-height:1.35}
+th{text-align:left;font-weight:500;color:var(--soft);font-size:9.5px;padding:6px 6px;background:#F3E8DA;border:1px solid var(--rule)}
+td{padding:7px 6px;border:1px solid var(--rule);vertical-align:top;font-weight:500;background:#fff}
+td.lvl span{display:inline-block;padding:2px 6px;border-radius:99px;font-size:9.5px;background:#F6E3BF}
+td.lvl span.low{background:#E4EBD5}
+.sheet .val.sig{font-family:'IS';font-style:italic;font-size:30px;line-height:1;padding:0 0 2px!important;color:#2A3A66}
+.note{margin-top:16px;font-size:11px;color:var(--soft);border-top:1px dashed #CDBBA6;padding-top:9px}
+/* tablet */
+.dev{position:absolute;background:#1C1714;box-shadow:0 30px 60px -18px rgba(43,29,20,.6),inset 0 0 0 1.5px #3c332d}
+.dev.tablet{left:52px;right:52px;top:68px;bottom:30px;border-radius:30px;padding:16px}
+.screen{width:100%;height:100%;background:var(--cream);border-radius:16px;overflow:hidden;position:relative}
+.appbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--rule)}
+.nav{display:flex;gap:14px;font-size:11px;opacity:.8;align-items:center}
+.nav .pill{background:var(--sun);padding:5px 11px;border-radius:99px;opacity:1}
+.body{padding:20px 22px}
+.body .blk{margin-top:16px}
+/* phone */
+.dev.phone{left:150px;width:300px;top:40px;bottom:-40px;border-radius:44px;padding:11px}
+.dev.phone .screen{border-radius:34px}
+.notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:84px;height:22px;border-radius:99px;background:#1C1714;z-index:2}
+.dev.phone .appbar{padding:42px 18px 12px}
+.dev.phone .body{padding:16px 18px}
+.dev.phone .ftitle{font-size:22px}
+.dev.phone .blk{margin-top:14px}
+.dev.phone .grid{grid-template-columns:1fr}
+.banner{position:relative;height:118px;background:radial-gradient(circle at 30% 30%,#E9C46A,#C8742F 55%,#7A3E1C);overflow:hidden}.banner i{position:absolute;border-radius:50%;background:var(--cream);box-shadow:inset 0 0 0 14px #5A2E14}.banner i.a{width:120px;height:120px;right:40px;top:-22px}.banner i.b{width:64px;height:64px;right:180px;top:56px;opacity:.9;box-shadow:inset 0 0 0 9px #5A2E14}
+.dev.phone .banner{height:96px}.dev.phone .banner i.a{width:96px;height:96px;right:18px;top:-14px}.dev.phone .banner i.b{display:none}
+.hint{font-size:11.5px;color:var(--soft);margin-top:6px;line-height:1.4}
+.deco{position:absolute;border-radius:50%}
+</style></head><body><div id="root"></div>
+<script>
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+const title=t=>{const w=t.split(' ');return esc(w.slice(0,-1).join(' '))+' <em>'+esc(w.at(-1))+'</em>'};
+const field=([l,v,type,on])=>{
+  const cls=type==='wide'?' wide':'';
+  if(type==='check'||type==='radio')return `<div class="f wide ${type}"><label>${esc(l)}</label><div class="opts">${v.map((o,i)=>`<span class="opt${i===on?' on':''}"><span class="box"></span>${esc(o)}</span>`).join('')}</div></div>`;
+  if(l==='Signature')return `<div class="f${cls}"><label>${esc(l)}</label><div class="val sig">S. Taylor</div></div>`;
+  return `<div class="f${cls}"><label>${esc(l)}</label><div class="val${type==='select'?' sel':''}">${esc(v)}</div></div>`};
+const blk=s=>`<div class="blk"><p class="sect">${esc(s.title)}</p>${s.table?`<table><tr>${s.table.columns.map(c=>`<th>${esc(c)}</th>`).join('')}</tr>${s.table.rows.map(r=>`<tr>${r.map((c,i)=>i===2||i===3?`<td class="lvl"><span class="${c.toLowerCase()}">${esc(c)}</span></td>`:`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</table>`:`<div class="grid">${s.fields.map(field).join('')}</div>`}</div>`;
+window.render=(x,brand)=>{
+  const head=`<div class="brand"><span class="mark"></span><span class="bname">${esc(brand)}</span></div>`;
+  let h='';
+  if(x.kind==='paper')h=`<div class="bg paper"></div><div class="sheet"><div class="top"><div>${head}<p class="ftitle" style="margin-top:12px">${title(x.title)}</p></div></div>${x.sections.map(blk).join('')}<p class="note">${esc(x.note)}</p></div>`;
+  else{const nav=x.kind==='tablet'?`<span class="nav"><span>Menu</span><span>Visit</span><span class="pill">Book</span></span>`:'';
+    h=`<div class="bg ${x.kind}"></div><div class="dev ${x.kind}">${x.kind==='phone'?'<span class="notch"></span>':''}<div class="screen"><div class="appbar">${head}${nav}</div><div class="banner"><i class="a"></i><i class="b"></i></div><div class="body"><p class="ftitle">${title(x.title)}</p>${x.sections.map(blk).join('')}<div class="blk"><span class="btn">${esc(x.button)}</span></div></div></div></div>`}
+  document.getElementById('root').innerHTML=h;
+};
+</script></body></html>

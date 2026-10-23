@@ -4,7 +4,7 @@ import { SplitText } from 'gsap/SplitText';
 const rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
 // phone swipe strips: page dots follow the scroll position (not motion, so also under reduced motion)
-document.querySelectorAll('.works, .cstrip-row').forEach(row => {
+document.querySelectorAll('.works, .cstrip-row, .fgal').forEach(row => {
   const dots = row.parentElement.querySelectorAll(`:scope > .swipe-ui .sdots i`); if (!dots.length) return;
   row.addEventListener('scroll', () => { const kids = [...row.children]; let best = 0, d = 1e9; kids.forEach((k, i) => { const x = Math.abs(k.getBoundingClientRect().left - row.getBoundingClientRect().left - parseFloat(getComputedStyle(row).paddingLeft)); if (x < d) { d = x; best = i; } }); dots.forEach((el, i) => el.classList.toggle('on', i === best)); const ui = row.parentElement.querySelector(':scope > .swipe-ui'); ui.classList.toggle('at-end', best === kids.length - 1); const live = ui.querySelector('[aria-live]'), msg = `Card ${best + 1} of ${kids.length}`; if (live.textContent !== msg) live.textContent = msg; }, { passive: true });
 });

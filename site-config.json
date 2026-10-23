@@ -288,52 +288,209 @@
     "vatLine": "Prices are final. No VAT is added."
   },
   "otherServices": {
-    "heading": "<em>Forms</em>",
+    "eyebrow": "Other services",
+    "heading": "Form <em>add-ons</em>",
     "exampleLabel": "Example",
-    "exampleMessage": "This is an example. Nothing has been sent.",
+    "galleryLabel": "Example forms for a made-up café",
+    "_samples": "The sample entries below are made up, to show each form filled in. They appear only inside the example images in site/img (rendered by site/brand/render-forms.js).",
+    "bundle": "bundle",
     "examples": [
       {
-        "title": "Enquiry form",
-        "fields": [
-          [
-            "Name",
-            "text"
-          ],
-          [
-            "Email",
-            "email"
-          ],
-          [
-            "Message",
-            "textarea"
-          ]
-        ],
-        "button": "Send (example)",
-        "price": "simple"
+        "id": "risk",
+        "title": "Risk assessment form",
+        "price": "detailed",
+        "kind": "paper",
+        "alt": "Example risk assessment form for the made-up Corner Café, filled in with sample entries: who assessed it and when, a hazards table with control measures, a review date and a signed sign-off section. Template only. This is not professional health and safety advice.",
+        "note": "Template only. This is not professional health and safety advice.",
+        "sections": [
+          {
+            "title": "About this assessment",
+            "fields": [
+              [
+                "Business name",
+                "Corner Café"
+              ],
+              [
+                "Assessed by",
+                "Sam Taylor"
+              ],
+              [
+                "Date",
+                "12/10/2026"
+              ],
+              [
+                "Location or activity",
+                "Kitchen and counter"
+              ]
+            ]
+          },
+          {
+            "title": "Hazards",
+            "table": {
+              "columns": [
+                "Hazard",
+                "Who might be harmed",
+                "Likelihood",
+                "Severity",
+                "Control measures"
+              ],
+              "rows": [
+                [
+                  "Slips on a wet floor",
+                  "Staff and visitors",
+                  "Medium",
+                  "Medium",
+                  "Wipe up spills straight away and put out a wet floor sign."
+                ],
+                [
+                  "Lifting heavy boxes",
+                  "Staff",
+                  "Low",
+                  "Medium",
+                  "Use a trolley, and get help with anything too heavy to lift alone."
+                ]
+              ]
+            }
+          },
+          {
+            "title": "Review",
+            "fields": [
+              [
+                "Review date",
+                "12/04/2027"
+              ]
+            ]
+          },
+          {
+            "title": "Sign-off",
+            "fields": [
+              [
+                "Name",
+                "Sam Taylor"
+              ],
+              [
+                "Role",
+                "Café manager"
+              ],
+              [
+                "Date",
+                "12/10/2026"
+              ],
+              [
+                "Signature",
+                ""
+              ]
+            ]
+          }
+        ]
       },
       {
+        "id": "booking",
         "title": "Booking form",
-        "fields": [
-          [
-            "Name",
-            "text"
-          ],
-          [
-            "Email",
-            "email"
-          ],
-          [
-            "Date",
-            "date"
-          ]
+        "price": "detailed",
+        "kind": "tablet",
+        "alt": "Example booking form for the made-up Corner Café on a tablet, filled in with sample entries: a group booking for six people with date and time, contact details and a note asking for a table by the window.",
+        "sections": [
+          {
+            "title": "Your booking",
+            "fields": [
+              [
+                "Service",
+                "Group booking",
+                "select"
+              ],
+              [
+                "Date",
+                "14/11/2026"
+              ],
+              [
+                "Time",
+                "10:30"
+              ],
+              [
+                "Number of people",
+                "6"
+              ]
+            ]
+          },
+          {
+            "title": "Your details",
+            "fields": [
+              [
+                "Name",
+                "Alex Morgan"
+              ],
+              [
+                "Phone",
+                "07700 900123"
+              ],
+              [
+                "Email",
+                "alex@example.com"
+              ],
+              [
+                "Notes",
+                "A table by the window, please.",
+                "wide"
+              ]
+            ]
+          }
         ],
-        "button": "Send (example)",
-        "price": "detailed"
+        "button": "Send"
+      },
+      {
+        "id": "enquiry",
+        "title": "Enquiry form",
+        "price": "simple",
+        "kind": "phone",
+        "alt": "Example enquiry form for the made-up Corner Café on a phone, filled in with sample entries: name and email, a ticked choice asking for a quote, a short message about catering, and email chosen as the way to reply.",
+        "sections": [
+          {
+            "title": "About you",
+            "fields": [
+              [
+                "Name",
+                "Jamie Lee"
+              ],
+              [
+                "Email",
+                "jamie@example.com"
+              ]
+            ]
+          },
+          {
+            "title": "Your enquiry",
+            "fields": [
+              [
+                "What do you need?",
+                [
+                  "A quote",
+                  "More information",
+                  "Something else"
+                ],
+                "check",
+                0
+              ],
+              [
+                "Message",
+                "Could you do coffee and bakes for a team breakfast for 12 people?",
+                "wide"
+              ],
+              [
+                "How should we reply?",
+                [
+                  "Email",
+                  "Phone"
+                ],
+                "radio",
+                0
+              ]
+            ]
+          }
+        ],
+        "button": "Send"
       }
-    ],
-    "bundle": "bundle",
-    "eyebrow": "Other services",
-    "exampleNote": "Example only, nothing is sent"
+    ]
   },
   "stories": {
     "placeholder": "We’re new, so there are no client stories yet. See our concept work above.",
