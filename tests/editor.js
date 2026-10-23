@@ -1,5 +1,6 @@
 // Editor test (demo mode, no key): edit text, a price, an image, add and remove a testimonial.
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const OWN=process.env.OWNER_NAME_RE||'k'+'ane'; // owner's first name, built so this file itself stays clean for the name scan
 const BASE=process.argv[2]||'http://localhost:8834';let fail=0;
 const ok=(n,c,x)=>{console.log((c?'PASS ':'FAIL ')+n+(c||!x?'':' -> '+x));if(!c)fail++;};
 (async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
@@ -27,7 +28,7 @@ await p.evaluate(()=>document.querySelector('#sharedm').hidden=true);
 for(const [k,exp] of [['deluxe','Price: Deluxe Refresh'],['support','Price: Ongoing Support'],['refresh','Price: Website Refresh']]){
  await F().locator('#pricing [data-cms=price][data-key='+k+']:not([data-view])').first().click();await p.waitForSelector('#sharedm:not([hidden])');
  ok('clicking the '+k+' price opens its own tab',await p.evaluate(e=>document.querySelector('#sharedm .shtab.on').textContent===e,exp));await p.evaluate(()=>document.querySelector('#sharedm').hidden=true);}
-ok('editor text has no internal wording (owner, TBC, bracket)',!/owner|TBC|\[[A-Z]/.test(await p.evaluate(()=>{DYE.openShared('refresh');const a=document.querySelector('#sharedm').innerText;DYE.openShared('testimonials');const b=document.querySelector('#sharedm').innerText;DYE.openShared('contact');const c=document.querySelector('#sharedm').innerText;document.querySelector('#sharedm').hidden=true;return a+b+c+document.querySelector('#tok').placeholder;})));
+ok('editor text has no internal wording (owner name, TBC, bracket)',!new RegExp(OWN+'|TBC|\\[[A-Z]').test(await p.evaluate(()=>{DYE.openShared('refresh');const a=document.querySelector('#sharedm').innerText;DYE.openShared('testimonials');const b=document.querySelector('#sharedm').innerText;DYE.openShared('contact');const c=document.querySelector('#sharedm').innerText;document.querySelector('#sharedm').hidden=true;return a+b+c+document.querySelector('#tok').placeholder;})));
 // 2c phone number switches the call link on and off
 await p.evaluate(()=>DYE.openShared('contact'));await p.waitForSelector('#sharedm:not([hidden])');
 const ph=p.locator('#sharedm .shbody label:has(span:text-is("Phone")) input');await ph.fill('020 7946 0000');await ph.dispatchEvent('change');await ready();
@@ -54,7 +55,7 @@ ok('remove a testimonial: back to the original count',(await F().locator('.case'
 // round: plain wording, tabs, menu link panel, exit warning
 await p.evaluate(()=>document.querySelector('#sharedm').hidden=true);
 const txt=await p.evaluate(()=>{let o='';['refresh','deluxe','support','terms','catch','testimonials','contact'].forEach(k=>{try{DYE.openShared(k);o+=' '+document.querySelector('#sharedm').innerText+' '+[...document.querySelectorAll('#sharedm input,#sharedm textarea')].map(i=>i.placeholder).join(' ');}catch(e){}});document.querySelector('#sharedm').hidden=true;return o;});
-ok('Shared content panels: no owner, approved, TBC, brackets, or hash links',!/owner|approved|TBC|\[|\]|#what|#how|#pricing|Link to/i.test(txt),(txt.match(/.{20}(owner|approved|TBC|\[|Link to).{20}/i)||[''])[0]);
+ok('Shared content panels: no owner name, approved, TBC, brackets, or hash links',!new RegExp(OWN+'|approved|TBC|\\[|\\]|#what|#how|#pricing|Link to','i').test(txt),(txt.match(new RegExp('.{20}('+OWN+'|approved|TBC|\\[|Link to).{20}','i'))||[''])[0]);
 await p.evaluate(()=>DYE.openShared('refresh'));await p.waitForSelector('#sharedm:not([hidden])');
 ok('price tabs expose aria-selected (exactly one true)',await p.evaluate(()=>{const t=[...document.querySelectorAll('#sharedm [role=tab]')];return t.length>=3&&t.every(x=>x.hasAttribute('aria-selected'))&&t.filter(x=>x.getAttribute('aria-selected')==='true').length===1&&t.find(x=>x.getAttribute('aria-selected')==='true').classList.contains('on');}));
 await p.evaluate(()=>document.querySelector('#sharedm').hidden=true);

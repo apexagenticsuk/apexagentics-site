@@ -2,7 +2,7 @@
 
 One-page static site, served from `main` on GitHub Pages. Hidden from search engines on purpose (noindex, nofollow on every page, robots.txt disallows all).
 
-- `content.json`: single source of truth for shared content (prices, testimonials, contact, logo setting `brand.logo` = A, B or C, siteUrl). Price amounts stay empty until owner approves.
+- `content.json`: single source of truth for shared content (prices, testimonials, contact, logo setting `brand.logo` = A, B or C, siteUrl). Price amounts stay empty until the owner approves.
 - `content.js`: applies `content.json` and editor overlays to the page. `tools/prerender.js` bakes it into the HTML so first paint needs no script.
 - `admin/`: visual editor. Open `/admin/` and choose demo mode (no key needed).
 - `tools/rebuild.sh`: run after changing `index.html` or `content.json` (needs Playwright and Chrome).

@@ -1,0 +1,258 @@
+{
+  "_help": "Single source for every price, name and placeholder. Empty/null or [bracketed] values are never rendered (their line or section is hidden). provisional:true shows the 'Estimate' tag. Legal-line placeholders are kept for Ben's wording but hidden while flags.showLegalLine is false.",
+  "brand": "Apex Agentics",
+  "public": true,
+  "siteUrl": "https://apexagentics.co.uk",
+  "_publicHelp": "public:false keeps noindex on every page and robots.txt blocking all crawlers. public:true drops noindex (404 stays noindex), robots.txt allows crawling and points to /sitemap.xml. sitemap.xml and canonical links always use siteUrl.",
+  "flags": {
+    "daveYoungApproved": false,
+    "ownershipConfirmed": false,
+    "showLegalLine": false
+  },
+  "trader": {
+    "name": {
+      "value": "[TRADER NAME]",
+      "provisional": true
+    },
+    "ownerName": {
+      "value": "[OWNER NAME]",
+      "provisional": true
+    },
+    "postalAddress": {
+      "value": "[POSTAL ADDRESS]",
+      "provisional": true
+    },
+    "status": {
+      "value": "Sole trader",
+      "provisional": false
+    },
+    "vat": {
+      "value": "Not VAT registered",
+      "provisional": false
+    },
+    "email": {
+      "value": "apexagenticsuk@gmail.com",
+      "provisional": true
+    }
+  },
+  "prices": {
+    "build": {
+      "label": "Website build",
+      "value": "£595",
+      "prefix": "from",
+      "unit": "one-off",
+      "provisional": true,
+      "includes": [
+        "Design and build of your site",
+        "Works on phones and laptops",
+        "Contact details easy to find"
+      ],
+      "leadTag": "Start here"
+    },
+    "deluxe": {
+      "label": "Deluxe brand review",
+      "value": null,
+      "unit": "add-on",
+      "provisional": true
+    }
+  },
+  "formAddons": [
+    {
+      "label": "Simple form",
+      "value": "£49",
+      "provisional": true
+    },
+    {
+      "label": "Detailed form",
+      "value": "£99",
+      "provisional": true
+    },
+    {
+      "label": "3 forms",
+      "value": "£120",
+      "provisional": true
+    }
+  ],
+  "faq": {
+    "cancellation": null,
+    "vat": "No VAT is added to our prices.",
+    "ownershipAnswer": "You own your site and domain. No lock-in.",
+    "items": [
+      {
+        "q": "Are your prices estimates?",
+        "a": "Yes. Prices start from the figure shown. We confirm your quote before any work begins."
+      },
+      {
+        "q": "Do you add VAT?",
+        "a": "No VAT is added to our prices."
+      },
+      {
+        "q": "What does Care cover?",
+        "a": "@care:0"
+      },
+      {
+        "q": "What does Care Plus cover?",
+        "a": "@care:1"
+      },
+      {
+        "q": "How do I get a quote?",
+        "a": "Tell us what you need using the contact section below."
+      },
+      {
+        "q": "What is a ‘Concept’?",
+        "a": "An example design for a made-up business, made to show our style. It is not a real client."
+      }
+    ],
+    "_note": "'@care:N' answers are built from careTiers[N].includes so they always match the price cards."
+  },
+  "about": {
+    "bio": "Apex Agentics is a small UK web studio designing clear, modern websites for small businesses.",
+    "statement": "Your website should be as good as the work you do."
+  },
+  "contact": {
+    "placeholder": "Email coming soon",
+    "privacyLine": "We only use your details to reply to your enquiry. We don’t share them or use them for marketing. See our privacy notice.",
+    "privacyLinkText": "privacy notice",
+    "heading": "Let’s talk about your website",
+    "intro": "Tell us about your business and what you need from your site."
+  },
+  "footer": {
+    "tradingLine": "Apex Agentics is a trading name of [OWNER NAME], sole trader. [POSTAL ADDRESS]. [EMAIL].",
+    "vatLine": "Not VAT registered",
+    "privacyLinkText": "Privacy notice"
+  },
+  "privacy": {
+    "responsiblePerson": "[RESPONSIBLE PERSON]",
+    "_note": "responsiblePerson is not rendered. Contact uses trader.email and is hidden while empty.",
+    "sections": [
+      {
+        "h": "What we collect",
+        "p": "Your name, email address and what you write when you contact us."
+      },
+      {
+        "h": "Why",
+        "p": "We use your details only to reply to your enquiry. We don’t share your details or use them for marketing."
+      },
+      {
+        "h": "How long we keep it",
+        "p": "We keep your messages only as long as we need to deal with your enquiry, then delete them."
+      },
+      {
+        "h": "Your rights",
+        "p": "You can ask to see or delete your details by emailing us."
+      }
+    ]
+  },
+  "formSection": {
+    "intro": "Branded forms that work on phone or laptop, save or print.",
+    "disclaimer": "Template only. This is not professional health and safety advice. You must check and adapt it for your own activity, venue and people, and keep it up to date. You remain responsible for your own risk assessment."
+  },
+  "daveYoung": {
+    "name": "Dave Young",
+    "title": "A preview concept made for Dave Young",
+    "images": [
+      {
+        "src": "assets/dave_desktop.webp",
+        "alt": "Preview concept for Dave Young on a computer",
+        "w": 1100,
+        "h": 600
+      },
+      {
+        "src": "assets/dave_phone.webp",
+        "alt": "Preview concept for Dave Young on a phone",
+        "w": 540,
+        "h": 900
+      }
+    ],
+    "changes": []
+  },
+  "estimateLabel": "Estimate",
+  "concepts": {
+    "heading": "Concept work",
+    "intro": "Made-up businesses, designed by us to show the style. These are concepts, not real clients.",
+    "items": [
+      {
+        "key": "cafe",
+        "name": "Corner Café",
+        "type": "Café website concept"
+      },
+      {
+        "key": "plumber",
+        "name": "Local Plumbing Co.",
+        "type": "Trades website concept"
+      },
+      {
+        "key": "studio",
+        "name": "Clay & Form Studio",
+        "type": "Studio website concept"
+      }
+    ],
+    "inner": [
+      {
+        "key": "cafe",
+        "alt": "Concept menu page for Corner Café, a made-up business"
+      },
+      {
+        "key": "plumber",
+        "alt": "Concept services page for Local Plumbing Co., a made-up business"
+      },
+      {
+        "key": "studio",
+        "alt": "Concept classes and gallery page for Clay & Form Studio, a made-up business"
+      }
+    ]
+  },
+  "careTiers": [
+    {
+      "label": "Care",
+      "value": "£19",
+      "prefix": "from",
+      "unit": "a month",
+      "provisional": true,
+      "includes": [
+        "Hosting",
+        "Security updates",
+        "Small text changes"
+      ]
+    },
+    {
+      "label": "Care Plus",
+      "value": "£39",
+      "prefix": "from",
+      "unit": "a month",
+      "provisional": true,
+      "includes": [
+        "Everything in Care",
+        "Photo and image swaps",
+        "Small page edits"
+      ]
+    }
+  ],
+  "included": [
+    {
+      "t": "Made for phones first",
+      "d": "Designed for small screens first, then scaled up for laptops."
+    },
+    {
+      "t": "Easy to read",
+      "d": "Clear headings, plain words and strong contrast."
+    },
+    {
+      "t": "Light pages",
+      "d": "Compressed images and nothing they don’t need."
+    },
+    {
+      "t": "Easy to keep up to date",
+      "d": "With Care or Care Plus, send us small changes and we make them."
+    },
+    {
+      "t": "Visible to search engines",
+      "d": "Set up so search engines can list your site once it’s live."
+    }
+  ],
+  "closing": {
+    "heading": "Let’s build a website worthy of your business.",
+    "button": "Get in touch",
+    "secondary": "See prices"
+  }
+}

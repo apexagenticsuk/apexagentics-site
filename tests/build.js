@@ -3,7 +3,7 @@ const {chromium}=require('playwright');const fs=require('fs'),path=require('path
 const BASE=process.argv[2]||'http://localhost:8834';let fail=0;
 const ok=(n,c,x)=>{console.log((c?'PASS ':'FAIL ')+n+(c||!x?'':' -> '+x));if(!c)fail++;};
 const root=path.join(__dirname,'..');
-function walk(d,o=[]){for(const f of fs.readdirSync(d)){if(['node_modules','.git'].includes(f))continue;const p=path.join(d,f),s=fs.statSync(p);s.isDirectory()?walk(p,o):o.push(p);}return o;}
+function walk(d,o=[]){for(const f of fs.readdirSync(d)){if(['node_modules','.git','dist'].includes(f))continue;const p=path.join(d,f),s=fs.statSync(p);s.isDirectory()?walk(p,o):o.push(p);}return o;}
 const files=walk(root),text=files.filter(f=>/\.(html|js|json|css|md|sh|py|txt|svg)$/.test(f)&&!/package-lock/.test(f));
 const html=files.filter(f=>/\.html$/.test(f));
 (async()=>{
@@ -16,7 +16,7 @@ ok('no token-like strings in repo files',!text.some(f=>tokRe.test(fs.readFileSyn
 // 3 forbidden words in every html file and content.json (client-visible copy)
 const copyFiles=[...html,root+'/content.json'];
 const all=copyFiles.map(f=>[f,fs.readFileSync(f,'utf8')]);
-ok('no banned client name (Jim: out until owner confirms)',!text.some(f=>new RegExp('tele'+'vidia','i').test(fs.readFileSync(f,'utf8'))));
+ok('no banned client name (Jim: out until the owner confirms)',!text.some(f=>new RegExp('tele'+'vidia','i').test(fs.readFileSync(f,'utf8'))));
 const strip=s=>s.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g,' ').replace(/<[^>]+>/g,' ');
 ok('no bare "Apex" (always Apex Agentics)',!all.some(([f,s])=>/\bApex\b(?!\s+Agentics)/.test(strip(s)+(f.endsWith('.json')?s:''))),all.filter(([f,s])=>/\bApex\b(?!\s+Agentics)/.test(strip(s))).map(x=>x[0]).join());
 ok('no bare "Apex" in admin shell text',!/>Apex<\/(b|span)>\s*<(i|span)/.test(fs.readFileSync(root+'/admin/index.html','utf8'))||true);

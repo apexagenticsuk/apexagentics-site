@@ -1,0 +1,13 @@
+// Renders the made-up Corner Café concept as a phone-width page (390x693) for the phone mock-up.
+const {chromium}=require('playwright');
+const fs=require('fs');const F=`${__dirname}/../fonts`;const d=f=>'data:font/woff2;base64,'+fs.readFileSync(`${F}/${f}`).toString('base64');
+const html=`<html><head><style>@font-face{font-family:SG;font-weight:700;src:url(${d('space-grotesk-latin-700-normal.woff2')})}@font-face{font-family:IT;src:url(${d('inter-tight-latin-400-normal.woff2')})}@font-face{font-family:IS;font-style:italic;src:url(${d('instrument-serif-latin-400-italic.woff2')})}
+*{margin:0;box-sizing:border-box}body{width:390px;height:693px;overflow:hidden;background:#F4ECE1;color:#2B1D14;font-family:IT}</style></head><body>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:22px 22px 0"><b style="font-family:SG;font-size:19px">Corner Café</b><span style="width:26px;height:12px;border-top:2px solid #2B1D14;border-bottom:2px solid #2B1D14"></span></div>
+<div style="padding:34px 22px 0"><p style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#9A5B2E">Neighbourhood coffee</p>
+<h1 style="font-family:SG;font-size:52px;line-height:.95;letter-spacing:-.04em;margin:14px 0">Good coffee, <span style="font-family:IS;font-weight:400">slow</span> mornings.</h1>
+<p style="font-size:16px;opacity:.8">Fresh bakes daily, seasonal brunch and a seat by the window.</p>
+<div style="margin-top:20px;display:flex;gap:10px"><span style="background:#2B1D14;color:#F4ECE1;padding:12px 18px;border-radius:99px;font-size:14px">See the menu</span><span style="border:1px solid #2B1D14;padding:12px 18px;border-radius:99px;font-size:14px">Find us</span></div></div>
+<div style="margin:26px 22px 0;height:250px;border-radius:22px;background:radial-gradient(circle at 35% 30%,#E9C46A,#C8742F 55%,#7A3E1C);position:relative"><div style="position:absolute;width:130px;height:130px;border-radius:50%;background:#F4ECE1;top:40px;left:50%;margin-left:-65px;box-shadow:inset 0 0 0 16px #5A2E14"></div></div>
+</body></html>`;
+(async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});const p=await b.newPage({viewport:{width:390,height:693},deviceScaleFactor:2});await p.setContent(html);console.log(await p.evaluate(async()=>{await Promise.all([document.fonts.load('700 52px SG'),document.fonts.load('16px IT'),document.fonts.load('italic 52px IS')]);return [...document.fonts].map(f=>f.family+':'+f.status).join(' ')}));await p.waitForTimeout(300);await p.screenshot({path:'/tmp/phone-cafe.png'});await b.close();})();

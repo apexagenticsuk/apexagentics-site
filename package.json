@@ -5,7 +5,19 @@
   "scripts": {
     "serve": "python3 -m http.server 8834",
     "build": "tools/rebuild.sh",
-    "test": "for t in build editor; do node tests/$t.js ${BASE:-http://localhost:8834} || exit 1; done"
+    "build:refresh": "node site/build.js",
+    "test:refresh": "node tests/refresh.js",
+    "test": "node tests/refresh.js && node tests/umbrella.js && node tests/steps-line.js ${DIST:-http://localhost:8851} && node tests/root-page.js ${DIST:-http://localhost:8851} && for t in build editor; do node tests/$t.js ${BASE:-http://localhost:8834} || exit 1; done",
+    "test:umbrella": "node tests/umbrella.js"
   },
-  "devDependencies": { "playwright": "^1.48.0" }
+  "devDependencies": {
+    "@fontsource/instrument-serif": "^5.3.0",
+    "@fontsource/inter-tight": "^5.3.0",
+    "@fontsource/space-grotesk": "^5.3.0",
+    "esbuild": "^0.28.2",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.27",
+    "ogl": "^1.0.11",
+    "playwright": "^1.48.0"
+  }
 }

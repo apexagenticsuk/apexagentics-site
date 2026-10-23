@@ -1,0 +1,11 @@
+<!doctype html>
+<!-- Icon template: the site mark (Signal diamond) on Ink. render.js screenshots it at 16, 32 and 180 px. ?s=size&r=1 rounds the corners. -->
+<html><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><style>
+*{margin:0}html,body{background:transparent;overflow:hidden}
+.i{width:var(--s);height:var(--s);background:#0B0D10;display:grid;place-items:center}
+.i.r{border-radius:calc(var(--s)*.22)}
+.m{width:calc(var(--s)*var(--k));height:calc(var(--s)*var(--k));background:#7CFFB2;border-radius:calc(var(--s)*.06);transform:rotate(45deg)}
+</style></head><body><div class="i" id="i"><div class="m"></div></div><script>
+const q=new URLSearchParams(location.search),s=+q.get('s')||32,i=document.getElementById('i');
+i.style.setProperty('--s',s+'px');i.style.setProperty('--k',s<=16?.5:s<=32?.46:.4);if(q.get('r'))i.classList.add('r');
+</script></body></html>
