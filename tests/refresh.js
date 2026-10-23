@@ -59,4 +59,10 @@ ok('privacy page: contact line only when email set',C.trader.email.value?s.inclu
  ok('privacy: no name/responsible-person line',!/Responsible|Data controller|Who is responsible|\[OWNER NAME\]|\[TRADER NAME\]|\[RESPONSIBLE PERSON\]/i.test(pv)&&!pv.includes(C.trader.ownerName.value));
  ok('privacy: no legal/trading-name line',!/trading name|trading as|t\/a /i.test(text(pv))&&!pv.includes(C.footer.tradingLine));
  ok('privacy: public mode, no noindex',!/name="robots"/.test(pv));}
+// Contact email is hello@apexagentics.co.uk: the old webmail address (domain built below so this file stays clean) is in no built file; every mailto on /, /web/, /web/privacy and 404 uses it.
+{const HELLO='hello@apexagentics.co.uk',OLD=new RegExp('g'+'mail','i'),files=walk(dist).filter(f=>/\.(html|css|js|json|txt|xml|svg|webmanifest)$|_redirects$/.test(f));
+ ok('config email is '+HELLO,C.trader.email.value===HELLO,C.trader.email.value);
+ const hits=files.filter(f=>OLD.test(fs.readFileSync(f,'utf8'))).map(f=>path.relative(dist,f));ok('no old webmail address in any built file ('+files.length+' checked)',hits.length===0,hits.join());
+ for(const f of ['index.html','web/index.html','web/privacy.html','404.html']){const s=fs.readFileSync(path.join(dist,f),'utf8'),m=[...s.matchAll(/href="mailto:([^"]*)"/g)].map(x=>x[1]);
+  ok(f+': has mailto links and all use '+HELLO,m.length>0&&m.every(x=>x===HELLO),m.join());}}
 process.exit(fail?1:0);
