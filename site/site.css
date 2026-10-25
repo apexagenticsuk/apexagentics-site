@@ -392,28 +392,28 @@ html:has(dialog.viewer[open]){overflow:hidden}
 .sdemo .ss-ring{animation:ss-ring 9s infinite}.sdemo .ss-photo .ss-ring{animation:ss-pring 9s infinite}
 .sdemo .ss-new{animation:ss-new 9s ease-in-out infinite}
 .sdemo .ss-mask{animation:ss-type 9s steps(22,end) infinite}
-@keyframes st-s1{0%,20%{opacity:1;transform:none}23%,100%{opacity:var(--lo);transform:none}}
-@keyframes st-s2{0%,20%{opacity:var(--lo);transform:translateY(.3em)}23%,40%{opacity:1;transform:none}43%,100%{opacity:var(--lo);transform:none}}
-@keyframes st-s3{0%,40%{opacity:var(--lo);transform:translateY(.3em)}43%,61%{opacity:1;transform:none}64%,100%{opacity:var(--lo);transform:none}}
-@keyframes st-s4{0%,61%{opacity:var(--lo);transform:translateY(.3em)}64%,100%{opacity:1;transform:none}}
-@keyframes st-prog{0%{transform:scaleX(0)}94%,100%{transform:scaleX(1)}}
-@keyframes st-f1{0%,4%{opacity:0;transform:scale(1.25)}8%{opacity:1;transform:scale(1)}11%{opacity:1;transform:scale(.82)}14%{opacity:1;transform:scale(1)}19%,100%{opacity:0;transform:scale(1)}}
-@keyframes st-r1{0%,10.5%{opacity:0;transform:scale(.8)}11.5%{opacity:.9;transform:scale(.9)}20%,100%{opacity:0;transform:scale(2.6)}}
-@keyframes st-f2{0%,33%{opacity:0;transform:scale(1.25)}37%{opacity:1;transform:scale(1)}40%{opacity:1;transform:scale(.82)}43%{opacity:1;transform:scale(1)}48%,100%{opacity:0;transform:scale(1)}}
-@keyframes st-r2{0%,39.5%{opacity:0;transform:scale(.8)}40.5%{opacity:.9;transform:scale(.9)}49%,100%{opacity:0;transform:scale(2.6)}}
-@keyframes ss-press{0%,10%{opacity:0}11.5%{opacity:.1}16%,100%{opacity:0}}
+
+
+
+
+
+
+
+
+
+
 @keyframes ss-dim{0%,17%{opacity:0}26%,62%{opacity:.4}70%,100%{opacity:0}}
 @keyframes ss-sheet{0%,17%{transform:translateY(105%);animation-timing-function:cubic-bezier(.2,.85,.25,1)}28%,62%{transform:none;animation-timing-function:cubic-bezier(.55,0,.75,.3)}69%,100%{transform:translateY(105%)}}
 @keyframes ss-sel{0%,40%{opacity:0}42%,100%{opacity:1}}
 @keyframes ss-tick{0%,40.5%{opacity:0;transform:scale(.4)}44%,100%{opacity:1;transform:none}}
-@keyframes ss-toast{0%,72%{transform:translate(-50%,-180%)}77%,88%{transform:translate(-50%,0)}92%,100%{transform:translate(-50%,-180%)}}
-@keyframes ss-out{0%,66%{opacity:1;transform:none}70%,100%{opacity:0;transform:scale(.96)}}
-@keyframes ss-push{0%,66%{transform:none}76%,100%{transform:translateY(9.6em)}}
-@keyframes ss-in{0%,68%{opacity:0;transform:translateY(1em) scale(.97)}78%,100%{opacity:1;transform:none}}
-@keyframes ss-ring{0%,74%{opacity:0}78%,86%{opacity:1}92%,100%{opacity:0}}
-@keyframes ss-pring{0%,9%{opacity:0}12%,24%{opacity:1}28%,74%{opacity:0}78%,86%{opacity:1}92%,100%{opacity:0}}
-@keyframes ss-new{0%,68%{opacity:0;transform:scale(1.06)}78%,100%{opacity:1;transform:none}}
-@keyframes ss-type{0%,45%{transform:translateX(0)}58%,100%{transform:translateX(100%)}}
+@keyframes ss-toast{0%,71%{transform:translate(-50%,-180%)}76%,88%{transform:translate(-50%,0)}92%,100%{transform:translate(-50%,-180%)}}
+
+
+
+@keyframes ss-ring{0%,71%{opacity:0}75%,86%{opacity:1}91%,100%{opacity:0}}
+@keyframes ss-pring{0%,9%{opacity:0}12%,24%{opacity:1}28%,71%{opacity:0}75%,86%{opacity:1}91%,100%{opacity:0}}
+
+
 @media(min-width:760px){.ecard:not(:first-child) .rdemo .rd-body{font-size:clamp(11px,2.35cqi,19px)}}
 @media(max-width:759px){.mdemo .rd-bar span{display:none}.rdemo{aspect-ratio:5/7}.rdemo .rd-body{grid-template-columns:1fr;padding:6%;font-size:clamp(11px,4.6cqi,17px)}.rd-page{display:none!important}}
 @media(prefers-reduced-motion:reduce){.mdemo *{animation:none!important}.rd-hint{display:none!important}.mdemo{cursor:default}}
@@ -421,3 +421,21 @@ html:has(dialog.viewer[open]){overflow:hidden}
 @media(max-width:759px){.foot p a{display:inline-flex;align-items:center;min-height:44px}.foot nav a{min-width:44px}.foot .flogo{display:inline-flex;align-items:center;min-height:44px}#faq details{padding:16px 0}#faq summary{min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:12px}}
 .sdemo .ss-tile .tp.tp-quote{height:1.13em;padding:0;margin-bottom:.237em;line-height:1.5}
 @media(max-width:759px){.bar .logo{min-height:44px;margin:-7px 0}.cta-row .tlink{display:inline-flex;align-items:center;min-height:44px;margin:-6px 0}.cmail a{display:inline-block;padding:11px 0;margin:-11px 0}.cfine a{display:inline-block;padding:13px 4px;margin:-13px -4px}}
+
+/* web-fixes-3 round 2: seamless loop (no fade to an empty card), captions that never overlap, a pressing fingertip with a soft ripple, live preview in the picture panel, drawn layout tiles */
+@keyframes st-s1{0%,19%{opacity:1}21%,96.5%{opacity:var(--lo)}98.5%,100%{opacity:1}}@keyframes st-s2{0%,21.5%{opacity:var(--lo)}23.5%,30%{opacity:1}32%,100%{opacity:var(--lo)}}@keyframes st-s3{0%,32.5%{opacity:var(--lo)}34.5%,68%{opacity:1}70%,100%{opacity:var(--lo)}}@keyframes st-s4{0%,70.5%{opacity:var(--lo)}72.5%,94%{opacity:1}96%,100%{opacity:var(--lo)}}@keyframes st-prog{0%{transform:scaleX(0);opacity:1}94%{transform:scaleX(1);opacity:1}98%,100%{transform:scaleX(1);opacity:0}}@keyframes st-f1{0%,3%{opacity:0;transform:translate(.9em,1.1em) scale(1.15)}7.5%{opacity:1;transform:none}9%{opacity:1;transform:none}10.5%{opacity:1;transform:scale(.72)}13%{opacity:1;transform:scale(.95)}17%,100%{opacity:0;transform:scale(1.05)}}@keyframes st-r1{0%,10%{opacity:0;transform:scale(.5)}11%{opacity:.85;transform:scale(.75)}19%,100%{opacity:0;transform:scale(2.8)}}@keyframes st-f2{0%,33%{opacity:0;transform:translate(.9em,1.1em) scale(1.15)}37%{opacity:1;transform:none}38.5%{opacity:1;transform:none}40%{opacity:1;transform:scale(.72)}42.5%{opacity:1;transform:scale(.95)}46%,100%{opacity:0;transform:scale(1.05)}}@keyframes st-r2{0%,39.5%{opacity:0;transform:scale(.5)}40.5%{opacity:.85;transform:scale(.75)}48.5%,100%{opacity:0;transform:scale(2.8)}}@keyframes ss-press{0%,10%{opacity:0}11%{opacity:.12}15%,100%{opacity:0}}@keyframes ss-type{0%,43%{transform:translateX(0)}53%,100%{transform:translateX(100%)}}@keyframes ss-out{0%,10%{opacity:1;transform:none}11%{opacity:1;transform:scale(.97)}13.5%,62%{opacity:1;transform:none}65%,94.5%{opacity:0;transform:scale(.96)}98%,100%{opacity:1;transform:none}}@keyframes ss-push{0%,62%{transform:none;animation-timing-function:cubic-bezier(.5,0,.2,1)}71%,93%{transform:translateY(9.6em);animation-timing-function:cubic-bezier(.4,0,.2,1)}98%,100%{transform:none}}@keyframes ss-in{0%,64%{opacity:0;transform:translateY(1em) scale(.97)}73%,92%{opacity:1;transform:none}94.5%,100%{opacity:0;transform:translateY(.4em)}}@keyframes ss-new{0%,63%{opacity:0;transform:scale(1.06)}71%,92%{opacity:1;transform:none}99%,100%{opacity:0;transform:none}}@keyframes ss-tp{0%,39.8%{transform:none}40.8%{transform:scale(.95)}43%,100%{transform:none}}@keyframes ss-hp{0%,10%{transform:none}11%{transform:scale(.975)}13.5%,100%{transform:none}}@keyframes ss-pvn{0%,40.5%{opacity:0}44%,100%{opacity:1}}
+.mdemo.sdemo .rd-body{animation:none}
+.sdemo .ss-pick{animation:ss-tp 9s infinite}
+.sdemo .ss-photo{animation:ss-hp 9s infinite}
+.sdemo .ss-pvn{animation:ss-pvn 9s infinite}
+.sdemo .st-f{background:radial-gradient(circle at 38% 32%,rgba(255,255,255,.98),rgba(255,255,255,.78) 55%,rgba(235,235,235,.6));border:0;box-shadow:0 .35em .9em rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.1),inset 0 -.15em .3em rgba(0,0,0,.12)}
+.sdemo .st-r{border:0;background:radial-gradient(circle,rgba(255,255,255,0) 45%,rgba(255,255,255,.55) 66%,rgba(255,255,255,0) 71%);box-shadow:none}
+.sdemo .ss-pick .st-r{background:radial-gradient(circle,rgba(47,191,113,0) 45%,rgba(47,191,113,.5) 66%,rgba(47,191,113,0) 71%)}
+.sdemo .tp-svg svg{display:block;width:100%;height:100%}
+.sdemo .ss-shr{display:flex;justify-content:space-between;align-items:flex-start;gap:.6em}
+.sdemo .ss-pv{position:relative;flex:0 0 5.4em;height:3.2em;border-radius:.5em;overflow:hidden;background-repeat:no-repeat;box-shadow:0 0 0 1px #e4e0d8,0 .2em .6em rgba(0,0,0,.12)}
+.sdemo .ss-pvn{position:absolute;inset:0;background-repeat:no-repeat;opacity:0}
+.ss-pv small{position:absolute;left:.3em;bottom:.3em;padding:.22em .4em;border-radius:99em;background:rgba(0,0,0,.6);color:#fff;font:500 .72em/1 var(--body)}
+.sdemo .ss-cafe~.ss-sheet .ss-sub{margin-bottom:.5em}
+@media(hover:hover) and (pointer:fine){.wcard:hover .wimg.mdemo{transform:none}}
+body:has(.mdemo:hover) .cursor{opacity:0!important;visibility:hidden!important}
