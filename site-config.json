@@ -271,7 +271,7 @@
     },
     "buildHandOver": {
       "title": "Build and hand over",
-      "badge": "Start here",
+      "badge": "",
       "options": [
         {
           "price": "newSite",
