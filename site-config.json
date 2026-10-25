@@ -237,13 +237,13 @@
         "key": "add",
         "title": "Add a section",
         "text": "Pick a ready-made layout, then change the words and pictures.",
-        "alt": "Editor preview: the Add a section window, with ready-made layouts such as Text + image, Cards and FAQ"
+        "alt": "Editor preview: on a pottery studio site, Add section is tapped, Gallery is chosen from the ready-made layouts, and a new photo gallery appears on the page"
       },
       {
         "key": "image",
         "title": "Change a picture",
         "text": "Click a picture, choose a new one and describe it for visitors who can’t see it.",
-        "alt": "Editor preview: a picture on the page has just been replaced, with the Picture panel open showing Replace picture and a description box"
+        "alt": "Editor preview: on a café site, the main picture is tapped, a new photo is chosen and described for visitors who can’t see it, and the page updates"
       }
     ],
     "swipeHint": "Swipe to see more",
