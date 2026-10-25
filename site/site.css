@@ -420,3 +420,4 @@ html:has(dialog.viewer[open]){overflow:hidden}
 /* web-fixes-2: phone tap targets of at least 44px in the footer (email, every nav link incl. FAQ, logo) and the FAQ questions */
 @media(max-width:759px){.foot p a{display:inline-flex;align-items:center;min-height:44px}.foot nav a{min-width:44px}.foot .flogo{display:inline-flex;align-items:center;min-height:44px}#faq details{padding:16px 0}#faq summary{min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:12px}}
 .sdemo .ss-tile .tp.tp-quote{height:1.13em;padding:0;margin-bottom:.237em;line-height:1.5}
+@media(max-width:759px){.bar .logo{min-height:44px;margin:-7px 0}.cta-row .tlink{display:inline-flex;align-items:center;min-height:44px;margin:-6px 0}.cmail a{display:inline-block;padding:11px 0;margin:-11px 0}.cfine a{display:inline-block;padding:13px 4px;margin:-13px -4px}}
