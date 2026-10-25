@@ -37,3 +37,14 @@
     if(opener){opener.focus({preventScroll:true});opener=null;}
   });
 })();
+// Editor card "Reorder sections" (button.rdemo): CSS plays it on hover/focus. On touch screens it autoplays while mostly on screen; a tap pauses or plays it. Nothing runs under reduced motion (CSS shows a still frame).
+(function(){
+  var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine=window.matchMedia&&matchMedia('(hover: hover) and (pointer: fine)').matches;
+  document.querySelectorAll('.rdemo').forEach(function(el){
+    if(rm)return;
+    var set=function(on){el.classList.toggle('play',on);el.setAttribute('aria-pressed',on?'true':'false');};
+    if(!fine&&'IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(en){if(!el.dataset.paused)set(en.isIntersecting);});},{threshold:.6}).observe(el);}
+    el.addEventListener('click',function(){var on=!el.classList.contains('play');set(on);el.dataset.paused=on?'':'1';});
+  });
+})();
