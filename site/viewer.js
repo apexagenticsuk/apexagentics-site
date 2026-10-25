@@ -38,15 +38,14 @@
   });
 })();
 // Editor cards (button.mdemo): CSS runs them on hover/focus. On touch screens each autoplays while mostly on screen; a tap pauses it where it is (animation-play-state) and the next tap resumes from the same point.
-// Scrolling away also freezes it in place. Nothing runs under reduced motion (CSS shows a still frame).
+// Scrolling away also freezes it in place. Under reduced motion nothing autoplays: CSS shows the finished frame and a Play pill; a tap starts it (adds .on).
 (function(){
   var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine=window.matchMedia&&matchMedia('(hover: hover) and (pointer: fine)').matches;
   document.querySelectorAll('.mdemo').forEach(function(el){
-    if(rm)return;
     var vis=false;
     var sync=function(){var playing=el.classList.contains('on')&&!el.classList.contains('paused');el.setAttribute('aria-pressed',playing?'true':'false');};
-    if(!fine&&'IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(en){vis=en.isIntersecting;if(el.dataset.user==='paused')return;if(vis){el.classList.add('on');el.classList.remove('paused');}else if(el.classList.contains('on')){el.classList.add('paused');}sync();});},{threshold:.6}).observe(el);}
+    if(!rm&&!fine&&'IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(en){vis=en.isIntersecting;if(el.dataset.user==='paused')return;if(vis){el.classList.add('on');el.classList.remove('paused');}else if(el.classList.contains('on')){el.classList.add('paused');}sync();});},{threshold:.6}).observe(el);}
     el.addEventListener('click',function(){
       if(!el.classList.contains('on')){el.classList.add('on');el.classList.remove('paused');el.dataset.user='';}
       else if(el.classList.contains('paused')){el.classList.remove('paused');el.dataset.user='';}

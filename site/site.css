@@ -276,7 +276,8 @@ html:has(dialog.viewer[open]){overflow:hidden}
 @media(max-width:759px){.vstage{align-items:flex-start}.vstage img{width:100%;max-height:none}}
 /* Editor cards: HTML/CSS mock-ups (site/build.js edemo: reorder, add, picture). Every animation is always attached but paused, so the idle frame is the 0% keyframe.
    It runs on hover/focus (desktop) or with .on (site/viewer.js: touch autoplay when on screen, tap toggles). .paused freezes it where it is; resuming carries on from the same point. Reduced motion: still frame, no animation. */
-.mdemo{display:block;position:relative;width:100%;padding:0;margin:0;font:inherit;color:var(--bone);text-align:left;cursor:pointer;aspect-ratio:16/10;container-type:inline-size;background:radial-gradient(80% 90% at 20% 0%,#1b2330,#101419)}
+.ecard-demo{container-type:inline-size}
+.mdemo{-webkit-appearance:none;appearance:none;border-radius:22px;-webkit-tap-highlight-color:transparent;display:block;position:relative;width:100%;min-width:0;padding:0;margin:0;font:inherit;color:var(--bone);text-align:left;cursor:pointer;aspect-ratio:16/10;background:radial-gradient(80% 90% at 20% 0%,#1b2330,#101419)}
 .mdemo>span{display:block}.mdemo .rd-bar{display:flex;position:absolute;top:0;left:0;right:0}.mdemo .rd-body{display:grid}.mdemo .rd-hint{position:absolute}
 .mdemo *{animation-play-state:paused!important}
 .mdemo.on:not(.paused) *,.mdemo:focus-visible:not(.paused) *{animation-play-state:running!important}
@@ -320,7 +321,7 @@ html:has(dialog.viewer[open]){overflow:hidden}
    Story: a tap (soft ripple) -> the editor panel slides up -> a choice is made -> the result shows on the page. Motion is transform and opacity only, so nothing reflows.
    Geometry is in em and the font scales with the card (cqi), so the mock-up fills the card at every width: narrow cards stack phone + caption, wide cards put the steps beside the phone. */
 .sdemo{--md-d:9s;aspect-ratio:auto;padding-top:34px}
-.mdemo.sdemo .rd-body{position:relative;inset:auto;display:block;padding:.8em;font-size:4.76cqi;gap:0}
+.mdemo.sdemo .rd-body{position:relative;inset:auto;display:block;padding:.8em;font-size:clamp(12px,4.2vw,17px);font-size:4.76cqi;gap:0}
 @container (min-width:440px){.mdemo.sdemo .rd-body{display:grid;grid-template-columns:19.4em 1fr;align-items:center;column-gap:1.7em;padding:1.3em 1.6em;font-size:2.72cqi}}
 .sdemo .st-phone{position:relative;width:19.4em;padding:.35em;border-radius:1.7em;background:#07090c;box-shadow:0 0 0 1px #2a3038,0 1.6em 3em rgba(0,0,0,.5)}
 .sdemo .st-screen{position:relative;height:20.5em;border-radius:1.35em;overflow:hidden;background:#efece6;isolation:isolate}
@@ -416,7 +417,13 @@ html:has(dialog.viewer[open]){overflow:hidden}
 
 @media(min-width:760px){.ecard:not(:first-child) .rdemo .rd-body{font-size:clamp(11px,2.35cqi,19px)}}
 @media(max-width:759px){.mdemo .rd-bar span{display:none}.rdemo{aspect-ratio:5/7}.rdemo .rd-body{grid-template-columns:1fr;padding:6%;font-size:clamp(11px,4.6cqi,17px)}.rd-page{display:none!important}}
-@media(prefers-reduced-motion:reduce){.mdemo *{animation:none!important}.rd-hint{display:none!important}.mdemo{cursor:default}}
+/* Reduced motion: no autoplay. Story demos freeze on their finished frame (80% of the loop: result, toast, step 4) and a visible Play pill starts them on tap. */
+.mdemo .rd-play{display:none}
+@media(prefers-reduced-motion:reduce){.rdemo:not(.on) *{animation:none!important}.rd-hint{display:none!important}
+.sdemo:not(.on) *{animation-delay:calc(var(--md-d,9s)*-.8)!important}
+.mdemo .rd-play{display:flex;align-items:center;gap:7px;position:absolute;right:10px;top:5px;z-index:5;padding:5px 11px 5px 9px;border-radius:999px;background:#7cf2a6;color:#0b0d10;font:600 12px/1 var(--disp)}
+.mdemo .rd-play::before{content:"";width:0;height:0;border-left:8px solid currentColor;border-top:5px solid transparent;border-bottom:5px solid transparent}
+.mdemo.on .rd-play{display:none}.mdemo:hover:not(.on) *,.mdemo:focus-visible:not(.on) *{animation-play-state:paused!important}}
 /* web-fixes-2: phone tap targets of at least 44px in the footer (email, every nav link incl. FAQ, logo) and the FAQ questions */
 @media(max-width:759px){.foot p a{display:inline-flex;align-items:center;min-height:44px}.foot nav a{min-width:44px}.foot .flogo{display:inline-flex;align-items:center;min-height:44px}#faq details{padding:16px 0}#faq summary{min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:12px}}
 .sdemo .ss-tile .tp.tp-quote{height:1.13em;padding:0;margin-bottom:.237em;line-height:1.5}
