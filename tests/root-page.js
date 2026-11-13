@@ -1,5 +1,5 @@
 // Playwright: root holding page at 375/390 (touch), 1280x800 and 1440x900, JS on/off and reduced motion; /web/ readable with JS off;
-// icons + share image served; custom cursor hidden until the first mousemove. Usage: node tests/root-page.js [baseUrl of dist]
+// icons + share image served; root page custom cursor hidden until the first mousemove; /web/ loads no animation libraries. Usage: node tests/root-page.js [baseUrl of dist]
 const {chromium}=require('playwright');const BASE=process.argv[2]||'http://localhost:8851';let fail=0;
 const ok=(n,c,x)=>{console.log((c?'PASS ':'FAIL ')+n+(c||!x?'':' -> '+x));if(!c)fail++;};
 (async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
@@ -23,11 +23,10 @@ for(const [n,o,js,rm] of [['375',phone({width:375,height:812}),true,'no-preferen
  if(!js)ok(`${n}: no-JS shows heading and card without motion classes`,!r.fx&&!r.split);
  if(n==='375')ok(`${n}: Space Grotesk loaded`,r.font);
  await c.close();}
-{const c=await b.newContext({viewport:{width:1280,height:800}});const p=await c.newPage();await p.goto(BASE+'/web/',{waitUntil:'load'});
- await p.waitForSelector('.cursor',{state:'attached',timeout:10000}).catch(()=>{});
- const st=await p.evaluate(()=>{const el=document.querySelector('.cursor');if(!el)return null;const s=getComputedStyle(el);return {o:+s.opacity,v:s.visibility};});
- ok('/web/ 1280: custom cursor hidden before the first mousemove (no dot at top-left)',st&&st.o===0&&st.v==='hidden',JSON.stringify(st));
- await p.waitForLoadState('networkidle');for(let i=0;i<10&&!(await p.evaluate(()=>document.querySelector('.cursor').classList.contains('seen')));i++){await p.mouse.move(500+i*7,300);await p.waitForTimeout(150);}await p.waitForTimeout(400);const st2=await p.evaluate(()=>{const s=getComputedStyle(document.querySelector('.cursor'));return +s.opacity;});ok('/web/ 1280: cursor visible after mousemove',st2===1,st2);await c.close();}
+{const c=await b.newContext({viewport:{width:1280,height:800}});const p=await c.newPage();const js=[];p.on('request',r=>{if(r.resourceType()==='script')js.push(new URL(r.url()).pathname);});await p.goto(BASE+'/web/',{waitUntil:'networkidle'});await p.waitForTimeout(2200);
+ const st=await p.evaluate(()=>({cursor:!!document.querySelector('.cursor'),dim:[...document.querySelectorAll('.hero h1,.hero .lead,.hero .hp,.hero .btn,.hero-art img,.proof')].filter(e=>{const s=getComputedStyle(e);return +s.opacity<1||s.visibility==='hidden'||e.getBoundingClientRect().height===0}).length}));
+ ok('/web/ 1280: no custom cursor (the system pointer is used); hero fully visible once its entrance has played',!st.cursor&&st.dim===0,JSON.stringify(st));
+ ok('/web/ 1280: only the two small scripts load (main.js, viewer.js), no animation libraries',js.length===2&&js.every(u=>/^\/js\/(main|viewer)\.js$/.test(u)),js.join());await c.close();}
 {const c=await b.newContext({viewport:{width:375,height:812},javaScriptEnabled:false});const p=await c.newPage();await p.goto(BASE+'/web/');
  const t=await p.evaluate(()=>[...document.querySelectorAll('h1,#prices h2,#contact h2,footer')].map(e=>{const s=getComputedStyle(e);return e.getBoundingClientRect().height>0&&+s.opacity>0&&s.visibility!=='hidden'}));
  ok('/web/ no-JS: hero, prices, contact and footer visible',t.length===4&&t.every(Boolean),JSON.stringify(t));
