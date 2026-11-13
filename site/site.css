@@ -448,9 +448,9 @@ section.hero .hp{animation-delay:.08s}section.hero .cta-row{animation-delay:.16s
 @media(prefers-reduced-motion:reduce){.mq{flex-wrap:wrap;padding-inline:var(--gut)}.mq-set{animation:none;flex-wrap:wrap;gap:12px 28px;padding:0}.mq-set[aria-hidden]{display:none}}
 /* ---------- Privacy notice ---------- */
 .privacy{padding:clamp(40px,7vw,88px) 0 clamp(72px,10vw,128px);border-top:0}
-.privacy h1{font-size:clamp(40px,6.4vw,68px);margin-bottom:.6em}
-.privacy h2{font-size:clamp(22px,2.4vw,28px);letter-spacing:-.02em;margin:0 0 .5em;padding-top:1.3em;border-top:1px solid var(--line)}
-.privacy p{color:var(--mut-2);max-width:60ch;margin-bottom:1.5em}
+.privacy h1{font-size:clamp(40px,6.4vw,68px);margin-bottom:.7em}
+.sec.privacy h2{font-size:clamp(21px,2.2vw,26px);letter-spacing:-.02em;margin:0 0 .5em;padding-top:1.2em;border-top:1px solid var(--line)}
+.privacy p{color:var(--mut-2);font-size:18px;max-width:60ch;margin-bottom:1.4em}.privacy p a{color:var(--bone)}
 /* ---------- 404 ---------- */
 .nf{margin-top:calc(-1*var(--ho));padding:calc(var(--hh) + clamp(72px,12vw,150px)) 0 clamp(72px,12vw,150px)}
 .nf .lead{margin-bottom:32px}
