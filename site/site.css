@@ -543,44 +543,44 @@ section.hero .hp{animation-delay:.08s}section.hero .cta-row{animation-delay:.16s
 /* ---------- Footer ---------- */
 .foot{padding:clamp(40px,6vw,72px) 0 44px;border-top:1px solid var(--line);color:var(--mut-2)}
 .foot p a{color:var(--bone)}.foot nav{gap:4px 26px}.foot nav a{font-size:16px}
-/* ---------- Root page (/): earlier rules, kept as they were until that page is restyled ---------- */
-.cursor{position:fixed;left:0;top:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--sig);pointer-events:none;z-index:100;mix-blend-mode:difference;opacity:0;visibility:hidden;transition:width .25s,height .25s,margin .25s,opacity .2s}.cursor.seen{opacity:1;visibility:visible}
-.cursor.on{width:44px;height:44px;margin:-22px 0 0 -22px}
-.reveal{will-change:clip-path,transform}
-.split-line,.hero h1 [aria-hidden]{display:block}
-.orb{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:0;transition:opacity 1.2s;pointer-events:none}
-/* Root holding page (Apex Agentics umbrella): heading + one card left, orb fills the right; whole page fits one laptop screen */
+/* ---------- Root page (/): Apex Agentics UK. One screen: logo, tagline and the card to /web/, with the Shift mark drawn large beside them. No script. ---------- */
 .home{min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
 .home-hero{flex:1;display:flex;align-items:center;padding:clamp(40px,8vh,96px) 0}
+.home-hero::before{background:radial-gradient(38% 46% at 76% 46%,rgba(124,255,178,.2),transparent 70%),radial-gradient(30% 40% at 12% 88%,rgba(110,132,255,.12),transparent 70%)}
 .home-grid{width:100%;position:relative;z-index:1}
-.home-copy{max-width:640px}.home-copy .home-h1{width:max-content;max-width:min(100%,9ch)}@media(min-width:900px){.home-copy .home-h1{max-width:6.8em}}
-.home-mark{width:22px;height:22px;margin:0 0 clamp(20px,3.5vh,36px) 4px}
-.home-h1{font-size:clamp(60px,19vw,92px);letter-spacing:-.05em;line-height:.92;margin:0 0 clamp(28px,5vh,56px);max-width:9ch}
-.home-h1 em{letter-spacing:-.02em;padding-right:.04em}
-.home-brand{margin:0 0 clamp(22px,4vh,40px);line-height:0}.home-brand .home-logo{width:min(100%,460px);height:auto}
-.home-copy .home-tag{font-family:var(--disp);font-weight:700;font-size:clamp(40px,11.5vw,60px);letter-spacing:-.04em;line-height:1;color:var(--bone);width:auto;max-width:11ch}
-.home-orb{position:absolute;top:-6%;right:-38%;width:120%;height:62%;z-index:0;pointer-events:none;opacity:.7}
-.home-orb::before{content:"";position:absolute;left:50%;top:50%;width:min(100%,100vh);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(124,255,178,.62),rgba(124,255,178,.30) 38%,rgba(124,255,178,.09) 66%,transparent);transition:opacity 1.2s;animation:orbf 9s ease-in-out infinite alternate}
-.home-orb.orb-live::before{opacity:0}
-.home-orb .orb{z-index:0}
-@keyframes orbf{to{transform:translate(-50%,-46%) scale(1.07)}}
-.dcard{position:relative;display:block;max-width:560px;border:1px solid var(--line);border-radius:24px;padding:clamp(22px,3vw,32px);padding-right:84px;background:rgba(11,13,16,.6);color:var(--bone);text-decoration:none;transition:border-color .25s,background .25s;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-.dcard::after{content:"";position:absolute;right:28px;top:50%;width:40px;height:40px;margin-top:-20px;border-radius:50%;background:var(--sig) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B0D10' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/20px no-repeat;transition:transform .25s}
-.dcard:hover,.dcard:focus-visible{border-color:var(--sig);background:rgba(15,18,22,.8)}.dcard:hover::after{transform:translateX(4px)}
-.dcard-h{font-size:clamp(26px,3.4vw,34px);margin:0 0 8px;display:flex;gap:.3em;align-items:baseline;flex-wrap:wrap}.dcard-p{color:var(--mut);font-size:17px;margin:0}
+/* faint drawing-board grid behind the mark */
+.home-grid::before{content:"";position:absolute;inset:-40vh -50vw;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(242,239,233,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(242,239,233,.045) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(34% 40% at 68% 50%,#000,transparent 80%);mask-image:radial-gradient(34% 40% at 68% 50%,#000,transparent 80%)}
+.home-copy{max-width:660px}
+.home-brand{margin:0 0 clamp(26px,5vh,48px);line-height:0}
+.home-brand .home-logo{width:auto;height:clamp(28px,3.2vw,40px);max-width:100%;margin:0}
+.home-copy .home-tag{font:700 clamp(44px,12.4vw,68px)/.96 var(--disp);letter-spacing:-.045em;color:var(--bone);max-width:11ch;margin:0 0 clamp(30px,5.5vh,56px);text-wrap:balance}
+.dcard{position:relative;display:block;max-width:560px;padding:clamp(22px,3vw,30px);padding-right:96px;border:1px solid var(--line-2);border-radius:var(--r);background:rgba(21,26,32,.66);color:var(--bone);text-decoration:none;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 30px 60px -30px rgba(0,0,0,.75);transition:border-color .25s,background .25s,transform .4s var(--ease)}
+.dcard::after{content:"";position:absolute;right:26px;top:50%;width:48px;height:48px;margin-top:-24px;border-radius:50%;background:var(--sig) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B0D10' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/22px no-repeat;transition:transform .25s}
+.dcard:hover,.dcard:focus-visible{border-color:var(--sig);background:rgba(21,26,32,.9)}.dcard:hover::after{transform:translateX(4px)}
+@media(hover:hover) and (pointer:fine){.dcard:hover{transform:translateY(-4px)}}
+.dcard-h{font-size:clamp(26px,3.2vw,34px);margin:0 0 8px;display:flex;gap:.3em;align-items:baseline;flex-wrap:wrap}.dcard-p{color:var(--mut-2);font-size:17px;line-height:1.5;margin:0;max-width:34ch}
+/* the Shift mark: two triangles in the logo's proportions (decorative; the logo itself is the h1) */
+.home-orb{position:absolute;z-index:0;top:-3%;right:-24%;width:min(80vw,360px);aspect-ratio:122.5/131.07;opacity:.16;pointer-events:none;filter:drop-shadow(0 0 44px rgba(124,255,178,.3))}
+.tri{position:absolute;display:block;width:44.5%;height:83.2%}
+.tri-l{left:0;top:16.8%;clip-path:polygon(0 50%,100% 0,100% 100%);background:linear-gradient(160deg,#fff,var(--bone) 42%,#b4ae9f)}
+.tri-r{right:0;top:0;clip-path:polygon(100% 50%,0 0,0 100%);background:linear-gradient(200deg,#d6ffe8,var(--sig) 44%,#2fbf7d)}
 .home-foot{padding:14px 0 18px;border-top:1px solid var(--line)}
 .home-foot .fgrid{gap:4px;align-items:center}
 @media(min-width:900px){
-.home-h1{font-size:clamp(80px,min(10vw,14.5vh),168px);max-width:none}
-.home-copy .home-tag{font-size:clamp(56px,min(6.4vw,10vh),96px);max-width:11ch}
-.home-orb{top:0;bottom:0;right:0;left:auto;width:56%;height:auto;opacity:1}
-.home-orb::before{width:min(92%,84vh)}
+.home-copy .home-tag{font-size:clamp(56px,min(6.6vw,10.5vh),104px)}
+.home-orb{top:50%;right:max(var(--gut),calc(50% - 560px));width:min(34vw,60vh,480px);margin-top:calc(min(34vw,60vh,480px)*-.535);opacity:1}
 }
-.fx .home-h1,.fx .dcard{visibility:hidden;animation:fxshow 0s 2.5s forwards}
-@keyframes fxshow{to{visibility:visible}}
-.home-h1 [aria-hidden]{display:block}
-@media(prefers-reduced-motion:reduce){.dcard,.dcard::after{transition:none}.dcard:hover::after{transform:none}.home-orb::before{animation:none}}
+/* motion: the two halves start as one diamond and shift into the logo; the card rises. Nothing is hidden first, so the page reads the same without it. */
+@media(prefers-reduced-motion:no-preference){
+.tri-l{animation:tri-l 1.5s var(--ease) .3s both}.tri-r{animation:tri-r 1.5s var(--ease) .3s both}
+.home-orb{animation:floaty 8s ease-in-out 1.8s infinite alternate}
+.dcard{animation:rise .8s var(--ease) .1s both}
+}
+@keyframes tri-l{from{transform:translate(12.4%,-10.1%)}}
+@keyframes tri-r{from{transform:translate(-12.4%,10.1%)}}
+@keyframes floaty{to{translate:0 -3%}}
+@media(prefers-reduced-motion:reduce){.dcard,.dcard::after{transition:none}.dcard:hover,.dcard:hover::after{transform:none}}
+/* ---------- Logo images (SVG lockups have no built-in margin) ---------- */
 .foot nav .ldiv{margin-left:.28em}
 .slot-logo{display:block;height:24px;width:auto;max-width:none;margin:6px 0}.foot .slot-logo{height:22px}
 @media(max-width:759px){.slot-logo{height:18px}}
-.home-logo{height:clamp(26px,3.4vw,40px);padding:0;margin:0 0 clamp(28px,5vh,52px)}
