@@ -454,6 +454,95 @@ section.hero .hp{animation-delay:.08s}section.hero .cta-row{animation-delay:.16s
 /* ---------- 404 ---------- */
 .nf{margin-top:calc(-1*var(--ho));padding:calc(var(--hh) + clamp(72px,12vw,150px)) 0 clamp(72px,12vw,150px)}
 .nf .lead{margin-bottom:32px}
+/* ---------- Sections: shared ---------- */
+.sec h2{font-size:clamp(34px,4.8vw,60px);margin-bottom:20px}
+.sec .lead{max-width:46ch;margin-bottom:0}
+/* light sections (Prices, FAQ): Bone background, Ink text, the darker green as the accent */
+.lt{background:var(--bone);color:var(--ink);border-top-color:transparent}
+.lt+.sec{border-top-color:transparent}
+.lt .eyebrow,.lt h2 em{color:var(--sig-d)}
+.lt :focus-visible{outline-color:var(--ink)}
+.lt a:not(.btn){color:var(--sig-d)}
+/* ---------- Concept work ---------- */
+.works{gap:clamp(20px,2.4vw,28px);margin-top:clamp(32px,4vw,56px)}
+.wimg{border-radius:var(--r);border-color:var(--line-2);background:var(--ink-3)}
+.wcard .wmeta{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;margin-top:18px;padding-inline:4px}
+.wcard .wmeta .num{order:1}.wcard .wmeta h3{order:2;flex:1;min-width:0;margin:0;font-size:clamp(20px,2vw,24px)}
+.wcard .wmeta .ctag.below{order:3;margin:0 0 0 auto;padding:3px 11px}
+.wcard .wmeta p{order:4;flex-basis:100%;color:var(--mut-2)}
+.ecard .wmeta{display:block;padding-inline:4px}.ecard .wmeta h3{font-size:22px}.ecard .wmeta .ctag.below{margin:0 0 14px}.ecard .wmeta h3{margin:0 0 6px}.ecard .wmeta p{color:var(--mut-2);max-width:52ch}
+@media(max-width:759px){.works{gap:14px;margin:32px calc(-1*var(--gut)) 0;padding:0 var(--gut) 12px;scroll-padding:0 var(--gut)}.wimg{border-radius:var(--r-m)}}
+.swipe-ui{color:var(--mut-2)}
+/* ---------- Prices: white cards on Bone, the middle card inverted ---------- */
+.prices .cards.three{gap:clamp(16px,1.8vw,24px);margin-top:clamp(32px,4vw,56px)}
+.lt .card{background:#fff;border-color:var(--line-l);border-radius:var(--r);padding:clamp(24px,2.6vw,36px);box-shadow:0 30px 60px -44px rgba(11,13,16,.35)}
+.lt .card:hover{border-color:var(--ink)}
+.lt .card h3{font-size:clamp(22px,2vw,26px);margin:10px 0 0}
+.lt .card .num,.lt .card .best b{color:var(--sig-d)}
+.lt .card p,.lt .card .ptext,.lt .card .pline{color:var(--mut-l)}
+.lt .card .price b,.lt .opt h4,.lt .inc li{color:var(--ink)}
+.lt .prov{border-color:var(--sig-d);color:var(--sig-d)}
+.lt .opt,.lt .inc,.lt .inc li{border-color:var(--line-l)}.lt .inc li::before{border-color:var(--sig-d)}
+.pcards .card .best{margin-top:22px;padding-top:18px;border-top:1px solid var(--line-l)}
+.pcards .pc-co .cohead{font-family:var(--disp);font-weight:500;font-size:min(22px,6.6cqi);letter-spacing:-.01em;color:var(--ink);margin:14px 0 20px}
+.lt .btn.line{color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}.lt .btn.line:hover{background:var(--ink);color:var(--bone);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.prices .vatline{color:var(--mut-l)}
+.lt .card.feat{background:radial-gradient(90% 46% at 50% 0%,rgba(124,255,178,.17),transparent 70%),var(--ink);color:var(--bone);border-color:var(--ink);box-shadow:0 44px 80px -40px rgba(11,13,16,.75)}
+.lt .card.feat .num,.lt .card.feat .best b{color:var(--sig)}
+.lt .card.feat p,.lt .card.feat .ptext,.lt .card.feat .pline{color:var(--mut-2)}
+.lt .card.feat .price b,.lt .card.feat .opt h4{color:var(--bone)}
+.lt .card.feat .opt,.lt .card.feat .best{border-color:var(--line-2)}
+.lt .card.feat :focus-visible{outline-color:var(--sig)}
+@media(min-width:1000px){.lt .card.feat{margin-block:-18px;padding-block:calc(clamp(24px,2.6vw,36px) + 18px)}}
+/* ---------- How it works ---------- */
+.steps.big{margin-top:clamp(40px,5vw,64px)}.steps.big li{color:var(--mut-2)}
+.steps.big li::before{font-size:clamp(56px,7vw,96px)}
+/* ---------- What your visitors get: the phone beside a grid of cards ---------- */
+#included .split{align-items:center}#included .split h2{position:static}
+.xp{display:grid;gap:14px}
+.xp li{display:block;padding:24px;border:1px solid var(--line-2);border-radius:var(--r-m);background:var(--ink-3);transition:border-color .3s,transform .4s var(--ease)}
+.xp li:hover{padding-left:24px}
+.xp .num{display:block;padding:0;margin-bottom:26px}
+.xp h3{font-size:22px;margin:0 0 6px}.xp p{color:var(--mut-2);font-size:16px;line-height:1.5}
+@media(hover:hover) and (pointer:fine){.xp li:hover{border-color:var(--sig);transform:translateY(-4px)}}
+@media(min-width:620px){.xp{grid-template-columns:1fr 1fr}.xp li:last-child:nth-child(odd){grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){.xp li:hover{transform:none}}
+/* ---------- Form add-ons ---------- */
+.fgal-label{margin-top:clamp(28px,4vw,44px);font:500 14px/1 var(--disp);letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.fgal{gap:clamp(14px,2vw,24px);margin-top:18px}.fpic{border-radius:var(--r-m);border-color:var(--line-2);background:var(--ink-3)}
+.fcard h3{font-size:20px}
+.bundle{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:0 .5em;margin-top:clamp(28px,4vw,44px);padding:14px 28px;border:1px solid var(--line-2);border-radius:999px;background:var(--ink-3);color:var(--mut-2)}
+.bundle .price b{color:var(--sig)}
+/* ---------- Clients note ---------- */
+.sec.stories{background:var(--ink-2)}.stories .lead{max-width:52ch;color:var(--bone)}
+/* ---------- FAQ ---------- */
+.faq .split{align-items:start}
+.lt details,#faq details{padding:0}.lt details{border-top:1px solid var(--line-l)}.lt details:last-child{border-bottom:1px solid var(--line-l)}
+.lt summary{align-items:center;padding:20px 0;color:var(--ink);font-weight:500;font-size:clamp(19px,2vw,24px);letter-spacing:-.015em}
+.lt summary::after{flex:none;display:grid;place-items:center;width:36px;height:36px;border:1.5px solid var(--ink);border-radius:50%;color:var(--ink);font:500 20px/1 var(--disp);transition:transform .35s var(--ease),background .2s,color .2s}
+.lt details[open] summary::after{background:var(--ink);color:var(--bone)}
+.lt details p{margin:0;padding:0 52px 24px 0;max-width:62ch;color:var(--mut-l)}
+@media(hover:hover) and (pointer:fine){.lt summary:hover::after{background:var(--ink);color:var(--bone)}}
+/* ---------- About ---------- */
+.about .statement.big{font-size:clamp(34px,5.6vw,80px)!important;line-height:1.02;letter-spacing:-.04em;max-width:17ch}
+.about .bio{color:var(--mut-2);max-width:48ch;font-size:clamp(17px,1.6vw,20px);margin-top:clamp(24px,3vw,36px)}
+/* ---------- Contact: one Signal panel ---------- */
+.closing{padding:clamp(8px,2vw,24px) var(--gut) clamp(56px,8vw,104px);background:none;border-bottom:0;overflow:visible}
+.closing .wrap{max-width:var(--max);padding:clamp(36px,7vw,96px) clamp(24px,6vw,88px);border-radius:clamp(28px,4vw,44px);background:radial-gradient(70% 90% at 100% 0%,#c4ffdf,transparent 62%),var(--sig);color:var(--ink)}
+.closing .wrap{position:relative;overflow:hidden}
+/* the Shift mark as a quiet watermark (wide screens only) */
+@media(min-width:900px){.closing .wrap::after{content:"";position:absolute;right:clamp(24px,7%,96px);top:50%;width:min(30%,340px);aspect-ratio:122.5/131.07;transform:translateY(-50%);background:var(--ink);opacity:.07;pointer-events:none;clip-path:polygon(0 58.4%,44.5% 100%,44.5% 16.8%,0 58.4%,100% 41.6%,55.5% 0,55.5% 83.2%,100% 41.6%)}}
+.closing .eyebrow{color:var(--ink)}
+.closing h2{font-size:clamp(38px,7vw,92px);line-height:.98;max-width:13ch;margin-bottom:clamp(20px,3vw,32px)}
+.closing .cintro{color:var(--ink);font-size:clamp(18px,2vw,22px);line-height:1.4;max-width:34ch;margin-bottom:clamp(24px,3vw,36px)}
+.closing .btn{background:var(--ink);color:var(--bone)}.closing .btn:hover{background:#000;color:var(--sig)}
+.closing .tlink,.closing .tlink:hover,.closing .cmail,.closing .cfine a{color:var(--ink)}
+.closing .cmail{margin-top:22px;font-size:18px}
+.closing .cfine{margin-top:clamp(28px,4vw,44px);color:rgba(11,13,16,.8)}
+.closing :focus-visible{outline-color:var(--ink)}
+/* ---------- Footer ---------- */
+.foot{padding:clamp(40px,6vw,72px) 0 44px;border-top:1px solid var(--line);color:var(--mut-2)}
+.foot p a{color:var(--bone)}.foot nav{gap:4px 26px}.foot nav a{font-size:16px}
 /* ---------- Root page (/): earlier rules, kept as they were until that page is restyled ---------- */
 .cursor{position:fixed;left:0;top:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--sig);pointer-events:none;z-index:100;mix-blend-mode:difference;opacity:0;visibility:hidden;transition:width .25s,height .25s,margin .25s,opacity .2s}.cursor.seen{opacity:1;visibility:visible}
 .cursor.on{width:44px;height:44px;margin:-22px 0 0 -22px}
