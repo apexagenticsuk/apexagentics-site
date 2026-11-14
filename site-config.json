@@ -532,6 +532,14 @@
     "width": 236,
     "height": 24
   },
+  "nav": [
+    { "id": "work", "label": "Work" },
+    { "id": "prices", "label": "Prices" },
+    { "id": "how", "label": "Process" },
+    { "id": "editor", "label": "Editor" },
+    { "id": "faq", "label": "FAQ" }
+  ],
+  "_navNote": "Section links in the /web/ header (wide screens only; phones use the footer links). id is the section's id on /web/, label is the link text (each label is that section's own small heading).",
   "webPage": {
     "_note": "/web/ page title, also used for the share (og and twitter) titles. The header and footer show webLogo (alt 'Apex Agentics Web'); / shows home.logo (alt 'Apex Agentics UK'), which is also the share site name there and the footer link text back to /.",
     "title": "Apex Agentics Web | Fast, modern websites for small businesses"

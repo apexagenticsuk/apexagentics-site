@@ -40,11 +40,11 @@ ok('root: footer links to the privacy page /web/privacy',/<footer[\s\S]*<a href=
  const extra=chunks.filter(c=>!webText.includes(c)&&c!==C.home.tagline&&c!==C.home.card);ok('root: every visible text chunk already exists on the Web site, or is the given tagline or card line',extra.length===0,extra.join(' | '));
  const t=text(home);ok('root: no other divisions, figures or timeframes',!/division|consult|agency|software|marketing|automation|\bAI\b|labs?\b|studios\b|coming soon|launching|soon|\d/i.test(t.replace(em,'')),t);
  ok('rebrand v3 root: description meta is the tagline "Modern technology for UK businesses."',(home.match(/<meta name="description" content="([^"]*)"/)||[])[1]===C.home.tagline&&C.home.tagline==='Modern technology for UK businesses.');}
-{// motion JS: no external script tag; one inline loader that only adds /js/home.js on desktop (fine pointer, >=1024px, motion allowed)
+{// The root page is complete in HTML and CSS: no script of any kind (the earlier desktop-only motion bundle is gone)
  const sc=[...home.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)];
- ok('root: phones get no JS - only one inline loader, no external script tags',sc.length===1&&sc[0][1]===''&&!/<script[^>]+src=/.test(home),sc.length);
- const L=sc[0]?sc[0][2]:'';ok('root: loader is gated on reduced motion, fine pointer and width >= 1024 and loads /js/home.js',/prefers-reduced-motion: reduce/.test(L)&&/\(hover: hover\) and \(pointer: fine\)/.test(L)&&/innerWidth>=1024/.test(L)&&/\/js\/home\.js/.test(L));
- ok('dist has js/home.js (holding-page motion entry)',fs.existsSync(path.join(dist,'js/home.js')));}
+ ok('root: no JavaScript at all (no script tags, inline or external)',sc.length===0&&!/<script/i.test(home),sc.length);
+ ok('root: the Shift mark picture is decorative (aria-hidden) and drawn in CSS, with no extra image',/<div class="home-orb" aria-hidden="true"><i class="tri tri-l"><\/i><i class="tri tri-r"><\/i><\/div>/.test(home)&&(home.match(/<img\b/g)||[]).length===1);
+ ok('dist ships no animation bundle for the root page (no js/home.js)',!fs.existsSync(path.join(dist,'js/home.js')));}
 {// brand name: logo heading (image alt) + card label only
  const t=text(home),body=home.slice(home.indexOf('<body'));ok('rebrand v3 root: "Apex Agentics" appears once in visible text (the card label) and "Apex Agentics UK" once in the body (the logo alt)',(t.match(/Apex Agentics/g)||[]).length===1&&(body.match(/Apex Agentics UK/g)||[]).length===1,(t.match(/Apex Agentics/g)||[]).length+'/'+(body.match(/Apex Agentics UK/g)||[]).length);
  ok('root: exactly one h1 and one h2 (card label)',(home.match(/<h1[\s>]/g)||[]).length===1&&(home.match(/<h2[\s>]/g)||[]).length===1);
