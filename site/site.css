@@ -384,7 +384,7 @@ section.hero .lead{margin-bottom:26px}
 /* the fan: three concept handsets (pictures only; the same concepts are described in full under Concept work, where this links) */
 .hero-art{position:relative;display:block;width:min(100%,440px);margin-inline:auto;color:inherit;text-decoration:none;border-radius:var(--r)}
 .fan{position:relative;display:block;aspect-ratio:10/7.4}
-.fan img{position:absolute;width:50%;aspect-ratio:9/16;object-fit:cover;border-radius:clamp(18px,5vw,30px);background:var(--ink-3);box-shadow:0 0 0 1px rgba(242,239,233,.12),0 30px 70px -18px rgba(0,0,0,.75);transition:transform .7s var(--ease),filter .5s}
+.fan img{position:absolute;width:50%;aspect-ratio:9/16;object-fit:cover;transition:transform .7s var(--ease),filter .5s}
 .fan .fan-c{left:25%;top:0;z-index:2}
 .fan .fan-l{left:-2%;top:8%;transform:rotate(-11deg);transform-origin:70% 100%;filter:brightness(.62)}
 .fan .fan-r{right:-2%;top:8%;transform:rotate(11deg);transform-origin:30% 100%;filter:brightness(.62)}
@@ -395,7 +395,7 @@ section.hero .lead{margin-bottom:26px}
 .hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:center;padding-bottom:clamp(64px,7vw,104px)}
 section.hero h1{font-size:clamp(54px,5.5vw,76px);max-width:14ch}
 .hero-art{width:100%;max-width:540px;margin-inline:auto 0}
-.fan{aspect-ratio:10/10.2}.fan img{border-radius:30px}.fan .fan-l,.fan .fan-r{top:10%}
+.fan{aspect-ratio:10/10.2}.fan .fan-l,.fan .fan-r{top:10%}
 .hero-art .ctag{bottom:-6px}
 }
 /* entrance (CSS only, so it never waits for script): the supporting copy rises and the fan opens. The heading and the front handset are never hidden, so the first paint already carries them. */
